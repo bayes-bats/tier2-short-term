@@ -1,0 +1,87 @@
+---
+title: "Work Plan"
+subtitle: "Bayes-Bats Tier 2: A Gentle Introduction to Probability and Bayesian Statistics"
+format: html
+author: 
+  - name: Laurie Baker (Bates College)
+  - name: Jim Scott (Colby College)
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+library(plan)
+library(dplyr)
+```
+
+## Overview
+
+
+
+## Updated Gantt Chart
+
+Draft work plan
+
+```{r, echo=FALSE}
+g <- new("gantt")
+g <- ganttAddTask(g, "Work Plan")
+g <- ganttAddTask(g, "Syllabus Development","2024-09-03","2024-10-03", done=0)
+g <- ganttAddTask(g, "Draft Homework and Activity Plan", "2024-09-20","2024-10-03", done=0)
+g <- ganttAddTask(g, "Progress Report 1")
+g <- ganttAddTask(g, "Develop Draft of Activities 1-2", "2024-10-04", "2024-10-17", done=0)
+g <- ganttAddTask(g, "Develop Draft of Activities 3-4", "2024-10-17", "2024-11-04", done=0)
+g <- ganttAddTask(g, "Submit Tier 3 Proposal", "2024-10-17", "2024-10-24", done=0)
+g <- ganttAddTask(g, "Progress Report 2")
+g <- ganttAddTask(g, "Finalize Activity 1-2", "2024-11-03", "2024-11-17", done=0)
+g <- ganttAddTask(g, "Finalize Activity 3-4", "2024-11-17", "2024-12-03", done=0)
+g <- ganttAddTask(g, "Final Materials Submission")
+g <- ganttAddTask(g, "Finalize applied R activity", "2024-12-01", "2024-12-10", done=0)
+g <- ganttAddTask(g, "Finalize all activities and syllabus", "2024-12-10", "2024-12-14", done=0)
+
+
+font <- ifelse(is.na(g[["start"]]), 2, 1)
+
+plot(g, ylabels=list(font=font),
+     event.label='Submit Final Materials',event.time='2024-12-03',
+     col.event=c("firebrick2"),
+     col.done=c("steelblue3"),
+     col.notdone=c("palegreen3"),
+     cex.main=1,
+     main="Tier 2: Gentle Intro to Probability and Bayesian Statistics",
+     )
+
+legend("topright", pch=22, pt.cex=2, cex=0.6, pt.bg=c("steelblue3", "palegreen3"),
+     border="black",
+     legend=c("Completed", "Incomplete"), bg="white", xpd=TRUE)
+
+```
+
+## Completed Materials
+
+
+## Next Steps
+
+## Meeting Times
+
+We will keep meeting based on the following:
+
+-   Weekly meetings for the activity-creating team
+-   Monthly meetings with mentor (Mine)
+-   Office hours
+
+| Date       | Time               | PI     | Zoom Link |
+|------------|--------------------|--------|-----------|
+| 2024-09-06 | 3:00 - 4:00 pm ET      | Amy |         |
+| 2024-09-18 | 3:30 - 4:30 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
+| 2024-09-26 | 2:00 - 3:00 pm ET  | Mine    |[`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/91799232149)          |
+| 2024-10-07 | 3:30 - 4:30 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
+| 2024-10-15 | 3:00 - 4:00 pm ET      | Amy |         |
+| 2024-10-2? | | Mine | |
+| 2024-11-0? | | Mine | |
+| 2024-11-12 | 3:00 - 4:00 pm ET      | Amy |         |
+| 2023-11-20 | 3:30 - 4:30 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
+
+
+## Acknowledgements
+
+This report template comes from Zachary Del Rosario and Stefani Langehennig's [Bayes-Bats tier 2 project](https://github.com/bayes-bats/tier2-freq-bayes)

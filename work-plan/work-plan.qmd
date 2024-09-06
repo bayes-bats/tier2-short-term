@@ -21,17 +21,18 @@ The aim of this project is to develop a 2-credit Gentle Introduction to Probabil
 The students should be prepared to learn and code in R but the course would assume no prerequisites for probability and statistics. The idea behind the course is to expose students across disciplines to Bayesian Thinking who might be otherwise hesitant to sign up for a Bayesian course.
 
 As part of the course we will design the syllabus to spend more time at the beginning exposing students to probability concepts and it would finish with introducing MCMC algorithms. We propose to cover the following topics: 
-* Overview; Setting up your computer + intro to R
-* Obtaining data + basic definitions: parameter, statistic, population, sample, inference, estimation
-* Probability, random variables, rules of probability, conditional probability, Bayes rule
-* Discrete distributions + pmf + Exp/Var: -Bernoulli, binomial, Poisson
-* Likelihood + examples
-* Posterior = Prior * Likelihood + examples
-* A single proportion: Beta/Binomial
-* Continuous distribution + pdf + Exp/Var: Normal, exponential, gamma, beta.
-* A single mean (known sigma): Normal/Normal
-* A single mean and sigma: Normal/Gamma
-* MCMC/Gibbs
+
+- Overview; Setting up your computer + intro to R
+- Obtaining data + basic definitions: parameter, statistic, population, sample, inference, estimation
+- Probability, random variables, rules of probability, conditional probability, Bayes rule
+- Discrete distributions + pmf + Exp/Var:  Bernoulli, binomial, Poisson
+- Likelihood + examples
+- Posterior = Prior * Likelihood + examples
+- A single proportion: Beta/Binomial
+- Continuous distribution + pdf + Exp/Var: Normal, exponential, gamma, beta.
+- A single mean (known sigma): Normal/Normal
+- A single mean and sigma: Normal/Gamma
+- MCMC/Gibbs
 
 Given our backgrounds in ecology (Laurie) and epidemiology (Laurie and Jim) we will look to complement the existing course materials from Bayes Rules and Probability and Bayesian modeling to include examples and assignments from these fields. We will develop the exercises in R and host the course materials on Github and make them available for others to re-use.
 
@@ -60,6 +61,7 @@ Specifically we have identified the following tasks:
 We will then focus our efforts on developing hands-on in-class activities, lab and homework assignments and case studies that will complement the existing courses and texts.
 
 Specifically we have identified the following tasks:
+
 - Determine activities for each class
 - Determine assignments for each class
 - Develop 4 new activities/assignments
@@ -72,6 +74,7 @@ Specifically we have identified the following tasks:
 In the final phase we will incorporate feedback and update and publish our final materials (activities and syllabus) in a Github website.
 
 Specifically we have identified the following tasks:
+
 - Update and incorporate feedback into activities
 - Develop a guide to materials for instructors. 
 
@@ -113,9 +116,6 @@ legend("topright", pch=22, pt.cex=2, cex=0.6, pt.bg=c("steelblue3", "palegreen3"
      legend=c("Completed", "Incomplete"), bg="white", xpd=TRUE)
 
 ```
-
-## Completed Materials
-
 
 ## Next Steps
 

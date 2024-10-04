@@ -73,17 +73,18 @@ We have completed the following of our original tasks:
 
 1. Determine software for course
 
-We will use R and RStudio. We will start the students off using web-r before transitioning to RStudio for assignments.
+We will use R and RStudio. We will start the students off using web-r before transitioning to RStudio for assignments. Laurie would like to find out if it is possible to save work in web-r as this seems to be the biggest drawback of using web-r.
 
 2. Determine books/resources that we’ll use (for us and/or students)
 
 We identified several existing resources to use for the course:
 
-- [stat20.org by Andrew Bray and colleagues](https://www.stat20.org) notes in Week 5 and 6 introducing probability
-- [Probability and Bayesian Modelling by Jim Albert and Jingchen Hu](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html)
-- [Bayes Rules by Alicia A. Johnson, Miles Q. Ott, Mine Dogucu](https://www.bayesrulesbook.com)
+- [stat20.org by Andrew Bray and colleagues](https://www.stat20.org) the reading notes in Week 5 and 6 introducing probability are engaging and may be used as texts or lecture notes for Laurie and Jim.
+- [Probability and Bayesian Modelling by Jim Albert and Jingchen Hu](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html) We both like the introduction to probability in this book.
+- [Bayes Rules by Alicia A. Johnson, Miles Q. Ott, Mine Dogucu](https://www.bayesrulesbook.com) I think we will find relevant case studies and exercises in this book.
+- [Probability with applications in R](https://www.amazon.com/Probability-Applications-Robert-P-Dobrow/dp/1118241258) This book is not open source but also has some nice examples for probability exercises in R.
 
-We will use these books and lessons to plan the lectures and readings for students. We will pay attention to differences in notation and weigh the pros and cons of using each resource.
+We will use these books and lessons to plan the lectures and readings for students. We will pay attention to differences in notation and think about which resource we will recommend to students. 
 
 3. Draft a needs analysis (what background are students coming into the course with)
 

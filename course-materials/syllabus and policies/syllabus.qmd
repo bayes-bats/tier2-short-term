@@ -1,0 +1,35 @@
+---
+title: "Syllabus"
+author: "Jim Scott and Laurie Baker"
+date: "10/04/2024"
+format: html
+editor: visual
+---
+
+## Syllabus
+
+Bayesian statistics is an approach to data analysis that incorporates prior knowledge or beliefs with new evidence to make inferences.  This differs from traditional statistics, which interprets probability as the long-term frequency of events and doesn’t explicitly incorporate any prior knowledge of the system being studied.  Fundamental to both types of statistical analysis is probability.  At its core, probability is a field of mathematics that attempts to model and quantify the uncertainty of an event or events.  It helps us answer the question:  “What is the likelihood that an event will occur?”.  Probability is widely used in science, economics, forecasting, engineering, and many other fields to help us understand risk, improve designs, and make decisions.
+
+In this course, we will explore the basics of probability and how it pertains to Bayesian statistics.  We’ll focus on conceptual understanding, practical skills, and problem-solving abilities.  We will also introduce the Bayesian framework for doing statistics, describe how it differs from traditional statistics, and perform statistical analyses using Bayesian methods using the software R and the integrated development environment, RStudio.
+ 
+### Learning Goals:
+
+- Understand basic probability concepts and basic Bayesian concepts
+- Learn basic rules of probability and how to apply them
+- Develop a firm understanding of conditional probability and Bayes theorem
+- Explore common discrete and continuous probability distributions
+- Compare and contrast Bayesian methods with frequentist statistical methods
+- Use Bayes theorem to update probabilities with prior knowledge
+- Understand the basics concepts of likelihood, prior and posterior distributions
+- Perform Bayesian inference for a single mean and a single proportion
+- Create and interpret credible intervals
+- Use computational methods to perform analyses
+
+### Assessment
+
+Some possibilities to explore:
+
+- Weekly in-class quizzes (LB: I think these will work well in the 3.5 week version of the class)
+- Weekly Homework (Larger homework or lab each week)
+- Final exam
+- Final Project (Perhaps homework will slowly build towards this?)

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Laurie Baker (Bates College)">
-<meta name="author" content="Jim Scott (Colby College)">
+<meta name="author" content="Jim Scott and Laurie Baker">
+<meta name="dcterms.date" content="2024-10-04">
 
-<title>Work Plan</title>
+<title>Syllabus</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,16 +25,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="work-plan_files/libs/clipboard/clipboard.min.js"></script>
-<script src="work-plan_files/libs/quarto-html/quarto.js"></script>
-<script src="work-plan_files/libs/quarto-html/popper.min.js"></script>
-<script src="work-plan_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="work-plan_files/libs/quarto-html/anchor.min.js"></script>
-<link href="work-plan_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="work-plan_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="work-plan_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="work-plan_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="work-plan_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="syllabus_files/libs/clipboard/clipboard.min.js"></script>
+<script src="syllabus_files/libs/quarto-html/quarto.js"></script>
+<script src="syllabus_files/libs/quarto-html/popper.min.js"></script>
+<script src="syllabus_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="syllabus_files/libs/quarto-html/anchor.min.js"></script>
+<link href="syllabus_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="syllabus_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="syllabus_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="syllabus_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="syllabus_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -47,8 +47,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Work Plan</h1>
-<p class="subtitle lead">Bayes-Bats Tier 2: A Gentle Introduction to Probability and Bayesian Statistics</p>
+<h1 class="title">Syllabus</h1>
 </div>
 
 
@@ -56,13 +55,18 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Laurie Baker (Bates College) </p>
-             <p>Jim Scott (Colby College) </p>
+             <p>Jim Scott and Laurie Baker </p>
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 4, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -72,155 +76,35 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The aim of this project is to develop a 2-credit Gentle Introduction to Probability and Bayesian statistics course open to students across disciplines that can be taught either over the course of a semester (half of a normal course) or it could be taught during the short-term at a college (e.g.&nbsp;Bates, Colby, and Middlebury).</p>
-<p>The students should be prepared to learn and code in R but the course would assume no prerequisites for probability and statistics. The idea behind the course is to expose students across disciplines to Bayesian Thinking who might be otherwise hesitant to sign up for a Bayesian course.</p>
-<p>As part of the course we will design the syllabus to spend more time at the beginning exposing students to probability concepts and it would finish with introducing MCMC algorithms. We propose to cover the following topics:</p>
+<section id="syllabus" class="level2">
+<h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
+<p>Bayesian statistics is an approach to data analysis that incorporates prior knowledge or beliefs with new evidence to make inferences. This differs from traditional statistics, which interprets probability as the long-term frequency of events and doesn’t explicitly incorporate any prior knowledge of the system being studied. Fundamental to both types of statistical analysis is probability. At its core, probability is a field of mathematics that attempts to model and quantify the uncertainty of an event or events. It helps us answer the question: “What is the likelihood that an event will occur?”. Probability is widely used in science, economics, forecasting, engineering, and many other fields to help us understand risk, improve designs, and make decisions.</p>
+<p>In this course, we will explore the basics of probability and how it pertains to Bayesian statistics. We’ll focus on conceptual understanding, practical skills, and problem-solving abilities. We will also introduce the Bayesian framework for doing statistics, describe how it differs from traditional statistics, and perform statistical analyses using Bayesian methods using the software R and the integrated development environment, RStudio.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning Goals:</h3>
 <ul>
-<li>Overview; Setting up your computer + intro to R</li>
-<li>Obtaining data + basic definitions: parameter, statistic, population, sample, inference, estimation</li>
-<li>Probability, random variables, rules of probability, conditional probability, Bayes rule</li>
-<li>Discrete distributions + pmf + Exp/Var: Bernoulli, binomial, Poisson</li>
-<li>Likelihood + examples</li>
-<li>Posterior = Prior * Likelihood + examples</li>
-<li>A single proportion: Beta/Binomial</li>
-<li>Continuous distribution + pdf + Exp/Var: Normal, exponential, gamma, beta.</li>
-<li>A single mean (known sigma): Normal/Normal</li>
-<li>A single mean and sigma: Normal/Gamma</li>
-<li>MCMC/Gibbs</li>
-</ul>
-<p>Given our backgrounds in ecology (Laurie) and epidemiology (Laurie and Jim) we will look to complement the existing course materials from Bayes Rules and Probability and Bayesian modeling to include examples and assignments from these fields. We will develop the exercises in R and host the course materials on Github and make them available for others to re-use.</p>
-</section>
-<section id="goals" class="level2">
-<h2 class="anchored" data-anchor-id="goals">Goals</h2>
-<p>We have split our project into three phases:</p>
-<section id="syllabus-development" class="level3">
-<h3 class="anchored" data-anchor-id="syllabus-development">Syllabus Development</h3>
-<p>We will start by drafting a needs analysis for students entering the course. We will then review existing resources for texts, slide decks, homeworks, and labs that might be suitable for our course.</p>
-<p>Specifically we have identified the following tasks:</p>
-<ul>
-<li>Determine software for course (RStudio, webR for materials)?</li>
-<li>Determine books/resources that we’ll use (for us and/or students)</li>
-<li>Draft a needs analysis (what background are students coming into the course with)</li>
-<li>Outline a syllabus, including how the course will be graded and what components we’ll use to determine grades (e.g.&nbsp;assignments, exams, projects, etc.)</li>
-<li>Formally state course objectives and learning outcomes</li>
-<li>Draft a course schedule.</li>
-<li>Finalize topics to be covered.</li>
-<li>Draft Homework and Activity Plan</li>
+<li>Understand basic probability concepts and basic Bayesian concepts</li>
+<li>Learn basic rules of probability and how to apply them</li>
+<li>Develop a firm understanding of conditional probability and Bayes theorem</li>
+<li>Explore common discrete and continuous probability distributions</li>
+<li>Compare and contrast Bayesian methods with frequentist statistical methods</li>
+<li>Use Bayes theorem to update probabilities with prior knowledge</li>
+<li>Understand the basics concepts of likelihood, prior and posterior distributions</li>
+<li>Perform Bayesian inference for a single mean and a single proportion</li>
+<li>Create and interpret credible intervals</li>
+<li>Use computational methods to perform analyses</li>
 </ul>
 </section>
-<section id="activity-and-homework-development" class="level3">
-<h3 class="anchored" data-anchor-id="activity-and-homework-development">Activity and Homework Development</h3>
-<p>We will then focus our efforts on developing hands-on in-class activities, lab and homework assignments and case studies that will complement the existing courses and texts.</p>
-<p>Specifically we have identified the following tasks:</p>
+<section id="assessment" class="level3">
+<h3 class="anchored" data-anchor-id="assessment">Assessment</h3>
+<p>Some possibilities to explore:</p>
 <ul>
-<li>Determine activities for each class</li>
-<li>Determine assignments for each class</li>
-<li>Develop 4 new activities/assignments</li>
-<li>Write codebooks for the datasets used.</li>
-<li>Write learning objectives for each activity.</li>
-<li>Create a grid mapping the learning objectives across assignments</li>
+<li>Weekly in-class quizzes (I think these will work well in the 3.5 week version of the class)</li>
+<li>Weekly Homework (Larger homework or lab each week)</li>
+<li>Final exam</li>
+<li>Final Project (larger homework that is built towards)</li>
 </ul>
 </section>
-<section id="finalization-and-submission-of-activities-and-syllabus" class="level3">
-<h3 class="anchored" data-anchor-id="finalization-and-submission-of-activities-and-syllabus">Finalization and Submission of Activities and Syllabus</h3>
-<p>In the final phase we will incorporate feedback and update and publish our final materials (activities and syllabus) in a Github website.</p>
-<p>Specifically we have identified the following tasks:</p>
-<ul>
-<li>Update and incorporate feedback into activities</li>
-<li>Develop a guide to materials for instructors.</li>
-</ul>
-</section>
-</section>
-<section id="timeline" class="level2">
-<h2 class="anchored" data-anchor-id="timeline">Timeline</h2>
-<p>Work plan</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="work-plan_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
-</section>
-<section id="meeting-times" class="level2">
-<h2 class="anchored" data-anchor-id="meeting-times">Meeting Times</h2>
-<p>We will keep meeting based on the following:</p>
-<ul>
-<li>Weekly meetings for the activity-creating team</li>
-<li>Monthly meetings with mentor (Mine)</li>
-<li>Office hours</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Time</th>
-<th>PI</th>
-<th>Zoom Link</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2024-09-18</td>
-<td>3:30 - 4:30 pm ET</td>
-<td>Monika</td>
-<td><a href="https://vassar.zoom.us/my/monika76five"><svg aria-hidden="true" role="img" viewbox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"></path></svg></a></td>
-</tr>
-<tr class="even">
-<td>2024-09-26</td>
-<td>2:00 - 3:00 pm ET</td>
-<td>Mine</td>
-<td><a href="https://uci.zoom.us/j/91799232149"><svg aria-hidden="true" role="img" viewbox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"></path></svg></a></td>
-</tr>
-<tr class="odd">
-<td>2024-10-07</td>
-<td>3:30 - 4:30 pm ET</td>
-<td>Monika</td>
-<td><a href="https://vassar.zoom.us/my/monika76five"><svg aria-hidden="true" role="img" viewbox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"></path></svg></a></td>
-</tr>
-<tr class="even">
-<td>2024-10-15</td>
-<td>3:00 - 4:00 pm ET</td>
-<td>Amy</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>2024-10-2?</td>
-<td></td>
-<td>Mine</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>2024-11-0?</td>
-<td></td>
-<td>Mine</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>2024-11-12</td>
-<td>3:00 - 4:00 pm ET</td>
-<td>Amy</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>2023-11-20</td>
-<td>3:30 - 4:30 pm ET</td>
-<td>Monika</td>
-<td><a href="https://vassar.zoom.us/my/monika76five"><svg aria-hidden="true" role="img" viewbox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"></path></svg></a></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This report template comes from Zachary Del Rosario and Stefani Langehennig’s <a href="https://github.com/bayes-bats/tier2-freq-bayes">Bayes-Bats tier 2 project</a></p>
 </section>
 
 </main>

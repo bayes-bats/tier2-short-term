@@ -1,7 +1,7 @@
 ---
 title: "Work Plan"
 subtitle: "Bayes-Bats Tier 2: A Gentle Introduction to Probability and Bayesian Statistics"
-format: html
+format: pdf
 author: 
   - name: Laurie Baker (Bates College)
   - name: Jim Scott (Colby College)

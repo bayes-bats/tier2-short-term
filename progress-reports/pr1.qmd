@@ -122,13 +122,12 @@ We will keep meeting based on the following:
 
 | Date       | Time               | PI     | Zoom Link |
 |------------|--------------------|--------|-----------|
-| 2024-10-07 | 3:30 - 4:30 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
-| 2024-10-15 | 3:00 - 4:00 pm ET      | Amy |         |
-| 2024-10-2? | | Mine | |
-| 2024-11-0? | | Mine | |
-| 2024-11-12 | 3:00 - 4:00 pm ET      | Amy |         |
-| 2023-11-20 | 3:30 - 4:30 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
-
+| 2024-10-09 | 3:45 - 4:45 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
+| 2024-10-15 | 3:00 - 4:00 pm ET      | Amy |     [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111     |
+| 2024-10-22 | 4:00 - 5:00 pm ET | Mine |[`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/93009936370) |
+| 2024-11-07 |2:00 - 3:00 pm ET | Mine |[`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/96570454362) |
+| 2024-11-12 | 3:00 - 4:00 pm ET      | Amy |   [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111       |
+| 2023-11-20 | 3:45 - 4:45 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
 
 ## Acknowledgements
 

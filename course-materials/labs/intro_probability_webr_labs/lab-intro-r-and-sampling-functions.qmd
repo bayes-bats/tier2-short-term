@@ -1,0 +1,266 @@
+---
+title: "Intro R and Probability Sampling Functions"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+## A Brief Intro to R
+
+Computers are great at **storing** things and also doing things quickly and not getting tired! We will be using the language R to explore probability concepts throughout this course. 
+
+R can do basic operations for us like adding:
+
+```{webr-r}
+1 + 1
+```
+
+subtracting:
+
+```{webr-r}
+10 - 1
+```
+
+and exponentiating:
+
+```{webr-r}
+2^2
+```
+
+It can also store values in **objects**. 
+
+Let's make an assignment and inspect the object we created:
+
+```{webr-r}
+x <- 3 * 15
+
+x
+```
+
+We can then use the object we created:
+
+```{webr-r}
+x - 10
+```
+
+All R statements where you create objects - "assignments" have this form:
+
+`object_name <- value`
+
+A good way to remember it is when you see the code:
+
+```{webr}
+x <- 10
+```
+
+You can say "x gets 10". The value *10* is assigned using the assignment operator `<-` to our object 'x'.
+
+You will want to give your objects memorable names and it may be wise to adopt a convention for demarcating words in names:
+
+`i_like_snake_case`, `other.people.use.periods`, `othersUseCamelCase`
+
+R is a stickler when it comes to spelling but there are some tricks that can help.
+
+
+```{webr-r}
+why_did_i_choose_this_really_long_name <- 7.8
+```
+
+What happens if you spell it wrong?
+
+
+```{webr-r}
+why_didi_choose_this_really_long_name
+```
+
+Try starting to type the first few characters, press TAB, add more characters to narrow down the options, then press return
+
+```{webr-r}
+# delete me and add your own code
+
+```
+
+
+## Useful Sampling Functions for Probability
+
+Three useful functions
+
+1.  `sample()`: randomly picks out elements (items) from a vector
+
+Drawing from a box of tickets is easily simulated in R, since there is a convenient function `sample()` that does exactly what we need: draw tickets from a “box” (which needs to be a vector).
+
+**Arguments**
+
+– x: the vector to be sampled from, this must be specified
+
+– size: the number of items to be sampled, the default value is the length of x
+
+– replace: whether we replace a drawn item before we draw again, the default value is FALSE, indicating that we would draw without replacement. Example: one sample of size 2 from a box with tickets from 1 to 6
+
+```{webr-r}
+box <- c(1, 2, 3, 4, 5, 6)
+sample(x = box, size = 2)
+```
+```{webr-r}
+box <- c(1, 2, 3, 4, 5, 6)
+sample(x = box, size = 2, replace = TRUE)
+```
+
+
+
+What would happen if we don’t specify values for size and replace?
+
+```{webr-r}
+box <- c(1, 2, 3, 4, 5, 6)
+sample(x = box)
+```
+
+
+What would we do differently if we wanted to simulate two rolls of a die?
+
+We would sample twice from the vector die with replacement:
+
+```{webr-r}         
+die <- c(1, 2, 3, 4, 5, 6)
+sample(die, sample = 2, replace = TRUE)
+```
+
+Your turn: Adapt the following code to roll 3 die with replacement:
+
+```{webr-r}         
+die <- c(1, 2, 3, 4, 5, 6)
+sample(die, size = 2, replace = FALSE)
+```
+
+What if we wanted to know the sum of the two die?
+
+```{webr-r}         
+die <- c(1, 2, 3, 4, 5, 6)
+roll <- sample(die, size = 2, replace = TRUE)
+
+sum(rolls)
+```
+
+
+2\. `set.seed()`: returns the random number generator to the point given by the seed number
+
+The random number generator in R is called a “Pseudo Random Number Generator”, because the process can be controlled by a “seed number”. These are algorithmic random number generators, which means that if you provide the same seed (a starting number), R will generate the same sequence of random numbers. This makes it easier to debug your code, and reproduce your results if needed.
+
+**Arguments**
+
+– **n:** the seed number to use. You can use any number you like, for example 1, or 31415 etc You might have noticed that each time you run sample in the code chunk above, it gives you a different sample. Sometimes we want it to give the same sample so that we can check how the code is working without the sample changing each time. We will use the set.seed function for this, which ensures that we will get the same random sample each time we run the code.
+
+Example: one sample of size 4 from a box with tickets from 1 to 6
+
+```{webr-r}
+set.seed(1)
+box <- c(1, 2, 3, 4, 5, 6)
+sample(box, size = 4, replace = FALSE)
+
+```
+
+
+Example: another sample of size 4 from a box with tickets from 1 to 6
+
+```{webr-r}
+set.seed(1)
+box <- c(1, 2, 3, 4, 5, 6)
+sample(box, size = 4, replace = FALSE)
+```
+
+
+Notice that we get the same sample. You can try to run sample(die) without using `set.seed()` and see what happens.
+
+```{webr-r}
+
+box <- c(1, 2, 3, 4, 5, 6)
+sample(box, size = 4, replace = FALSE)
+
+```
+
+
+Though we used `set.seed()` twice here to demonstrate its purpose, generally, you will only need to run `set.seed()` one time per document. This is a line of code that fits perfectly at the beginning of your work, when you are also loading libraries and packages.
+
+3\. `seq()`: creates a sequence of numbers
+Above, we created the vector die using `die <- c(1, 2, 3, 4, 5, 6)`, which is fine, but this method would be tedious if we wanted to simulate a 20-sided die, for instance. The function seq() allows us to create any sequence we like by specifying the starting number, how we want to increment the numbers, and either the ending number or the length of the sequence we want.
+
+**Arguments**
+
+– **from:** where to start
+- **by:** size of jump from number to number (the increment)
+You can end a sequence in one of two ways: 
+
+- **to:** at what number should the sequence end - **length:** how long should the sequence be
+
+**Example: sequence with the to argument**
+
+
+
+```{webr-r}
+
+odds_1 <- seq(from = 1, by = 2, to = 9)
+odds_1
+
+```
+
+Example: sequence with the length argument
+
+```{webr-r}
+
+odds_2 <- seq(from = 1, by = 2, length = 5)
+odds_2
+
+```
+
+
+## Returning to Beano
+
+Let's return to the Beano game. In the game we roll two die and sum them together. 
+
+Another way we can simulate this is to store our first dice roll in an object called `dice roll 1` and the second dice roll in an object called `dice roll 2`. We can get the sum by adding them together and we can plot the distribution.
+
+Try modifying the number of rolls to see how the game would play out with a small number of rolls (e.g. 8) and a very large number of rolls (e.g. 1000). What do you notice?
+
+```{webr, message = FALSE}
+library(ggplot2)
+
+die_1 <- seq(from = 1, to = 6, by = 1)
+die_2 <- seq(from = 1, to = 6, by = 1)
+
+number_of_rolls <- 100
+
+game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE),
+                         roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE))
+
+ggplot(game_rolls) + 
+  geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) +
+  scale_x_continuous(breaks = seq(1, 12, by = 1))
+```
+
+
+**Challenge**
+
+
+Try modifying the code to simulate a Beano game played with a 20 sided die.
+
+
+```{webr, message = FALSE}
+library(ggplot2)
+
+die_1 <- seq(from = 1, to = 6, by = 1)
+die_2 <- seq(from = 1, to = 6, by = 1)
+
+number_of_rolls <- 100
+
+game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE),
+                         roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE))
+
+ggplot(game_rolls) + 
+  geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) +
+  scale_x_continuous(breaks = seq(1, 12, by = 1))
+```
+
+**Hint**: Don't forget to update `scale_x_continuous()`

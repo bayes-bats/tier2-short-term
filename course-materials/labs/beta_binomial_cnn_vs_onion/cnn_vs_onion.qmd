@@ -1,0 +1,106 @@
+---
+title: "CNN vs. The Onion"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+## CNN vs The Onion
+
+CNN (the Cable News Network) is widely considered a reputable news source.  The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.  It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.”  Another way of putting it - The Onion is “fake news” for entertainment purposes.  
+
+In this exercise you will assess your ability to determine real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com).
+
+Each of you will take a quiz consisting of 15 questions.   Each question has the same possible answers:  CNN or The Onion.
+
+## Learning Objectives
+
+
+## Pre-Activity:
+
+Introducing `dbinom`, `pbinom`, and `rbinom`.
+
+### Bernoulli$(p)$ and Binomial$(n,p)$
+
+1.  `dbinom` computes the pmf of $X$, $f(k) = P(X = k)$, for $k = 0, 1, \ldots, n$.
+
+-   Arguments:
+    -   `x`: the value of $k$ in $f(k)$
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+2.  `pbinom` computes the cdf $F(x) = P(X \le x)$\
+
+-   Arguments:
+    -   `q`: the value of $x$ in $F(x)$
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+3.  `rbinom` generates a sample (random numbers) from the Binomial$(n,p)$ distribution.
+
+-   Arguments:
+    -   `n`: the sample size
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+
+Explore the binomial distribution using applet or R.  Show large n vs small n with p = .5,  with n = 100, vary p from 0.05 to 0.95.   What do you observe?  When is the binomial distribution skewed vs symmetric?
+
+```{webr}
+library(tidyverse)
+library(ggplot2)
+
+set.seed(100)
+correct_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)
+
+correct_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)
+
+correct_answers_n100_prob_50_df |>
+  group_by(correct_answers_n100_prob_50)|>
+  summarize(prob_outcomes = n()/100) |>
+  ggplot() +
+  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))
+
+```
+
+1. What happens if you change the size of n?
+
+
+2. What happens if you change prob to 0.05?
+
+
+3. What happens if you change the prob to 0.95?
+
+
+
+## Activity
+
+Let X = the number of questions you answer correctly.  
+
+
+1.  Does X follow a binomial distribution?   What assumptions must you make if you want to treat X as a binomial count? (Hint: think about the 4 things that must be true for a binomial variable). 
+
+2.  Let p denote the proportion of questions that you answer correctly.  Make a prediction – what do you think your value of p is?
+
+3.  Take the Quiz.  Make sure you record the number that you answer correctly.
+
+4.  Suppose that instead of thinking about each question and answering to the best of your ability, you randomly guessed answers (e.g. you flipped a coin – heads = CNN, tails = The Onion).  Under this scenario, what would you expect p to be?  What would you expect X to be?
+
+5.  Suppose you chose to take the quiz using the ‘random guessing’ strategy.  A passing grade on most exams is scoring above the 60th percentile.   Using this rubric, you would need to answer 9 questions correctly in order to pass.  Use the binomial formula to calculate the probability of getting exactly 9 questions right.  
+
+6.  Assuming ‘random guessing’, what is the probability of getting at least 12 questions right?  What is the probability of getting more than half (i.e 8 or more) right?  
+
+7. Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores.  If everyone simply guessed at random, the average score of the class should be about 7.5.  Is it? 
+
+8.  What percent of your classmates scored 12 or more?  8 or more?  How do these proportions compare to the probabilities you calculated earlier?  What does this tell you about your ability to correctly distinguish between headlines from CNN and The Onion?
+
+(Later, when ready to do hypothesis testing)
+
+9.  Test the hypothesis that your value for p, the proportion of questions you answer correctly, is greater than 0.5.  (Bayesian vs traditional method).
+
+
+[at a later time]
+Have someone enter the data for the class [one row per student, each column recording if they answered the question correctly or not]

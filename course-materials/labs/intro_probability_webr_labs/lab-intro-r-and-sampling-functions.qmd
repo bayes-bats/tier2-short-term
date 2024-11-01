@@ -109,8 +109,6 @@ box <- c(1, 2, 3, 4, 5, 6)
 sample(x = box, size = 2, replace = TRUE)
 ```
 
-
-
 What would happen if we don’t specify values for size and replace?
 
 ```{webr-r}

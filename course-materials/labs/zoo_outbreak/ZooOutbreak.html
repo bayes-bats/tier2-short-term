@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jim Scott and Laurie Baker">
-<meta name="dcterms.date" content="2024-10-04">
 
-<title>Syllabus</title>
+<title>Zoo Outbreak</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,19 +20,53 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="syllabus_files/libs/clipboard/clipboard.min.js"></script>
-<script src="syllabus_files/libs/quarto-html/quarto.js"></script>
-<script src="syllabus_files/libs/quarto-html/popper.min.js"></script>
-<script src="syllabus_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="syllabus_files/libs/quarto-html/anchor.min.js"></script>
-<link href="syllabus_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="syllabus_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="syllabus_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="syllabus_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="syllabus_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="ZooOutbreak_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ZooOutbreak_files/libs/quarto-html/quarto.js"></script>
+<script src="ZooOutbreak_files/libs/quarto-html/popper.min.js"></script>
+<script src="ZooOutbreak_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ZooOutbreak_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ZooOutbreak_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ZooOutbreak_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ZooOutbreak_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ZooOutbreak_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ZooOutbreak_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -47,26 +79,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Syllabus</h1>
+<h1 class="title">Zoo Outbreak</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jim Scott and Laurie Baker </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 4, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -76,34 +96,52 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="syllabus" class="level2">
-<h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
-<p>Bayesian statistics is an approach to data analysis that incorporates prior knowledge or beliefs with new evidence to make inferences. This differs from traditional statistics, which interprets probability as the long-term frequency of events and doesn’t explicitly incorporate any prior knowledge of the system being studied. Fundamental to both types of statistical analysis is probability. At its core, probability is a field of mathematics that attempts to model and quantify the uncertainty of an event or events. It helps us answer the question: “What is the likelihood that an event will occur?”. Probability is widely used in science, economics, forecasting, engineering, and many other fields to help us understand risk, improve designs, and make decisions.</p>
-<p>In this course, we will explore the basics of probability and how it pertains to Bayesian statistics. We’ll focus on conceptual understanding, practical skills, and problem-solving abilities. We will also introduce the Bayesian framework for doing statistics, describe how it differs from traditional statistics, and perform statistical analyses using Bayesian methods using the software R and the integrated development environment, RStudio.</p>
-<section id="learning-goals" class="level3">
-<h3 class="anchored" data-anchor-id="learning-goals">Learning Goals:</h3>
-<ul>
-<li>Understand basic probability concepts and basic Bayesian concepts</li>
-<li>Learn basic rules of probability and how to apply them</li>
-<li>Develop a firm understanding of conditional probability and Bayes theorem</li>
-<li>Explore common discrete and continuous probability distributions</li>
-<li>Compare and contrast Bayesian methods with frequentist statistical methods</li>
-<li>Use Bayes theorem to update probabilities with prior knowledge</li>
-<li>Understand the basics concepts of likelihood, prior and posterior distributions</li>
-<li>Perform Bayesian inference for a single mean and a single proportion</li>
-<li>Create and interpret credible intervals</li>
-<li>Use computational methods to perform analyses</li>
-</ul>
+<section id="tuberculosis-outbreak-at-a-zoo" class="level1">
+<h1>Tuberculosis Outbreak at a Zoo</h1>
 </section>
-<section id="assessment" class="level3">
-<h3 class="anchored" data-anchor-id="assessment">Assessment</h3>
-<p>Some possibilities to explore:</p>
-<ul>
-<li>Weekly in-class quizzes (LB: I think these will work well in the 3.5 week version of the class)</li>
-<li>Weekly Homework (Larger homework or lab each week)</li>
-<li>Final exam</li>
-<li>Final Project (Perhaps homework will slowly build towards this?)</li>
-</ul>
+<section id="what-is-tuberculosis-tb" class="level1">
+<h1>What is Tuberculosis (TB):</h1>
+<p>TB is An infectious disease caused by the bacterium M. tuberculosis. TB can affect nearly any organ system in the body, most commonly the lungs are infected. The disease is transmitted via droplet nuclei. Usually when a person with active disease coughs, sneezes, or talks, airborne particles are released. Inhaled particles may cause infection that can later lead to active disease. According to the World Health Organization, about one-quarter of the world’s population is infected with TB. Usually only a small percentage of those infected go on to develop active disease. However, the disease is still responsible for over one million deaths annually. Symptoms of active disease include coughing, weight loss, fever, and night sweats Diagnosis of TB is based on chest x-ray abnormalities and a microscopic examination of sputum. In most cases, effective treatment is achieved through the use of antibiotics.</p>
+</section>
+<section id="animals-infected" class="level1">
+<h1>Animals infected</h1>
+<p>In March 1997 an Asian elephant dies and a necropsy reveals lung disease; culture reveals M. tuberculosis. One month later another elephant is found to be M. tuberculosis culture positive. In all, two elephants, one rhino, and two goats are discovered to have the same strain of M. tuberculosis.</p>
+</section>
+<section id="goals-of-the-outbreak-team" class="level1">
+<h1>Goals of the outbreak team:</h1>
+<p>-Determine if ongoing transmission is occurring in animals and/or humans. -Identify source of M. tuberculosis infection in the goats diagnosed in February 2000. -Identify any active TB cases among employees. -Identify employees with LTBI. -Identify risk factors associated with TB infection among employees.</p>
+</section>
+<section id="tasks-conducted-by-research-team" class="level1">
+<h1>Tasks conducted by research team:</h1>
+<p>-Medical record review -Preliminary infection control assessment -Employee TB exposure questionnaire -TB case registry match -DNA fingerprinting -Veterinary outbreak investigation</p>
+<p>Employees were screened for recent M. tuberculosis infection (TBI). A number of possible risk factors for recent investigation were evaluated. In this exercise, we’ll focus on just two: Animal contact and Necropsy attendance.</p>
+<p>The animal contact data are stored in xxxx. Load the data into R.</p>
+</section>
+<section id="questions" class="level1">
+<h1>Questions</h1>
+<ol type="1">
+<li>How many individuals experienced TBI?</li>
+<li>What was the overall proportion of employees that had TBI?</li>
+<li>Determine the proportion of those with TBI by animal contact (any animal contact while working at the zoo)</li>
+<li>Create a 2x2 table to summarize the relationship between TBI and animal contact</li>
+<li>Based on these data, does it appear that animal contact is a risk factor for TBI? If animal contact and TBI are not related, what would you expect this table to look like?</li>
+</ol>
+<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="running-code" class="level2">
+<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
+<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>You can add options to executable code like this</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
 </section>
 </section>
 

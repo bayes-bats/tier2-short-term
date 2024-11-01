@@ -1,0 +1,213 @@
+---
+title: "Random Variables - Binomial, Hypergeometric, and Poisson"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+Draft inspired by problem set in Stat20.org.
+
+### Bernoulli$(p)$ and Binomial$(n,p)$
+
+1.  `dbinom` computes the pmf of $X$, $f(k) = P(X = k)$, for $k = 0, 1, \ldots, n$.
+
+-   Arguments:
+    -   `x`: the value of $k$ in $f(k)$
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+2.  `pbinom` computes the cdf $F(x) = P(X \le x)$\
+
+-   Arguments:
+    -   `q`: the value of $x$ in $F(x)$
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+3.  `rbinom` generates a sample (random numbers) from the Binomial$(n,p)$ distribution.
+
+-   Arguments:
+    -   `n`: the sample size
+    -   `size`: the parameter $n$, the number of trials
+    -   `prob`: the parameter $p$, the probability of success
+
+#### Example
+
+Suppose we consider $n = 3$, $p= 0.5$, that is, $X$ is the number of successes in 3 independent Bernoulli trials.
+
+```{webr}
+# probability that we see exactly 1 success = f(1)
+
+dbinom(x = 1, size = 3, prob = 0.5)
+```
+
+```{webr}
+# probability that we see at most 1 success = F(1) = f(0) + f(1)
+
+pbinom(q = 1, size = 3, prob = 0.5 )
+```
+
+```{webr}
+# check f(0) + f(1)
+
+dbinom(x = 0, size = 3, prob = 0.5) + dbinom(x = 1, size = 3, prob = 0.5)
+```
+
+```{webr}
+# generate a sample of size 5 where each element in sample represents number of successes in 3 trials (like number of heads in 3 tosses)
+
+rbinom(n = 5, size = 3, prob = 0.5)
+```
+
+```{webr}
+# if we want to generate a sequence of 10 tosses of a fair coin, for example:
+
+rbinom(n = 10, size = 1, prob = 0.5)
+```
+
+#### Exercise
+
+In the section on the Binomial distribution in the reading, we had an exercise where $X \sim Bin(10, 0.4)$. In the exercise you were asked to compute:
+
+-   $X = 5$
+-   $X \le 5$
+-   $3 \le X \le 8$
+
+The results are below. **How would you update the code below if instead the question was, the process can be defined as** $X \sim Bin(20, 0.2)$ and you are asked to compute the following:
+
+-   $X = 4$
+-   $X \le 4$
+-   $7 \le X \le 10$
+
+
+```{webr}
+# P(X = 5)
+dbinom(x = 5, size = 10, prob = 0.4)
+```
+
+```{webr}
+# P(X = 5)
+pbinom(5, 10, 0.4) - pbinom(4, 10, 0.4)
+```
+
+```{webr}
+# P(X <= 5)
+dbinom(x = 0, size = 10, prob = 0.4) + dbinom(x = 1, size = 10, prob = 0.4) + 
+  dbinom(x = 2, size = 10, prob = 0.4) + dbinom(x = 3, size = 10, prob = 0.4) +
+  dbinom(x = 4, size = 10, prob = 0.4) + dbinom(x = 5, size = 10, prob = 0.4)
+```
+
+```{webr}
+# P(X <= 5)
+pbinom(5, 10, 0.4)
+```
+
+```{webr}
+# P(3 <= X <= 8)
+dbinom(x = 3, size = 10, prob = 0.4) + dbinom(x = 4, size = 10, prob = 0.4) + 
+  dbinom(x = 5, size = 10, prob = 0.4) + dbinom(x = 6, size = 10, prob = 0.4) +
+  dbinom(x = 7, size = 10, prob = 0.4) + dbinom(x = 8, size = 10, prob = 0.4)
+```
+
+```{webr}
+# P(3 <= X <= 8)
+pbinom(8, 10, 0.4) - pbinom(2, 10, 0.4)
+```
+
+### Hypergeometric $(N, G, n)$
+
+The notation is a bit confusing, but just remember that `x` is usually the number $k$ that you want the probability for, and `m + n`$=N$ is the total number of successes and failures, or the population size.
+
+1.  `dhyper` computes the pmf of $X$, $f(k) = P(X = k)$, for $k = 0, 1, \ldots, n$.
+
+-   Arguments:
+    -   `x`: the value of $k$ in $f(k)$
+    -   `m`: the parameter $G$, the number of successes in the population
+    -   `n`: the value $N-G$, the number of failures in the population
+    -   `k`: the sample size (number of draws $n$, note that $0 \le k \le m+n$)
+
+2.  `phyper` computes the cdf $F(x) = P(X \le x)$\
+
+-   Arguments:
+    -   `q`: the value of $x$ in $F(x)$
+    -   `m`: the parameter $G$, the number of successes in the population
+    -   `n`: the value $N-G$, the number of failures in the population
+    -   `k`: the sample size (number of draws $n$)
+
+3.  `rhyper` generates a sample (random numbers) from the hypergeometric$(N, G, n)$ distribution.
+
+-   Arguments:
+    -   `nn`: the number of random numbers desired
+    -   `m`: the parameter $G$, the number of successes in the population
+    -   `n`: the value $N-G$, the number of failures in the population
+    -   `k`: the sample size (number of draws $n$)
+
+#### Example
+
+Suppose we consider $N = 10, G  = 6, n = 3$, that is, $X$ is the number of successes in 3 draws without replacement from a box that has 6 tickets marked $\fbox{1}$ and 4 tickets marked $\fbox{0}$
+
+```{webr}
+
+# probability that we see exactly 1 success = f(1)
+dhyper(x = 1, m = 6, n = 4, k = 3)
+
+# you can compute this by hand as well to check. 
+
+# probability that we see at most 1 success = F(1) = f(0) + f(1)
+phyper(q = 1, m = 6, n = 4, k = 3)
+# check f(0) + f(1)
+dhyper(x = 0, m = 6, n = 4, k = 3) + dhyper(x = 1, m = 6, n = 4, k = 3)
+
+# generate a sample of size 5 where each element in sample 
+# represents number of successes in 3 draws
+rhyper(nn = 5, m = 6, n = 4, k = 3)
+
+```
+
+### Poisson($\lambda$)
+
+1.  `dpois` computes the pmf of $X$, $f(k) = P(X = k)$, for $k = 0, 1, 2,  \ldots$.
+
+-   Arguments:
+    -   `x`: the value of $k$ in $f(k)$
+    -   `lambda`: the parameter $\lambda$
+
+2.  `ppois` computes the cdf $F(x) = P(X \le x)$\
+
+-   Arguments:
+    -   `q`: the value of $x$ in $F(x)$
+    -   `lambda`: the parameter $\lambda$
+
+3.  `rpois` generates a sample (random numbers) from the Poisson($\lambda$) distribution.
+
+-   Arguments:
+    -   `n`: the desired sample size
+    -   `lambda`: the parameter $\lambda$
+
+#### Example
+
+Suppose we consider $\lambda = 1$, that is $X \sim$ Poisson$(\lambda)$.
+
+```{webr}
+
+# probability that we see exactly 1 event = f(1)
+dpois(x = 1, lambda = 1)
+
+
+#check f(1) = exp(-lambda)*lambda = exp(-1)*1
+exp(-1)
+
+
+# probability that we see at most 1 success = F(1) = f(0) + f(1)
+ppois(q = 1,lambda = 1)
+
+# check f(0) + f(1)
+dpois(x = 0, lambda = 1) + dpois(x = 1, lambda = 1)
+
+# generate a sample of size 5 where each element in sample 
+# represents a random count from the Poisson(1) distribution
+rpois(n = 5, lambda = 1)
+
+```

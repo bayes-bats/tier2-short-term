@@ -10,5 +10,6 @@
 
 - [Draft CNN vs. The Onion](course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion.html)
 - [Draft Zoo TB](course-materials/labs/zoo_outbreak/ZooOutbreak.html)
-- [Draft Intro R and Sampling Functions Web-R Tutorial](course-materials/labs/intro_probability_sebr_labs/lab-intro-r-and-sampling-functions.html)
-- [Progress Report](progress-reports/pr2.html)
+- [Draft Intro R and Sampling Functions Web-R Tutorial](course-materials/labs/intro_probability_webr_labs/lab-intro-r-and-sampling-functions.html)
+- [Draft Random Variables Web-R Tutorial](course-materials/labs/intro_probability_webr_labs/random_variables_binomial_poisson.html)
+- [Progress Report 2](progress-reports/pr2.html)

@@ -368,9 +368,9 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 head(cnn_onion)
 ```
 
-Reading in the data from the google form (under construction)
+Reading in the data from the google form.
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 cnn_onion_survey <- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")
 
 head(cnn_onion_survey)

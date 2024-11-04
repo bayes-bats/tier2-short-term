@@ -458,8 +458,34 @@ unpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +
 poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
   labs(title = "Poor Guesser")
 
-gridExtra::grid.arrange(good, unpredictable, poor, ncol=3)
+gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
 
 ```
 
+
+```{webr-r}
+#| context: setup
+good <- plot_beta_binomial(14, 1, y = 45, n = 150) +
+  labs(title = "Good Guesser")
+
+unpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Unpredictable Guesser")
+
+poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
+  labs(title = "Poor Guesser")
+
+```
+
+
+Fill in the gap alpha and beta shape parameters with your guess:
+
+```{webr-r}
+library(patchwork)
+
+your_plot <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Your Guess")
+
+gridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)
+
+```
 

@@ -14,7 +14,11 @@ CNN (the Cable News Network) is widely considered a reputable news source. The O
 
 In this exercise you will assess your ability to determine real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com).
 
-Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion.
+Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our [google form](https://forms.gle/eVvFHZQwvtsBYa9r9): 
+
+```{=html}
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+```
 
 ## Learning Objectives
 

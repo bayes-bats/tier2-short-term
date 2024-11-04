@@ -323,7 +323,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-1","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# probability that we see exactly 1 success = f(1)\n\ndbinom(x = 1, size = 3, prob = 0.5)"},{"id":2,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-2","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# probability that we see at most 1 success = F(1) = f(0) + f(1)\n\npbinom(q = 1, size = 3, prob = 0.5 )"},{"id":3,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-3","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# check f(0) + f(1)\n\ndbinom(x = 0, size = 3, prob = 0.5) + dbinom(x = 1, size = 3, prob = 0.5)"},{"id":4,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-4","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# generate a sample of size 5 where each element in sample represents number of successes in 3 trials (like number of heads in 3 tosses)\n\nrbinom(n = 5, size = 3, prob = 0.5)"},{"id":5,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-5","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# if we want to generate a sequence of 10 tosses of a fair coin, for example:\n\nrbinom(n = 10, size = 1, prob = 0.5)"},{"id":6,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-6","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(X = 5)\ndbinom(x = 5, size = 10, prob = 0.4)"},{"id":7,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-7","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(X = 5)\npbinom(5, 10, 0.4) - pbinom(4, 10, 0.4)"},{"id":8,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-8","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(X <= 5)\ndbinom(x = 0, size = 10, prob = 0.4) + dbinom(x = 1, size = 10, prob = 0.4) + \n  dbinom(x = 2, size = 10, prob = 0.4) + dbinom(x = 3, size = 10, prob = 0.4) +\n  dbinom(x = 4, size = 10, prob = 0.4) + dbinom(x = 5, size = 10, prob = 0.4)"},{"id":9,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-9","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(X <= 5)\npbinom(5, 10, 0.4)"},{"id":10,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-10","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(3 <= X <= 8)\ndbinom(x = 3, size = 10, prob = 0.4) + dbinom(x = 4, size = 10, prob = 0.4) + \n  dbinom(x = 5, size = 10, prob = 0.4) + dbinom(x = 6, size = 10, prob = 0.4) +\n  dbinom(x = 7, size = 10, prob = 0.4) + dbinom(x = 8, size = 10, prob = 0.4)"},{"id":11,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-11","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# P(3 <= X <= 8)\npbinom(8, 10, 0.4) - pbinom(2, 10, 0.4)"},{"id":12,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-12","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# probability that we see exactly 1 success = f(1)\ndhyper(x = 1, m = 6, n = 4, k = 3)\n\n# you can compute this by hand as well to check. \n\n# probability that we see at most 1 success = F(1) = f(0) + f(1)\nphyper(q = 1, m = 6, n = 4, k = 3)\n# check f(0) + f(1)\ndhyper(x = 0, m = 6, n = 4, k = 3) + dhyper(x = 1, m = 6, n = 4, k = 3)\n\n# generate a sample of size 5 where each element in sample \n# represents number of successes in 3 draws\nrhyper(nn = 5, m = 6, n = 4, k = 3)"},{"id":13,"options":{"fig-width":7,"context":"interactive","classes":"","read-only":"false","out-width":"700px","label":"unnamed-chunk-13","fig-height":5,"output":"true","message":"true","warning":"true","editor-word-wrap":"true","autorun":"false","editor-quick-suggestions":"false","fig-cap":"","results":"markup","comment":"","dpi":72,"editor-font-scale":"1","out-height":"","editor-max-height":""},"code":"# probability that we see exactly 1 event = f(1)\ndpois(x = 1, lambda = 1)\n\n\n#check f(1) = exp(-lambda)*lambda = exp(-1)*1\nexp(-1)\n\n\n# probability that we see at most 1 success = F(1) = f(0) + f(1)\nppois(q = 1,lambda = 1)\n\n# check f(0) + f(1)\ndpois(x = 0, lambda = 1) + dpois(x = 1, lambda = 1)\n\n# generate a sample of size 5 where each element in sample \n# represents a random count from the Poisson(1) distribution\nrpois(n = 5, lambda = 1)"}];
+globalThis.qwebrCellDetails = [{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-1","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"dbinom(x = 1, size = 3, prob = 0.5)","id":1},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-2","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# Calculate F(1) using the cumulative distribution function\npbinom(q = 1, size = 3, prob = 0.5 )","id":2},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-3","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# Check f(0) + f(1)\n\ndbinom(x = 0, size = 3, prob = 0.5) + dbinom(x = 1, size = 3, prob = 0.5)","id":3},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-4","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"rbinom(n = 5, size = 3, prob = 0.5)","id":4},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-5","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"rbinom(n = 10, size = 1, prob = 0.5)","id":5},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-6","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X = 5)\ndbinom(x = 5, size = 10, prob = 0.4)","id":6},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-7","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X = 5)\npbinom(5, 10, 0.4) - pbinom(4, 10, 0.4)","id":7},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-8","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X <= 5)\ndbinom(x = 0, size = 10, prob = 0.4) + dbinom(x = 1, size = 10, prob = 0.4) + \n  dbinom(x = 2, size = 10, prob = 0.4) + dbinom(x = 3, size = 10, prob = 0.4) +\n  dbinom(x = 4, size = 10, prob = 0.4) + dbinom(x = 5, size = 10, prob = 0.4)","id":8},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-9","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X <= 5)\npbinom(5, 10, 0.4)","id":9},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-10","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(3 <= X <= 8)\ndbinom(x = 3, size = 10, prob = 0.4) + \n  dbinom(x = 4, size = 10, prob = 0.4) + \n  dbinom(x = 5, size = 10, prob = 0.4) + \n  dbinom(x = 6, size = 10, prob = 0.4) +\n  dbinom(x = 7, size = 10, prob = 0.4) + \n  dbinom(x = 8, size = 10, prob = 0.4)","id":10},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-11","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(3 >= X <= 8)\npbinom(8, 10, 0.4) - pbinom(2, 10, 0.4)","id":11},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-12","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X = 4)\n____binom(x = ___, size = 20, prob = _____)","id":12},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-13","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(X <= 4)\n___binom(___ = 4, size = ___, prob = 0.2)","id":13},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-14","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# P(7 <= X <= 10)\n___binom(___ = __, size = 20, prob = 0.2) - ___binom(___ = ___, size = 20, prob = 0.2)","id":14},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-15","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"dhyper(x = 1, m = 6, n = 4, k = 3)","id":15},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-16","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"phyper(q = 1, m = 6, n = 4, k = 3)","id":16},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-17","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# check f(0) + f(1)\ndhyper(x = 0, m = 6, n = 4, k = 3) + dhyper(x = 1, m = 6, n = 4, k = 3)","id":17},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-18","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"rhyper(nn = 5, m = 6, n = 4, k = 3)","id":18},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-19","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"dpois(x = 1, lambda = 1)","id":19},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-20","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"#check f(1) = exp(-lambda)*lambda = exp(-1)*1\nexp(-1)","id":20},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-21","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"ppois(q = 1,lambda = 1)","id":21},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-22","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"# check f(0) + f(1)\ndpois(x = 0, lambda = 1) + dpois(x = 1, lambda = 1)","id":22},{"options":{"dpi":72,"results":"markup","warning":"true","editor-word-wrap":"true","fig-height":5,"fig-width":7,"editor-font-scale":"1","out-width":"700px","label":"unnamed-chunk-23","editor-max-height":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","read-only":"false","fig-cap":"","comment":"","output":"true","message":"true","out-height":"","classes":""},"code":"rpois(n = 5, lambda = 1)","id":23}];
 
 </script>
 <script type="module">
@@ -1862,9 +1862,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p>Draft inspired by problem set in Stat20.org.</p>
-<section id="bernoullip-and-binomialnp" class="level3">
-<h3 class="anchored" data-anchor-id="bernoullip-and-binomialnp">Bernoulli<span class="math inline">\((p)\)</span> and Binomial<span class="math inline">\((n,p)\)</span></h3>
+<section id="code-examples" class="level1">
+<h1>Code Examples</h1>
+<p>Web-r to accompany examples in <a href="https://www.stat20.org/3-probability/04-random-variables/notes">Stat20 Random Variable Notes</a>.</p>
+<section id="bernoullip-and-binomialnp" class="level2">
+<h2 class="anchored" data-anchor-id="bernoullip-and-binomialnp">Bernoulli<span class="math inline">\((p)\)</span> and Binomial<span class="math inline">\((n,p)\)</span></h2>
 <ol type="1">
 <li><code>dbinom</code> computes the pmf of <span class="math inline">\(X\)</span>, <span class="math inline">\(f(k) = P(X = k)\)</span>, for <span class="math inline">\(k = 0, 1, \ldots, n\)</span>.</li>
 </ol>
@@ -1899,69 +1901,114 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><code>prob</code>: the parameter <span class="math inline">\(p\)</span>, the probability of success</li>
 </ul></li>
 </ul>
-<section id="example" class="level4">
-<h4 class="anchored" data-anchor-id="example">Example</h4>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
 <p>Suppose we consider <span class="math inline">\(n = 3\)</span>, <span class="math inline">\(p= 0.5\)</span>, that is, <span class="math inline">\(X\)</span> is the number of successes in 3 independent Bernoulli trials.</p>
+<ol type="1">
+<li>What is the probability that we see exactly 1 success = <span class="math inline">\(f(1)\)</span></li>
+</ol>
 <div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ol start="2" type="1">
+<li>What is the probability that we see <em>at most</em> 1 success = <span class="math inline">\(F(1) = f(0) + f(1)\)</span></li>
+</ol>
 <div class="cell">
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<p>Let’s double check that this is true: <span class="math inline">\(F(1) = f(0) + f(1)\)</span></p>
 <div class="cell">
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ol start="3" type="1">
+<li>Generate a sample of size 5 where each element in the sample represents the number of successes in 3 trials (like the number of heads in 3 tosses)</li>
+</ol>
 <div class="cell">
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ol start="4" type="1">
+<li>Let’s generate a sample of size 10 to simulate 10 tosses of a single fair coin</li>
+</ol>
 <div class="cell">
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-</section>
-<section id="exercise" class="level4">
-<h4 class="anchored" data-anchor-id="exercise">Exercise</h4>
-<p>In the section on the Binomial distribution in the reading, we had an exercise where <span class="math inline">\(X \sim Bin(10, 0.4)\)</span>. In the exercise you were asked to compute:</p>
-<ul>
-<li><span class="math inline">\(X = 5\)</span></li>
-<li><span class="math inline">\(X \le 5\)</span></li>
-<li><span class="math inline">\(3 \le X \le 8\)</span></li>
-</ul>
-<p>The results are below. <strong>How would you update the code below if instead the question was, the process can be defined as</strong> <span class="math inline">\(X \sim Bin(20, 0.2)\)</span> and you are asked to compute the following:</p>
-<ul>
-<li><span class="math inline">\(X = 4\)</span></li>
-<li><span class="math inline">\(X \le 4\)</span></li>
-<li><span class="math inline">\(7 \le X \le 10\)</span></li>
-</ul>
+<ol start="5" type="1">
+<li>If we have a Binomial distribution that can be described as <span class="math inline">\(X \sim Bin(10, 0.4)\)</span> compute the following</li>
+</ol>
+<section id="x-5" class="level4">
+<h4 class="anchored" data-anchor-id="x-5"><span class="math inline">\(X = 5\)</span></h4>
+<p>We can calculate <span class="math inline">\(X = 5\)</span> one of two ways:</p>
+<p>Using <code>dbinom</code> to calculate the pmf for <span class="math inline">\(X = 5\)</span></p>
 <div class="cell">
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<p>Using <code>pbinom</code> to calculate the cdf for <span class="math inline">\(X \le 5\)</span> and subtracting the cdf for <span class="math inline">\(X \le 4\)</span> to get the pmf of <span class="math inline">\(X = 5\)</span>.</p>
 <div class="cell">
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ul>
+<li><span class="math inline">\(X \le 5\)</span></li>
+</ul>
+<p>Can also be calculated two ways.</p>
+<p>We can compute this by adding up the pmfs of <span class="math inline">\(X = 0\)</span>, <span class="math inline">\(X = 1\)</span>, <span class="math inline">\(X = 2\)</span>, <span class="math inline">\(X = 3\)</span>, <span class="math inline">\(X = 4\)</span>, <span class="math inline">\(X = 5\)</span></p>
 <div class="cell">
 <div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<p>Or we can calculate the cdf:</p>
 <div class="cell">
 <div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ul>
+<li><span class="math inline">\(3 \le X \le 8\)</span></li>
+</ul>
+<p>Can be calculated by adding up the pmfs of <span class="math inline">\(X = 3\)</span>, <span class="math inline">\(X = 4\)</span>, <span class="math inline">\(X = 5\)</span>, <span class="math inline">\(X = 6\)</span>, <span class="math inline">\(X = 7\)</span>, and <span class="math inline">\(X = 8\)</span>.</p>
 <div class="cell">
 <div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<p>Or by calculating the cdf of <span class="math inline">\(X \le 8\)</span> and subtracting the cdf of <span class="math inline">\(X \le 2\)</span></p>
 <div class="cell">
 <div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </section>
+<section id="exercise" class="level3">
+<h3 class="anchored" data-anchor-id="exercise">Exercise:</h3>
+<p>Suppose our process is <span class="math inline">\(X \sim Bin(20, 0.2)\)</span>. <strong>Fill in the blanks below</strong> to compute the following:</p>
+<ul>
+<li><span class="math inline">\(X = 4\)</span></li>
+</ul>
+<p>Hint: Your answer should come out to be 0.2181994</p>
+<div class="cell">
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ul>
+<li><span class="math inline">\(X \le 4\)</span></li>
+</ul>
+<p>Hint: Your answer should come out to be 0.6296483</p>
+<div class="cell">
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ul>
+<li><span class="math inline">\(7 \le X \le 10\)</span></li>
+</ul>
+<p>Hint: Your answer should come out to be 0.6296483</p>
+<div class="cell">
+<div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 </section>
 <section id="hypergeometric-n-g-n" class="level3">
 <h3 class="anchored" data-anchor-id="hypergeometric-n-g-n">Hypergeometric <span class="math inline">\((N, G, n)\)</span></h3>
@@ -2006,8 +2053,32 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="example-1" class="level4">
 <h4 class="anchored" data-anchor-id="example-1">Example</h4>
 <p>Suppose we consider <span class="math inline">\(N = 10, G  = 6, n = 3\)</span>, that is, <span class="math inline">\(X\)</span> is the number of successes in 3 draws without replacement from a box that has 6 tickets marked <span class="math inline">\(\fbox{1}\)</span> and 4 tickets marked <span class="math inline">\(\fbox{0}\)</span></p>
+<ol type="1">
+<li>The probability that we see exactly 1 success = <span class="math inline">\(f(1)\)</span></li>
+</ol>
 <div class="cell">
-<div id="qwebr-insertion-location-12"></div>
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<p>Try computing this by hand as well to check.</p>
+<ol start="2" type="1">
+<li>The probability that we see <em>at most</em> 1 success = <span class="math inline">\(F(1) = f(0) + f(1)\)</span></li>
+</ol>
+<p>Using the cdf:</p>
+<div class="cell">
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<p>Adding up the pmfs:</p>
+<div class="cell">
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="3" type="1">
+<li>Generate a sample of size 5 where each element in the sample represents the number of successes in 3 draws.</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-18"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </section>
@@ -2048,10 +2119,42 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="example-2" class="level4">
 <h4 class="anchored" data-anchor-id="example-2">Example</h4>
 <p>Suppose we consider <span class="math inline">\(\lambda = 1\)</span>, that is <span class="math inline">\(X \sim\)</span> Poisson<span class="math inline">\((\lambda)\)</span>.</p>
+<ol type="1">
+<li>What is the probability that we see exactly 1 event <span class="math inline">\(f(1)\)</span></li>
+</ol>
 <div class="cell">
-<div id="qwebr-insertion-location-13"></div>
+<div id="qwebr-insertion-location-19"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ol start="2" type="1">
+<li>Let’s check that <span class="math inline">\(f(1) = exp(-\lambda)\lambda = exp(-1)1\)</span></li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="3" type="1">
+<li>What is the probability that we see <em>at most</em> 1 success, <span class="math inline">\(F(1) = f(0) + f(1)\)</span></li>
+</ol>
+<p>Using the cdf:</p>
+<div class="cell">
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<p>Adding up the pmfs</p>
+<div class="cell">
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="4" type="1">
+<li>Generate a sample of size 5 where each element in the sample represents a random count from the Poisson(1) distribution</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</section>
+</section>
 </section>
 </section>
 

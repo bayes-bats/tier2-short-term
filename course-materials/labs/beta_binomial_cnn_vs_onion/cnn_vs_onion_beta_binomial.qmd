@@ -1,5 +1,5 @@
 ---
-title: "CNN vs. The Onion"
+title: "CNN vs. The Onion - Beta Binomial"
 format: html
 engine: knitr
 webr:
@@ -10,192 +10,432 @@ filters:
 
 ## CNN vs The Onion
 
-CNN (the Cable News Network) is widely considered a reputable news source.  The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.  It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.”  Another way of putting it - The Onion is “fake news” for entertainment purposes.  
+CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization. It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.” Another way of putting it - The Onion is “fake news” for entertainment purposes.
 
 In this exercise you will assess your ability to determine real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com).
 
-Each of you will take a quiz consisting of 15 questions.   Each question has the same possible answers:  CNN or The Onion.
+Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion.
 
 ## Learning Objectives
 
-- Generate Binomial data
-- Calculate the probability mass function and cumulative distribution function using `dbinom` and `pbinom`
-- Generate random data from the Binomial distribution using `rbinom`
+-   Explore the effect of different priors on posteriors
+-   Introduce the concept of a prior
+-   Plotting priors and posteriors
 
-## Pre-Activity:
+## Packages
 
-Introducing `dbinom`, `pbinom`, and `rbinom`.
-
-### Bernoulli$(p)$ and Binomial$(n,p)$
-
-1.  `dbinom` computes the probability mass function (pmf) of $X$, $f(k) = P(X = k)$, for $k = 0, 1, \ldots, n$.
-
--   Arguments:
-    -   `x`: the value of $k$ in $f(k)$
-    -   `size`: the parameter $n$, the number of trials
-    -   `prob`: the parameter $p$, the probability of success
-
-2.  `pbinom` computes the cumulative distribution function (cdf) $F(x) = P(X \le x)$\
-
--   Arguments:
-    -   `q`: the value of $x$ in $F(x)$
-    -   `size`: the parameter $n$, the number of trials
-    -   `prob`: the parameter $p$, the probability of success
-
-3.  `rbinom` generates a sample (random numbers) from the Binomial$(n,p)$ distribution.
-
--   Arguments:
-    -   `n`: the sample size
-    -   `size`: the parameter $n$, the number of trials
-    -   `prob`: the parameter $p$, the probability of success
-
-
-Explore the binomial distribution in the following exercises. What do you observe?  When is the binomial distribution skewed vs symmetric?
-
-```{webr}
+```{r packages, message = FALSE}
 library(tidyverse)
-library(ggplot2)
+library(bayesrules)
+library(gridExtra)
+```
 
-set.seed(100)
-correct_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)
+```{webr-r}
+#| context: setup
 
-correct_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)
+library(tidyverse)
+library(gridExtra)
 
-correct_answers_n100_prob_50_df |>
-  group_by(correct_answers_n100_prob_50)|>
-  summarize(prob_outcomes = n()/100) |>
-  ggplot() +
-  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))
+#' Plot a Beta-Binomial Bayesian Model
+#'
+#' Consider a Beta-Binomial Bayesian model for parameter \eqn{\pi} with 
+#' a Beta(alpha, beta) prior on \eqn{\pi} and Binomial likelihood with n trials
+#' and y successes. Given information on the prior (alpha and data) and data (y and n),
+#' this function produces a plot of any combination of the corresponding prior pdf, 
+#' scaled likelihood function, and posterior pdf.  All three are included by default.
+#'
+#' @param alpha,beta positive shape parameters of the prior Beta model
+#' @param y observed number of successes
+#' @param n observed number of trials
+#' @param prior a logical value indicating whether the prior model should be plotted
+#' @param likelihood a logical value indicating whether the scaled likelihood should be plotted
+#' @param posterior a logical value indicating whether posterior model should be plotted
+#'
+#' @return a ggplot
+#' @export
+#' @import ggplot2
+#' @importFrom stats dbeta dbinom integrate
+#' @examples
+#'
+#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50)
+#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50, posterior = FALSE)
+#' 
+plot_beta_binomial <- function (alpha,
+                                beta,
+                                y = NULL,
+                                n = NULL,
+                                prior = TRUE,
+                                likelihood = TRUE,
+                                posterior = TRUE){
+  if (is.null(y) | is.null(n))
+    warning("To visualize the posterior,
+            specify data y and n")
+
+  g <- ggplot(data = data.frame(x = c(0, 1)), aes(x)) +
+    labs(x = expression(pi),
+         y = "density") +
+    scale_fill_manual("",
+                      values = c(prior = "#f0e442",
+                                 `(scaled) likelihood` = "#0071b2",
+                                 posterior = "#009e74"),
+                      breaks = c("prior",
+                                 "(scaled) likelihood",
+                                 "posterior"))
+  
+  if (prior == TRUE) {
+    g <- g +
+      stat_function(fun = dbeta,
+                           args = list(shape1 = alpha,
+                                       shape2 = beta)) +
+      stat_function(fun = dbeta,
+                    args = list(shape1 = alpha,
+                                shape2 = beta),
+                    geom = "area",
+                    alpha = 0.5,
+                    aes(fill = "prior"))
+    }
+
+  if (!is.null(y) & !is.null(n)) {
+    alpha_post <- alpha + y
+    beta_post <- beta + n - y
+    y_data <- y
+    like_scaled <- function(x) {
+      like_fun <- function(x) {
+        dbinom(x = y_data, size = n, prob = x)
+      }
+      scale_c <- integrate(like_fun, lower = 0, upper = 1)[[1]]
+      like_fun(x)/scale_c
+    }
+  }
+  if (!is.null(y) & !is.null(n) & (likelihood != FALSE)) {
+    g <- g +
+      stat_function(fun = like_scaled) +
+      stat_function(fun = like_scaled,
+                    geom = "area",
+                    alpha = 0.5,
+                    aes(fill = "(scaled) likelihood"))
+  }
+  if (!is.null(y) & !is.null(n) & posterior == TRUE) {
+    g <- g +
+      stat_function(fun = dbeta,
+                    args = list(shape1 = alpha_post,
+                                shape2 = beta_post)) +
+      stat_function(fun = dbeta,
+                    args = list(shape1 = alpha_post,
+                                shape2 = beta_post),
+                    geom = "area", alpha = 0.5,
+                    aes(fill = "posterior"))
+  }
+  g
+} # end of function
+
+#' @title Plot a Beta Model for \eqn{\pi} 
+#'
+#' @description Plots the probability density function (pdf) for
+#' a Beta(alpha, beta) model of variable \eqn{\pi}.
+#'
+#' @param alpha,beta positive shape parameters of the Beta model
+#' @param mean,mode a logical value indicating whether to display the model mean and mode
+#'
+#' @return A density plot for the Beta model.
+#' @export
+#' @import ggplot2
+#' @importFrom stats dbeta
+#'
+#' @examples
+#' plot_beta(alpha = 1, beta = 12, mean = TRUE, mode = TRUE)
+plot_beta <- function(alpha, beta, mean = FALSE, mode = FALSE){
+  
+  
+  p <- ggplot(data = data.frame(x = c(0, 1)),
+              aes(x)) +
+    stat_function(fun = stats::dbeta,
+                  n = 101,
+                  args = list(shape1 = alpha,
+                              shape2=beta)) +
+    labs(x = expression(pi),
+         y = expression(paste("f(",pi,")")))
+
+  
+  if (mean == TRUE & mode == FALSE){
+    mean <- alpha / (alpha + beta)
+    
+    p <- p +
+      geom_segment(aes(x = mean, y = 0, 
+                       xend = mean, 
+                       yend = dbeta(mean, alpha, beta),
+                       linetype = "mean")) +
+      scale_linetype_manual(values = c(mean = "solid")) +
+      theme(legend.title = element_blank())
+  }
+  
+  if (mean == FALSE & mode == TRUE){
+    mode <- (alpha - 1)/(alpha + beta - 2)
+    
+    p <- p +
+      geom_segment(aes(x = mode, y = 0, 
+                       xend = mode, 
+                       yend = dbeta(mode, alpha, beta), 
+                       linetype = "mode"))+
+      scale_linetype_manual(values = c(mode = "dashed")) +
+      theme(legend.title = element_blank())
+    
+    
+  }
+  
+  if (mean == TRUE & mode == TRUE){
+    mean <- alpha / (alpha + beta)
+    mode <- (alpha - 1)/(alpha + beta - 2)
+    
+    
+    p <- p +
+      geom_segment(aes(x = mean, y = 0, 
+                       xend = mean, 
+                       yend = dbeta(mean, alpha, beta),
+                       linetype = "mean")) +
+      geom_segment(aes(x = mode, y = 0, 
+                       xend = mode, 
+                       yend = stats::dbeta(mode, alpha, beta), 
+                       linetype = "mode"))+
+      scale_linetype_manual(values = c(mean = "solid", mode = "dashed")) +
+      theme(legend.title = element_blank())
+  }
+p
+}
+
+#' @title Summarize a Beta-Binomial Bayesian model
+#' 
+#' @description Consider a Beta-Binomial Bayesian model for parameter \eqn{\pi} with 
+#' a Beta(alpha, beta) prior on \eqn{\pi} and Binomial likelihood with n trials
+#' and y successes. Given information on the prior (alpha and data) and data (y and n),
+#' this function summarizes the mean, mode, and variance of the 
+#' prior and posterior Beta models of \eqn{\pi}.
+#' 
+#' @param alpha,beta positive shape parameters of the prior Beta model
+#' @param y number of successes
+#' @param n number of trials
+#'
+#' @return a summary table
+#' @export
+#'
+#' @examples 
+#' summarize_beta_binomial(alpha = 1, beta = 15, y = 25, n = 50)
+summarize_beta_binomial <- function (alpha, 
+                                     beta, 
+                                     y = NULL, 
+                                     n = NULL)
+{
+  if (is.null(y) | is.null(n))
+    warning("To summarize the posterior, 
+            specify data y and n")
+  beta_mean <- function(a, b) {
+    a/(a + b)
+  }
+  beta_mode <- function(a, b) {
+    if(a < 1 & b <1){
+      mode <- "0 and 1"
+    }else if (a <= 1 & b > 1){
+      mode <- 0
+    }else if (a > 1 & b < 1){
+      mode <- 1
+    }
+    else{
+      mode <- (a - 1)/(a + b - 2)
+    }
+  }
+  beta_var <- function(a, b) {
+    a * b/((a + b)^2 * (a + b + 1))
+  }
+  prior_mean <- beta_mean(alpha, beta)
+  prior_mode <- beta_mode(alpha, beta)
+  prior_var <- beta_var(alpha, beta)
+  prior_sd  <- sqrt(prior_var)
+  if (is.null(y) & is.null(n)) {
+    return(data.frame(model = c("prior"), 
+                      alpha = alpha,
+                      beta = beta, 
+                      mean = prior_mean, 
+                      mode = prior_mode,
+                      var = prior_var,
+                      sd = prior_sd))
+  }
+  else {
+    post_alpha <- y + alpha
+    post_beta <- n - y + beta
+    post_mean <- beta_mean(post_alpha, post_beta)
+    post_mode <- beta_mode(post_alpha, post_beta)
+    post_var  <- beta_var(post_alpha, post_beta)
+    post_sd   <- sqrt(post_var)
+    return(data.frame(model = c("prior", "posterior"), 
+                      alpha = c(alpha, post_alpha), 
+                      beta = c(beta, post_beta), 
+                      mean = c(prior_mean, post_mean), 
+                      mode = c(prior_mode, post_mode), 
+                      var = c(prior_var, post_var),
+                      sd = c(prior_sd, post_sd)))
+  }
+}
+
+cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep("Colby", times = 15*100)) # We will replace this with actual data
+
 
 ```
 
-1. What happens if you change the size of n?
 
-```{webr}
-library(tidyverse)
-library(ggplot2)
+## Priors
 
-set.seed(100)
-correct_answers_big_n_prob_50 <- rbinom(n = __, size = 15, prob = 0.5)
+Let's revisit our predictions of the number of answers we would get correct on the quiz. Let $\pi$ be the proportion of correct answers we guess right in the CNN vs the Onion quiz.
 
-correct_answers_big_n_prob_50_df <- data.frame(correct_answers_big_n_prob_50)
+The table shows three different people with three different priors about $\pi$
 
-correct_answers_big_n_prob_50_df |>
-  group_by(correct_answers_big_n_prob_50)|>
-  summarize(prob_outcomes = n()/___) |>
-  ggplot() +
-  geom_col(aes(x = correct_answers_big_n_prob_50, y = prob_outcomes))
+| Good Guesser | Unpredictable Guesser | Poor Guesser |
+|--------------|-----------------------|--------------|
+| Beta(14, 1)  | Beta(1, 1)            | Beta(5, 10)  |
 
+
+### Plotting the Priors
+
+```{r echo = FALSE, fig.align='center', fig.height=6.5, fig.width=13}
+
+good <- plot_beta(14, 1) +
+  labs(title = "Good Guesser")
+
+unpredictable <- plot_beta(1, 1) +
+  labs(title = "Unpredictable Guesser")
+
+poor <- plot_beta(5, 11) +
+  labs(title = "Poor Guesser")
+
+gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
 ```
 
+### Where does your prediction fall?
 
-2. What happens if you change prob to 0.05?
+Tip: You can break this down into how many questions out of 15 you expect to get correct: Beta(number_correct, number_wrong).
+
+Replace `number_correct` and `number_wrong` with your predictions.
 
 
-```{webr}
-library(tidyverse)
-library(ggplot2)
+```{webr-r}
 
-set.seed(100)
-correct_answers_prob_0_05 <- rbinom(n = 100, size = 15, prob = ___)
+my_prediction <- plot_beta(number_correct, number_wrong) +
+  labs(title = "My Prediction")
 
-correct_answers_prob_0_05_df <- data.frame(correct_answers_prob_0_05)
-
-correct_answers_prob_0_05_df |>
-  group_by(correct_answers_prob_0_05)|>
-  summarize(prob_outcomes = n()/100) |>
-  ggplot() +
-  geom_col(aes(x = correct_answers_prob_0_05, y = prob_outcomes))
-
+my_prediction
 ```
 
+Which guesser is your prior closest to or most different from?
 
-3. What happens if you change the prob to 0.95?
+### Vocabulary
 
-```{webr}
-library(tidyverse)
-library(ggplot2)
+- **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (ie. low variability).
 
-set.seed(100)
-correct_answers_prob_0_95 <- rbinom(n = 100, size = 15, prob = ___)
 
-correct_answers_prob_0_95_df <- data.frame(correct_answers_prob_0_95)
-
-correct_answers_prob_0_95_df |>
-  group_by(correct_answers_prob_0_95)|>
-  summarize(prob_outcomes = n()/100) |>
-  ggplot() +
-  geom_col(aes(x = correct_answers_prob_0_95, y = prob_outcomes))
-
-```
-
+- **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
 
 ## Activity
 
-Let X = the number of questions you answer correctly.  
+### Data
 
+- Our data is a data frame called `cnn_onion`. Select the data from the year the quiz began.
 
-1.  Does X follow a binomial distribution? What assumptions must you make if you want to treat X as a binomial count? (Hint: think about the 4 things that must be true for a binomial variable). 
+- Based on the observed data, we will update the posterior for our three guessers and our own prior. 
 
-2.  Let p denote the proportion of questions that you answer correctly.  Make a prediction – what do you think your value of p is?
+- Next, we calculate the summary statistics for the prior and posterior for all four.
 
-3.  Take the Quiz.  Make sure you record the number that you answer correctly.
+`summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
 
-4.  Suppose that instead of thinking about each question and answering to the best of your ability, you randomly guessed answers (e.g. you flipped a coin – heads = CNN, tails = The Onion).  Under this scenario, what would you expect p to be?  What would you expect X to be?
+-   Arguments:
+    -   `alpha, beta`: positive shape parameters of the prior Beta model
+    -   `y`: number of successes
+    -   `n`: number of trials
 
-5.  Suppose you chose to take the quiz using the ‘random guessing’ strategy.  A passing grade on most exams is scoring above the 60th percentile.   Using this rubric, you would need to answer 9 questions correctly in order to pass.  Use the binomial formula to calculate the probability of getting exactly 9 questions right.
+- We plot the prior, likelihood, and the posterior for all four.
 
+- We examine the effect of different priors on the posterior.
 
-Use the appropriate function in R to calculate the probability of getting exactly 9 questions right.
+### Quiz scores
 
-```{webr}
-___binom(x = , size = , prob = )
+```{r}
+cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep("Colby", times = 15*100)) # We will replace this with actual data
+
+head(cnn_onion)
 ```
 
 
-6.  Assuming ‘random guessing’, what is the probability of getting at least 12 questions right?  What is the probability of getting more than half (i.e 8 or more) right? Write your code in R
+
+```{webr-r}
+cnn_onion_2010 <- cnn_onion |>
+  filter(year == 2010,
+         student %in% c(1:10))
+
+summary(cnn_onion_2010)
+```
 
 
-```{webr}
-# options: rbinom, pbinom, dbinom
-# hint use ?rbinom to find out the arguments you need
 
+```{webr-r}
+count(cnn_onion_2010, correct)
+```
+### The Good Guesser
+
+```{r summarize Colby 2010 good}
+summarize_beta_binomial(14, 1, y = 45, n = 150)
+```
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(14, 1, y = 45, n = 150)
+```
+
+### The Unpredictable Guesser
+
+```{r summarize Colby 2010 unpredictable}
+summarize_beta_binomial(1, 1, y = 45, n = 150)
+```
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(1, 1, y = 45, n = 150)
+```
+
+### The Poor Guesser
+
+```{r summarize Colby 2010 poor}
+summarize_beta_binomial(4, 11, y = 45, n = 150)
+```
+
+```{r fig.align = "center", fig.height = 5}
+plot_beta_binomial(4, 11, y = 45, n = 150)
+```
+
+
+### You
+
+```{webr-r}
+summarize_beta_binomial(___, ___, y = 45, n = 150)
+```
+
+```{webr-r}
+plot_beta_binomial(___, ___, y = 45, n = 150)
+```
+
+
+## Comparison 
+
+
+```{r fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
+library(patchwork)
+
+good <- plot_beta_binomial(14, 1, y = 45, n = 150) +
+  labs(title = "Good Guesser")
+
+unpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Unpredictable Guesser")
+
+poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
+  labs(title = "Poor Guesser")
+
+gridExtra::grid.arrange(good, unpredictable, poor, ncol=3)
 
 ```
 
-7. Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores.  If everyone simply guessed at random, the average score of the class should be about 7.5.  Is it? Write your code in R
 
-
-```{webr}
-
-class_scores <- c(______________)
-
-# Look at the code above
-```
-
-8.  What percent of your classmates scored 12 or more?  8 or more?  How do these proportions compare to the probabilities you calculated earlier?  What does this tell you about your ability to correctly distinguish between headlines from CNN and The Onion?
-
-```{webr}
-
-class_scores <- c(______________)
-
-```
-
-(Later, when ready to do hypothesis testing)
-
-9.  Test the hypothesis that your value for p, the proportion of questions you answer correctly, is greater than 0.5.  (Bayesian vs traditional method).
-
-
-[at a later time]
-Have someone enter the data for the class [one row per student, each column recording if they answered the question correctly or not]
-
-```{webr}
-
-class_scores <- c(______________)
-
-class_data <- data.frame(student = seq(from = 1, to = length(class_scores)), class_scores = class_scores)
-
-head(class_data)
-
-# Look at the code above
-```

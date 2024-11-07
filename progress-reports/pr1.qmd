@@ -1,7 +1,7 @@
 ---
 title: "Progress Report Template"
 subtitle: "Activity: A Gentle Introduction to Bayesian Statistics"
-format: html
+format: pdf
 author: 
   - name: Laurie Baker (Bates College)
   - name: Jim Scott (Colby College)
@@ -20,14 +20,14 @@ In the first part of the project we chose to start by drafting a needs analysis 
 
 Specifically we have identified the following tasks:
 
-- Determine software for course
-- Determine books/resources that we’ll use (for us and/or students)
-- Draft a needs analysis (what background are students coming into the course with)
-- Outline a syllabus, including how the course will be graded and what components we’ll use to determine grades (e.g. assignments, exams, projects, etc.)
-- Formally state course objectives and learning outcomes
-- Draft a course schedule.
-- Finalize topics to be covered.
-- Draft Homework and Activity Plan
+-   Determine software for course
+-   Determine books/resources that we’ll use (for us and/or students)
+-   Draft a needs analysis (what background are students coming into the course with)
+-   Outline a syllabus, including how the course will be graded and what components we’ll use to determine grades (e.g. assignments, exams, projects, etc.)
+-   Formally state course objectives and learning outcomes
+-   Draft a course schedule.
+-   Finalize topics to be covered.
+-   Draft Homework and Activity Plan
 
 ## Updated Gantt Chart
 
@@ -71,46 +71,46 @@ legend("topright", pch=22, pt.cex=2, cex=0.6, pt.bg=c("steelblue3", "palegreen3"
 
 We have completed the following of our original tasks:
 
-1. Determine software for course
+1.  Determine software for course
 
 We will use R and RStudio. We will start the students off using web-r before transitioning to RStudio for assignments. Laurie would like to find out if it is possible to save work in web-r as this seems to be the biggest drawback of using web-r.
 
-2. Determine books/resources that we’ll use (for us and/or students)
+2.  Determine books/resources that we’ll use (for us and/or students)
 
 We identified several existing resources to use for the course:
 
-- [stat20.org by Andrew Bray and colleagues](https://www.stat20.org) the reading notes in Week 5 and 6 introducing probability are engaging and may be used as texts or lecture notes for Laurie and Jim.
-- [Probability and Bayesian Modelling by Jim Albert and Jingchen Hu](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html) We both like the introduction to probability in this book.
-- [Bayes Rules by Alicia A. Johnson, Miles Q. Ott, Mine Dogucu](https://www.bayesrulesbook.com) I think we will find relevant case studies and exercises in this book.
-- [Probability with applications in R](https://www.amazon.com/Probability-Applications-Robert-P-Dobrow/dp/1118241258) This book is not open source but also has some nice examples for probability exercises in R.
+-   [stat20.org by Andrew Bray and colleagues](https://www.stat20.org) the reading notes in Week 5 and 6 introducing probability are engaging and may be used as texts or lecture notes for Laurie and Jim.
+-   [Probability and Bayesian Modelling by Jim Albert and Jingchen Hu](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html) We both like the introduction to probability in this book.
+-   [Bayes Rules by Alicia A. Johnson, Miles Q. Ott, Mine Dogucu](https://www.bayesrulesbook.com) I think we will find relevant case studies and exercises in this book.
+-   [Probability with applications in R](https://www.amazon.com/Probability-Applications-Robert-P-Dobrow/dp/1118241258) This book is not open source but also has some nice examples for probability exercises in R.
 
-We will use these books and lessons to plan the lectures and readings for students. We will pay attention to differences in notation and think about which resource we will recommend to students. 
+We will use these books and lessons to plan the lectures and readings for students. We will pay attention to differences in notation and think about which resource we will recommend to students.
 
-3. Draft a needs analysis (what background are students coming into the course with)
+3.  Draft a needs analysis (what background are students coming into the course with)
 
-We have drafted an initial needs analysis. This will be included in the syllabus and policies folder. 
+We have drafted an initial needs analysis. This will be included in the syllabus and policies folder.
 
-4. Outline a syllabus, including how the course will be graded and what components we’ll use to determine grades (e.g. assignments, exams, projects, etc.)
+4.  Outline a syllabus, including how the course will be graded and what components we’ll use to determine grades (e.g. assignments, exams, projects, etc.)
 
 We have outlined a syllabus including a course description and a brainstorm of possible assessments. It might be that the semester-long 1/2 credit course and the 3.5 week "short-term" course may have different assessment strategies given the duration of the course.
 
-5. Formally state course objectives and learning outcomes
+5.  Formally state course objectives and learning outcomes
 
 We have drafted a set of learning goals in the syllabus document. We plan to further refine these into course objectives and learning outcomes.
 
 We have not yet completed these items:
 
-6. Draft a course schedule.
-7. Finalize topics to be covered.
-8. Draft Homework and Activity Plan
+6.  Draft a course schedule.
+7.  Finalize topics to be covered.
+8.  Draft Homework and Activity Plan
 
 ## Next Steps
 
 Before our check in with Mine we will draft the homework and activity plan which will identify the assignments and activities we will develop in the next stage of the project. So far we have identified a few case studies we are considering are:
 
-- CNN vs. The Onion students decide on whether a headline was generated by CNN or the Onion
-- Problems at the Zoo: Tuberculosis in Elephants
-- An analog example of the Metropolis-Hastings algorithm
+-   CNN vs. The Onion students decide on whether a headline was generated by CNN or the Onion
+-   Problems at the Zoo: Tuberculosis in Elephants
+-   An analog example of the Metropolis-Hastings algorithm
 
 ## Meeting Times
 
@@ -120,14 +120,14 @@ We will keep meeting based on the following:
 -   Monthly meetings with mentor (Mine)
 -   Office hours
 
-| Date       | Time               | PI     | Zoom Link |
-|------------|--------------------|--------|-----------|
-| 2024-10-09 | 3:45 - 4:45 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
-| 2024-10-15 | 3:00 - 4:00 pm ET      | Amy |     [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111     |
-| 2024-10-22 | 4:00 - 5:00 pm ET | Mine |[`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/93009936370) |
-| 2024-11-07 |2:00 - 3:00 pm ET | Mine |[`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/96570454362) |
-| 2024-11-12 | 3:00 - 4:00 pm ET      | Amy |   [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111       |
-| 2023-11-20 | 3:45 - 4:45 pm ET | Monika |  [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)        |
+| Date       | Time              | PI     | Zoom Link                                                                                                                     |
+|----------------|-------------------------|----------------|----------------|
+| 2024-10-09 | 3:45 - 4:45 pm ET | Monika | [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)                                                 |
+| 2024-10-15 | 3:00 - 4:00 pm ET | Amy    | [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111 |
+| 2024-10-22 | 4:00 - 5:00 pm ET | Mine   | [`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/93009936370)                                                      |
+| 2024-11-07 | 2:00 - 3:00 pm ET | Mine   | [`r fontawesome::fa(name = "video")`](https://uci.zoom.us/j/96570454362)                                                      |
+| 2024-11-12 | 3:00 - 4:00 pm ET | Amy    | [`r fontawesome::fa(name = "video")`](https://duke.zoom.us/my/amyherring?pwd=UWczUjFOOXZ2MlhuYTMrLzVka05sQT09) password 11111 |
+| 2023-11-20 | 3:45 - 4:45 pm ET | Monika | [`r fontawesome::fa(name = "video")`](https://vassar.zoom.us/my/monika76five)                                                 |
 
 ## Acknowledgements
 

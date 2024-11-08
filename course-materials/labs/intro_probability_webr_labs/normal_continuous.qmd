@@ -148,7 +148,7 @@ pnorm(120, mean = 100, sd = 15)
 5. Calculate the probability that a value is between 60 and 80 for a normal distribution with mean = 70 and sd = 10.
 
 ```{webr}
-
+# Add code
 
 
 ```
@@ -159,6 +159,8 @@ Generate random samples from an normal distribution with mean 0 and sd 20.
 
 ```{webr}
 # add code here
+
+
 ```
 
     
@@ -218,6 +220,9 @@ Here is a simulation showing the Central Limit Theorem at work, with the empiric
 
 ```{webr-r}
 library(ggplot2)
+library(patchwork)
+
+
 set.seed(123)
 N = 1000
 results1 <- replicate(n = N, expr =sum(sample(gain, size = 10, 

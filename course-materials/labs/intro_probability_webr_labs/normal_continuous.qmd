@@ -170,11 +170,7 @@ Let's verify the empirical rule for the standard normal random variable:
 
 Note that (for example) $P(-1 \le X \le 1) = F(1) - F(-1)$:
 
-```{webr-r, message = FALSE}
-#| echo: false
-#| fig-width: 4
-#| fig-height: 4
-#| fig-align: center
+```{webr, message = FALSE}
 
 library(ggplot2)
 
@@ -200,6 +196,9 @@ pnorm(q = 3) - pnorm(q = -3)
 
 We have seen the function `sample()`, but so far, have only used it when we were sampling uniformly at random. That is, all the values are equally likely. We can sample according to a weighted probability, though, by putting in a vector of probabilities. Let's look at the example of net gain while betting on red on a roulette spin. Recall that if we bet a dollar on red, then our net gain is $+1$ with a probability of $\displaystyle \frac{18}{38}$ and $-1$ with a probability of $\displaystyle \frac{20}{38}$. 
 
+
+1. Exercise: Update the code below to look at the probability of landing on a green in roulette (*N.B. There are only 2 green in roulette)
+
 ```{webr-r}
 
 gain <- c(1,-1) # define the gain for a single spin
@@ -211,7 +210,7 @@ set.seed(123)
 #simulate gain from 10 spins of the wheel
 sample(x = gain, size = 10, prob = prob_gain, replace = TRUE)
 
-#simulate net gain from 10 spins of the wheel which would sum these
+# simulate net gain from 10 spins of the wheel which would sum these
 sum(sample(x = gain, size = 10, prob = prob_gain, replace = TRUE))
 
 ```

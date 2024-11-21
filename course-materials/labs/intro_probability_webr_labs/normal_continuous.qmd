@@ -1,0 +1,177 @@
+---
+title: "Random Variables - Normal Continuous"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+## Ideas in code
+
+### Useful functions
+
+### Uniform$(a, b)$
+
+1.  `dunif` computes the density $f(x)$ of $X$ where $f(x) = \displaystyle \frac{1}{b-a}$, for $a < x < b$.
+- Arguments:
+    - `x`: the value of $x$ in $f(x)$
+    - `min`: the parameter $a$, the lower end point of the interval for $X$. The default value is `min = 0`
+    - `max`: the parameter $b$, the upper end point of the interval for $X$. The default value is `max = 1`
+    
+2. `punif` computes the cdf $F(x) = P(X \le x)$ of $X$.
+- Arguments:
+    - `q`: the value of $x$ in $F(x)$
+    - `min`: the parameter $a$, the lower end point of the interval for $X$. The default value is `min = 0`
+    - `max`: the parameter $b$, the upper end point of the interval for $X$. The default value is `max = 1`
+
+3. `runif` generates random numbers from the $Unif(a,b)$ distribution.
+- Arguments:
+    - `n`: the size of the sample we want
+    - `min`: the parameter $a$, the lower end point of the interval for $X$. The default value is `min = 0`
+    - `max`: the parameter $b$, the upper end point of the interval for $X$. The default value is `max = 1`
+    
+### Normal$(\mu, \sigma^2)$
+
+1.  `dnorm` computes the density $f(x)$ of $X \sim N(\mu,\sigma^2)$
+- Arguments:
+    - `x`: the value of $x$ in $f(x)$
+    - `mean`: the parameter $\mu$, the mean of the distribution. The default value is `mean = 0`
+    - `sd`: the parameter $\sigma$, the sd of the distribution. The default value is `sd = 1`
+    
+2. `pnorm` computes the cdf $F(x) = P(X \le x)$ of $X$.
+- Arguments:
+    - `q`: the value of $x$ in $F(x)$
+    - `mean`: the parameter $\mu$, the mean of the distribution. The default value is `mean = 0`
+    - `sd`: the parameter $\sigma$, the sd of the distribution. The default value is `sd = 1`
+
+3. `rnorm` generates random numbers from the Normal$(\mu, \sigma^2)$ distribution.
+- Arguments:
+    - `n`: the size of the sample we want
+    - `mean`: the parameter $\mu$, the mean of the distribution. The default value is `mean = 0`
+    - `sd`: the parameter $\sigma$, the sd of the distribution. The default value is `sd = 1`  
+    
+#### Example
+
+Let's verify the empirical rule for the standard normal random variable:
+
+Note that (for example) $P(-1 \le X \le 1) = F(1) - F(-1)$:
+
+```{webr-r, message = FALSE}
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: center
+
+library(ggplot2)
+
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "darkblue", xlim = c(-1, 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "goldenrod", xlim = c(-2, -1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "goldenrod", xlim = c(1,2)) +
+  geom_area(stat = "function", fun = dnorm, fill = "darkblue", xlim = c(2, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "darkblue", xlim = c(-3, -2)) +
+  labs(x = "x", y = "f(x)") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-3, -2,-1,1,2,3)) + 
+  theme_minimal()
+```
+
+```{webr-r}
+pnorm(q = 1) - pnorm(q = -1)
+pnorm(q = 2) - pnorm(q = -2)
+pnorm(q = 3) - pnorm(q = -3)
+```
+
+### The argument `prob` in the function `sample()`
+
+We have seen the function `sample()`, but so far, have only used it when we were sampling uniformly at random. That is, all the values are equally likely. We can sample according to a weighted probability, though, by putting in a vector of probabilities. Let's look at the example of net gain while betting on red on a roulette spin. Recall that if we bet a dollar on red, then our net gain is $+1$ with a probability of $\displaystyle \frac{18}{38}$ and $-1$ with a probability of $\displaystyle \frac{20}{38}$. 
+
+```{webr-r}
+
+gain <- c(1,-1) # define the gain for a single spin
+prob_gain <- c(18/38,20/38) #define the corresponding probabilities
+exp_gain <- sum(gain*prob_gain)
+exp_gain
+
+set.seed(123)
+#simulate gain from 10 spins of the wheel
+sample(x = gain, size = 10, prob = prob_gain, replace = TRUE)
+
+#simulate net gain from 10 spins of the wheel which would sum these
+sum(sample(x = gain, size = 10, prob = prob_gain, replace = TRUE))
+
+```
+
+Here is a simulation showing the Central Limit Theorem at work, with the empirical distribution becoming gradually more bell-shaped. Net gain is the sum of $n$ draws with replacement from the vector `gain` defined above using the `prob_gain` vector. 
+
+```{webr-r}
+library(ggplot2)
+set.seed(123)
+N = 1000
+results1 <- replicate(n = N, expr =sum(sample(gain, size = 10, 
+                                              prob = prob_gain, replace = TRUE)))
+p1 <- data.frame(results1) |>
+  ggplot(mapping = aes(x = results1)) +
+  geom_histogram(mapping = aes(y = ..density..), bins = 12, color = "grey", 
+                 fill = "blue",alpha = 0.8) +
+  scale_x_continuous(breaks = seq(from = -10, to = 10, by = 2)) + 
+  geom_vline(xintercept = exp_gain*10,lwd = 1, color = "black") +
+  geom_vline(xintercept = mean(results1),lwd = 1, color = "darkred") +
+  labs(title = "N = 10", 
+       x = "net gain", 
+       y = "probability") + theme_minimal()
+
+set.seed(123)
+results2 <- replicate(n = N, expr =sum(sample(gain, size = 100, 
+                                             prob = prob_gain, replace = TRUE)))
+p2 <- data.frame(results2) |>
+  ggplot(mapping = aes(x = results2)) +
+  geom_histogram(mapping = aes(y = ..density..), bins = 20, color = "grey", 
+                 fill = "darkblue", alpha = 0.8) +
+  scale_x_continuous(breaks = seq(from = -35, to = 30, by = 5)) + 
+   geom_vline(xintercept = mean(results2),lwd = 1.5, color = "black") +
+  geom_vline(xintercept =exp_gain*100,lwd = 1, color = "darkred") +
+  labs(title = "N = 100", 
+       x = "Net gain", 
+       y = "probability") + theme_minimal()
+
+
+set.seed(123)
+results3 <- replicate(n = N, expr =sum(sample(gain, size = 1000, 
+                                              prob = prob_gain, replace = TRUE)) )
+
+p3 <- data.frame(results3) |>
+  ggplot(mapping = aes(x = results3)) +
+  geom_histogram(mapping = aes(y = ..density..), bins = 40,color = "grey", 
+                 fill = "darkblue", alpha = 0.8) +
+  scale_x_continuous(breaks = seq(from = -200, to = 100, by = 20)) + 
+  geom_vline(xintercept = mean(results3),lwd = 1.5, color = "black") +
+  geom_vline(xintercept =exp_gain*1000,lwd = 1, color = "darkred") +
+  labs(title = "N = 1,000", 
+       x = "Net gain", 
+       y = "probability") + theme_minimal()
+
+
+set.seed(123)
+results4 <- replicate(n = N, expr =sum(sample(gain, size = 5000, 
+                                              prob = prob_gain, replace = TRUE)) )
+
+p4 <- data.frame(results4) |>
+  ggplot(mapping = aes(x = results4)) +
+  geom_histogram(mapping = aes(y = ..density..), bins = 50,color = "grey", 
+                 fill = "darkblue", alpha = 0.8) +
+  scale_x_continuous(breaks = seq(from = -600, to = 100, by = 50)) + 
+  geom_vline(xintercept = mean(results4),lwd = 1.5, color = "black") +
+  geom_vline(xintercept =exp_gain*5000,lwd = 1, color = "darkred") +
+  labs(title = "N = 5,000", 
+       x = "Net gain", 
+       y = "probability") + theme_minimal()
+
+
+p1 + p2 + p3 + p4 + plot_annotation(
+  title = "Empirical distribution of net gain after N spins (notice the spreads!)",
+  subtitle = "Expected net gain (-0.0526*N) in dollars is in red and average (from data) net gain in dollars is in black"
+)
+```

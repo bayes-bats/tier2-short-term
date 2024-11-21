@@ -1,0 +1,75 @@
+---
+title: "Zoo Outbreak"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+# Tuberculosis Outbreak at a Zoo
+
+# What is Tuberculosis (TB): 
+
+TB is An infectious disease caused by the bacterium *M. tuberculosis*.  TB can affect nearly any organ system in the body, most commonly the lungs are infected.   The disease is transmitted via droplet nuclei.  Usually when a person with active disease coughs, sneezes, or talks, airborne particles are released.  Inhaled particles may cause infection that can later lead to active disease.  According to the World Health Organization, about one-quarter of the world’s population is infected with TB.  Usually only a small percentage of those infected go on to develop active disease.  However, the disease is still responsible for over one million deaths annually.   Symptoms of active disease include coughing, weight loss, fever, and night sweats.
+
+Diagnosis of TB is  based on chest x-ray abnormalities and a microscopic examination of sputum.  In most cases, effective treatment is achieved through the use of antibiotics.
+
+# Animals infected  
+
+In March 1997 an Asian elephant dies and a necropsy reveals lung disease; culture reveals *M. tuberculosis*.  One month later another elephant is found to be *M. tuberculosis* culture positive.  In all, two elephants, one rhino, and two goats are discovered to have the same strain of *M. tuberculosis*.
+
+# Goals of the outbreak team:  
+
+- Determine if ongoing transmission is occurring in animals and/or humans.
+- Identify source of *M. tuberculosis* infection in the goats diagnosed in February 2000.
+- Identify any active TB cases among employees.
+- Identify employees with LTBI.
+- Identify risk factors associated with TB infection among employees.
+
+# Tasks conducted by research team:  
+
+- Medical record review
+- Preliminary infection control assessment
+- Employee TB exposure questionnaire
+- TB case registry match
+- DNA fingerprinting
+- Veterinary outbreak investigation
+
+Employees were screened for recent *M. tuberculosis* infection (TBI).  A number of possible risk factors for recent investigation were evaluated.  In this exercise, we’ll focus on just two: Animal contact and Necropsy attendance.
+
+The animal contact data are stored in xxxx.  Load the data into R.
+
+```{r}
+
+```
+
+
+# Questions  
+
+1. How many individuals experienced TBI?
+2. What was the overall proportion of employees that had TBI?
+3. Determine the proportion of those with TBI by animal contact (any animal contact while working at the zoo)
+4. Create a 2x2 table to summarize the relationship between TBI and animal contact
+5. Based on these data, does it appear that animal contact is a risk factor for TBI?  If animal contact and TBI are not related, what would you expect this table to look like?
+
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+

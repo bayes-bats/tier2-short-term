@@ -1,5 +1,5 @@
 ---
-title: "Progress Report Template"
+title: "Progress Report 1"
 subtitle: "Activity: A Gentle Introduction to Bayesian Statistics"
 format: pdf
 author: 

@@ -323,7 +323,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"out-height":"","results":"markup","output":"true","editor-font-scale":"1","fig-width":7,"fig-cap":"","fig-height":5,"context":"interactive","classes":"","autorun":"false","out-width":"700px","read-only":"false","comment":"","editor-quick-suggestions":"false","dpi":72,"message":"true","editor-word-wrap":"true","warning":"true","editor-max-height":"","label":"unnamed-chunk-1"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)\n\ncorrect_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)\n\ncorrect_answers_n100_prob_50_df |>\n  group_by(correct_answers_n100_prob_50)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))","id":1}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-1","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)\n\ncorrect_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)\n\ncorrect_answers_n100_prob_50_df |>\n  group_by(correct_answers_n100_prob_50)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))"},{"id":2,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-2","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_big_n_prob_50 <- rbinom(n = __, size = 15, prob = 0.5)\n\ncorrect_answers_big_n_prob_50_df <- data.frame(correct_answers_big_n_prob_50)\n\ncorrect_answers_big_n_prob_50_df |>\n  group_by(correct_answers_big_n_prob_50)|>\n  summarize(prob_outcomes = n()/___) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_big_n_prob_50, y = prob_outcomes))"},{"id":3,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-3","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_05 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_05_df <- data.frame(correct_answers_prob_0_05)\n\ncorrect_answers_prob_0_05_df |>\n  group_by(correct_answers_prob_0_05)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_05, y = prob_outcomes))"},{"id":4,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-4","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_95 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_95_df <- data.frame(correct_answers_prob_0_95)\n\ncorrect_answers_prob_0_95_df |>\n  group_by(correct_answers_prob_0_95)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_95, y = prob_outcomes))"},{"id":5,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-5","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"___binom(x = , size = , prob = )"},{"id":6,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-6","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"# options: rbinom, pbinom, dbinom"},{"id":7,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-7","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)\n\n# Look at the code above"},{"id":8,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-8","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)"},{"id":9,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-9","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)\n\nclass_data <- data.frame(student = seq(from = 1, to = length(class_scores)), class_scores = class_scores)\n\nhead(class_data)\n\n# Look at the code above"}];
 
 </script>
 <script type="module">
@@ -1870,6 +1870,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Generate Binomial data</li>
+<li>Calculate the probability mass function and cumulative distribution function using <code>dbinom</code> and <code>pbinom</code></li>
+<li>Generate random data from the Binomial distribution using <code>rbinom</code></li>
+</ul>
 </section>
 <section id="pre-activity" class="level2">
 <h2 class="anchored" data-anchor-id="pre-activity">Pre-Activity:</h2>
@@ -1916,10 +1921,26 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 <ol type="1">
-<li><p>What happens if you change the size of n?</p></li>
-<li><p>What happens if you change prob to 0.05?</p></li>
-<li><p>What happens if you change the prob to 0.95?</p></li>
+<li>What happens if you change the size of n?</li>
 </ol>
+<div class="cell">
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="2" type="1">
+<li>What happens if you change prob to 0.05?</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="3" type="1">
+<li>What happens if you change the prob to 0.95?</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 </section>
 </section>
 <section id="activity" class="level2">
@@ -1931,15 +1952,42 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><p>Take the Quiz. Make sure you record the number that you answer correctly.</p></li>
 <li><p>Suppose that instead of thinking about each question and answering to the best of your ability, you randomly guessed answers (e.g.&nbsp;you flipped a coin – heads = CNN, tails = The Onion). Under this scenario, what would you expect p to be? What would you expect X to be?</p></li>
 <li><p>Suppose you chose to take the quiz using the ‘random guessing’ strategy. A passing grade on most exams is scoring above the 60th percentile. Using this rubric, you would need to answer 9 questions correctly in order to pass. Use the binomial formula to calculate the probability of getting exactly 9 questions right.</p></li>
-<li><p>Assuming ‘random guessing’, what is the probability of getting at least 12 questions right? What is the probability of getting more than half (i.e 8 or more) right?</p></li>
-<li><p>Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores. If everyone simply guessed at random, the average score of the class should be about 7.5. Is it?</p></li>
-<li><p>What percent of your classmates scored 12 or more? 8 or more? How do these proportions compare to the probabilities you calculated earlier? What does this tell you about your ability to correctly distinguish between headlines from CNN and The Onion?</p></li>
 </ol>
+<p>Use the appropriate function in R to calculate the probability of getting exactly 9 questions right.</p>
+<div class="cell">
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="6" type="1">
+<li>Assuming ‘random guessing’, what is the probability of getting at least 12 questions right? What is the probability of getting more than half (i.e 8 or more) right? Write your code in R</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="7" type="1">
+<li>Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores. If everyone simply guessed at random, the average score of the class should be about 7.5. Is it? Write your code in R</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ol start="8" type="1">
+<li>What percent of your classmates scored 12 or more? 8 or more? How do these proportions compare to the probabilities you calculated earlier? What does this tell you about your ability to correctly distinguish between headlines from CNN and The Onion?</li>
+</ol>
+<div class="cell">
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 <p>(Later, when ready to do hypothesis testing)</p>
 <ol start="9" type="1">
 <li>Test the hypothesis that your value for p, the proportion of questions you answer correctly, is greater than 0.5. (Bayesian vs traditional method).</li>
 </ol>
 <p>[at a later time] Have someone enter the data for the class [one row per student, each column recording if they answered the question correctly or not]</p>
+<div class="cell">
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 </section>
 
 </main>

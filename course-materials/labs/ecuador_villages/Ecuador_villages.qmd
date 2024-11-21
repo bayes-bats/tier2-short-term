@@ -1,0 +1,106 @@
+---
+title: "Diarrhea Disease Transmission"
+format: html
+engine: knitr
+---
+
+# Case Study: Social Networks, Geographic Configuration and Diarrheal Disease Transmission in Rural Ecuador.
+
+Diarrheal diseases are primarily spread through the fecal-oral route, which involves the ingestion of pathogens originating from fecal contamination. Individuals may be exposed to disease through contaminated water, contaminated food, person-to-person transmission, environmental exposure, and animals and insects.
+
+This case study examines the relationship between social networks, geographic configuration, and the prevalence of diarrheal disease using data collected between 2003 and 2005 from nine rural communities in northern coastal Ecuador. See the full paper in the American Journal of Epidemiology.
+
+The dataset includes:
+
+-   **Demographic information:** Community and household-level details such as population size, education, and residence duration.
+-   **Social network data:** Measures of social connectedness within two types of networks: casual contact and food-sharing.
+-   **Geographic data:** Household locations, road access, and spatial indices reflecting housing density.
+
+In this lab, students will analyze how geographic factors (like road access and housing density) and social network metrics (such as contact degree) interact to influence the spread of disease using Bayesian modelling techniques. In this lab you will learn to:
+
+-   Apply statistical and visualization techniques to examine relationships between variables.
+-   Interpret multivariate models that quantify the role of social and geographic factors in disease prevalence.
+-   Reflect on the practical implications of these findings for designing public health interventions.
+
+# Bayesian Statistics Learning Objectives
+
+-   Build a Bayesian simple linear regression model
+-   Interpret appropriate prior models for the regression parameters;
+-   Simulate the posterior model of the regression parameters; and
+-   Use simulation results to build a posterior understanding of the relationship between Y and\
+    X and to build posterior predictive models of\
+
+Y.  
+
+-   Compare these models to a model with multiple linear regression.
+
+## Libraries
+
+```{r message = FALSE}
+library(tidyverse) # data cleaning and plotting
+library(bayesrules)
+library(tidyverse)
+library(rstan)
+library(rstanarm)
+library(bayesplot)
+library(tidybayes)
+library(janitor)
+library(broom.mixed)
+```
+
+## Introducing the data
+
+```{r}
+ecData <- read_csv("data/ecDataCompID.csv")
+
+ecData
+```
+
+The data contains information on:
+
+-   `city`: the city id
+-   `pop`: population (number of people)
+-   `meandeg`:
+-   `meanind`:
+-   `lnmeanind`:
+-   `remoteness`: measure of remoteness
+
+## Specifying the data model
+
+We are interested in understanding the relationship between ____ (Y) and ___ (X). 
+Diarrheal disease are spread through fecal-oral contact and through several transmission mechanisms that relate to population density. We might therefore expect that there's a **positive linear relationship** between Y and X --- the ___ it is, the more likely _____.
+
+Assuming the relationship between Y and X is linear, we can write $\mu_i$ as:
+
+$$\mu_i = \beta_0 + \beta_1X_i$$
+
+where we can interpret the **model coefficients** $\beta_0$ and $\beta_1$ as follows:
+
+- **Intercept coefficient** $\beta_0$ technically indicates the typical ____ on ___. 
+- X **coefficient** $\beta_1$ indicates the _____
+
+
+Questions:
+
+- Would it be useful to show simulated scenarios with a $\mu$ and $\sigma$ assumed?
+- I noticed that in your example you replace the global mean $\mu$ with the explantory variable specific local mean $\mu_i$ (for temperature). Is this just specific to the bike data example?
+
+## Specifying the priors
+
+In the data model, there are two data variables ($Y$ and $X$) and *three* unknown regression parameters that encode the relationship between these variables: $\beta_0$, $\beta_1$, and $\sigma$.
+
+We must specify prior models for each (there are lots of options, we will use the default prior structures in **rstanarm**).
+
+
+
+## Tuning prior models for regression parameters
+
+
+
+## Posterior simulation
+
+### Simulation via rstanarm
+
+## Interpreting the posterior
+
+## Posterior prediction

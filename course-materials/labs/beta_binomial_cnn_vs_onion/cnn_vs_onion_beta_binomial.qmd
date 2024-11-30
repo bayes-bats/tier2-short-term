@@ -14,16 +14,12 @@ CNN (the Cable News Network) is widely considered a reputable news source. The O
 
 In this exercise you will assess your ability to determine real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com).
 
-Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our [google form](https://forms.gle/eVvFHZQwvtsBYa9r9):
-
-```{=html}
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-```
 ## Learning Objectives
 
 -   Explore the effect of different priors on posteriors
 -   Introduce the concept of a prior
 -   Plotting priors and posteriors
+-   Calculating summary statistics of the prior and posteriors
 
 ## Packages
 
@@ -314,23 +310,27 @@ gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
 
 ### Where does your prediction fall?
 
-Tip: You can break this down into how many questions out of 15 you expect to get correct: Beta(number_correct, number_wrong).
+The CNN vs. The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines you will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.
 
-Replace `number_correct` and `number_wrong` with your predictions.
+For our prior from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: `Beta(approx_number_correct, approx_number_wrong)`.
+
+Replace `approx_number_correct` and `approx_number_wrong` with your predictions.
 
 ```{webr-r}
 
-my_prediction <- plot_beta(number_correct, number_wrong) +
+my_prediction <- plot_beta(alpha = approx_number_correct, beta = approx_number_wrong) +
   labs(title = "My Prediction")
 
 my_prediction
 ```
 
-Which guesser is your prior closest to or most different from?
+Looking at the graph of your prior. Which guesser is your prior most similar to: Good, Unpredictable or Poor?
 
 ### Vocabulary
 
--   **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (ie. low variability).
+We often describe priors in terms of how much information they give about the unknown variable.  
+
+-   **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (i.e. low variability).
 
 -   **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
 
@@ -338,13 +338,14 @@ Which guesser is your prior closest to or most different from?
 
 ### Data
 
--   Our data is a data frame called `cnn_onion`. Select the data from the year the quiz began.
+-   Our data is a data frame called `cnn_onion`.
 
 -   Based on the observed data, we will update the posterior for our three guessers and our own prior.
 
--   Next, we calculate the summary statistics for the prior and posterior for all four.
 
-`summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
+-   Next, we calculate the summary statistics for the prior and posterior for all four priors using the function:
+
+- `summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
 
 -   Arguments:
 
@@ -352,24 +353,27 @@ Which guesser is your prior closest to or most different from?
     -   `y`: number of successes
     -   `n`: number of trials
 
--   We plot the prior, likelihood, and the posterior for all four.
+-   Next, we plot the prior, likelihood, and the posterior for all four.
 
--   We examine the effect of different priors on the posterior.
+-   Lastly, we examine the effect of different priors on the posterior.
 
 ### Quiz scores
 
-```{r}
+
+
+```{r simulated data, echo = FALSE}
+set.seed(10)
+
 cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep("Colby", times = 15*100)) # We will replace this with actual data
 
 head(cnn_onion)
 ```
 
-Reading in the data from the google form.
+Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data.
 
-```{r, message = FALSE, warning = FALSE}
+```{r data from google form, echo = FALSE, message = FALSE, warning = FALSE}
 cnn_onion_survey <- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")
 
-head(cnn_onion_survey)
 
 cnn_onion_survey_clean <- cnn_onion_survey |>
   pivot_longer(cols = starts_with("Question"), names_to = "Question", names_prefix = "Question ", values_to = "Response") |>
@@ -379,62 +383,64 @@ cnn_onion_survey_clean <- cnn_onion_survey |>
   select(Institution, Year, Score, `Correct Guesses`, Question, Correct) |>
   janitor::clean_names()
 
-head(cnn_onion_survey_clean)
+
 ```
 
 ```{webr-r}
+
 cnn_onion_2010 <- cnn_onion |>
   filter(year == 2010,
          student %in% c(1:10))
 
-summary(cnn_onion_2010)
-```
-
-```{webr-r}
 count(cnn_onion_2010, correct)
 ```
+
+
+## Calculating the summary statistics and plotting the distribution
 
 ### The Good Guesser
 
 ```{r summarize Colby 2010 good}
-summarize_beta_binomial(14, 1, y = 45, n = 150)
+summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 ```
 
 ```{r fig.align = "center", fig.height = 5}
-plot_beta_binomial(14, 1, y = 45, n = 150)
+plot_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 ```
 
 ### The Unpredictable Guesser
 
 ```{r summarize Colby 2010 unpredictable}
-summarize_beta_binomial(1, 1, y = 45, n = 150)
+summarize_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 ```
 
 ```{r fig.align = "center", fig.height = 5}
-plot_beta_binomial(1, 1, y = 45, n = 150)
+plot_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 ```
 
 ### The Poor Guesser
 
 ```{r summarize Colby 2010 poor}
-summarize_beta_binomial(4, 11, y = 45, n = 150)
+summarize_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)
 ```
 
 ```{r fig.align = "center", fig.height = 5}
-plot_beta_binomial(4, 11, y = 45, n = 150)
+plot_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)
 ```
 
-### You
+### Your turn
+
+Fill in the alpha and beta shape parameters from your prior. 
 
 ```{webr-r}
-summarize_beta_binomial(___, ___, y = 45, n = 150)
+summarize_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)
 ```
 
 ```{webr-r}
-plot_beta_binomial(___, ___, y = 45, n = 150)
+plot_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)
 ```
 
-## Comparison
+## Comparison of the priors
 
 ```{r fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
 library(patchwork)
@@ -465,14 +471,25 @@ poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
 
 ```
 
-Fill in the gap alpha and beta shape parameters with your guess:
+Fill in the gaps to add your alpha and beta shape parameters with your guess:
 
 ```{webr-r}
 library(patchwork)
 
-your_plot <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+your_plot <- plot_beta_binomial(alpha = , beta = , y = 45, n = 150) +
   labs(title = "Your Guess")
 
 gridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)
 
+```
+
+
+## Take the quiz
+
+Now that we've updated our posteriors, let's take the quiz and add our data to the dataset of trials and successes.
+
+Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our [google form](https://forms.gle/eVvFHZQwvtsBYa9r9):
+
+```{=html}
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 ```

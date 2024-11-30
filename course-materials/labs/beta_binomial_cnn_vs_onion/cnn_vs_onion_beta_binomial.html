@@ -357,7 +357,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"library(tidyverse)\nlibrary(gridExtra)\n\n#' Plot a Beta-Binomial Bayesian Model\n#'\n#' Consider a Beta-Binomial Bayesian model for parameter \\eqn{\\pi} with \n#' a Beta(alpha, beta) prior on \\eqn{\\pi} and Binomial likelihood with n trials\n#' and y successes. Given information on the prior (alpha and data) and data (y and n),\n#' this function produces a plot of any combination of the corresponding prior pdf, \n#' scaled likelihood function, and posterior pdf.  All three are included by default.\n#'\n#' @param alpha,beta positive shape parameters of the prior Beta model\n#' @param y observed number of successes\n#' @param n observed number of trials\n#' @param prior a logical value indicating whether the prior model should be plotted\n#' @param likelihood a logical value indicating whether the scaled likelihood should be plotted\n#' @param posterior a logical value indicating whether posterior model should be plotted\n#'\n#' @return a ggplot\n#' @export\n#' @import ggplot2\n#' @importFrom stats dbeta dbinom integrate\n#' @examples\n#'\n#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50)\n#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50, posterior = FALSE)\n#' \nplot_beta_binomial <- function (alpha,\n                                beta,\n                                y = NULL,\n                                n = NULL,\n                                prior = TRUE,\n                                likelihood = TRUE,\n                                posterior = TRUE){\n  if (is.null(y) | is.null(n))\n    warning(\"To visualize the posterior,\n            specify data y and n\")\n\n  g <- ggplot(data = data.frame(x = c(0, 1)), aes(x)) +\n    labs(x = expression(pi),\n         y = \"density\") +\n    scale_fill_manual(\"\",\n                      values = c(prior = \"#f0e442\",\n                                 `(scaled) likelihood` = \"#0071b2\",\n                                 posterior = \"#009e74\"),\n                      breaks = c(\"prior\",\n                                 \"(scaled) likelihood\",\n                                 \"posterior\"))\n  \n  if (prior == TRUE) {\n    g <- g +\n      stat_function(fun = dbeta,\n                           args = list(shape1 = alpha,\n                                       shape2 = beta)) +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha,\n                                shape2 = beta),\n                    geom = \"area\",\n                    alpha = 0.5,\n                    aes(fill = \"prior\"))\n    }\n\n  if (!is.null(y) & !is.null(n)) {\n    alpha_post <- alpha + y\n    beta_post <- beta + n - y\n    y_data <- y\n    like_scaled <- function(x) {\n      like_fun <- function(x) {\n        dbinom(x = y_data, size = n, prob = x)\n      }\n      scale_c <- integrate(like_fun, lower = 0, upper = 1)[[1]]\n      like_fun(x)/scale_c\n    }\n  }\n  if (!is.null(y) & !is.null(n) & (likelihood != FALSE)) {\n    g <- g +\n      stat_function(fun = like_scaled) +\n      stat_function(fun = like_scaled,\n                    geom = \"area\",\n                    alpha = 0.5,\n                    aes(fill = \"(scaled) likelihood\"))\n  }\n  if (!is.null(y) & !is.null(n) & posterior == TRUE) {\n    g <- g +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha_post,\n                                shape2 = beta_post)) +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha_post,\n                                shape2 = beta_post),\n                    geom = \"area\", alpha = 0.5,\n                    aes(fill = \"posterior\"))\n  }\n  g\n} # end of function\n\n#' @title Plot a Beta Model for \\eqn{\\pi} \n#'\n#' @description Plots the probability density function (pdf) for\n#' a Beta(alpha, beta) model of variable \\eqn{\\pi}.\n#'\n#' @param alpha,beta positive shape parameters of the Beta model\n#' @param mean,mode a logical value indicating whether to display the model mean and mode\n#'\n#' @return A density plot for the Beta model.\n#' @export\n#' @import ggplot2\n#' @importFrom stats dbeta\n#'\n#' @examples\n#' plot_beta(alpha = 1, beta = 12, mean = TRUE, mode = TRUE)\nplot_beta <- function(alpha, beta, mean = FALSE, mode = FALSE){\n  \n  \n  p <- ggplot(data = data.frame(x = c(0, 1)),\n              aes(x)) +\n    stat_function(fun = stats::dbeta,\n                  n = 101,\n                  args = list(shape1 = alpha,\n                              shape2=beta)) +\n    labs(x = expression(pi),\n         y = expression(paste(\"f(\",pi,\")\")))\n\n  \n  if (mean == TRUE & mode == FALSE){\n    mean <- alpha / (alpha + beta)\n    \n    p <- p +\n      geom_segment(aes(x = mean, y = 0, \n                       xend = mean, \n                       yend = dbeta(mean, alpha, beta),\n                       linetype = \"mean\")) +\n      scale_linetype_manual(values = c(mean = \"solid\")) +\n      theme(legend.title = element_blank())\n  }\n  \n  if (mean == FALSE & mode == TRUE){\n    mode <- (alpha - 1)/(alpha + beta - 2)\n    \n    p <- p +\n      geom_segment(aes(x = mode, y = 0, \n                       xend = mode, \n                       yend = dbeta(mode, alpha, beta), \n                       linetype = \"mode\"))+\n      scale_linetype_manual(values = c(mode = \"dashed\")) +\n      theme(legend.title = element_blank())\n    \n    \n  }\n  \n  if (mean == TRUE & mode == TRUE){\n    mean <- alpha / (alpha + beta)\n    mode <- (alpha - 1)/(alpha + beta - 2)\n    \n    \n    p <- p +\n      geom_segment(aes(x = mean, y = 0, \n                       xend = mean, \n                       yend = dbeta(mean, alpha, beta),\n                       linetype = \"mean\")) +\n      geom_segment(aes(x = mode, y = 0, \n                       xend = mode, \n                       yend = stats::dbeta(mode, alpha, beta), \n                       linetype = \"mode\"))+\n      scale_linetype_manual(values = c(mean = \"solid\", mode = \"dashed\")) +\n      theme(legend.title = element_blank())\n  }\np\n}\n\n#' @title Summarize a Beta-Binomial Bayesian model\n#' \n#' @description Consider a Beta-Binomial Bayesian model for parameter \\eqn{\\pi} with \n#' a Beta(alpha, beta) prior on \\eqn{\\pi} and Binomial likelihood with n trials\n#' and y successes. Given information on the prior (alpha and data) and data (y and n),\n#' this function summarizes the mean, mode, and variance of the \n#' prior and posterior Beta models of \\eqn{\\pi}.\n#' \n#' @param alpha,beta positive shape parameters of the prior Beta model\n#' @param y number of successes\n#' @param n number of trials\n#'\n#' @return a summary table\n#' @export\n#'\n#' @examples \n#' summarize_beta_binomial(alpha = 1, beta = 15, y = 25, n = 50)\nsummarize_beta_binomial <- function (alpha, \n                                     beta, \n                                     y = NULL, \n                                     n = NULL)\n{\n  if (is.null(y) | is.null(n))\n    warning(\"To summarize the posterior, \n            specify data y and n\")\n  beta_mean <- function(a, b) {\n    a/(a + b)\n  }\n  beta_mode <- function(a, b) {\n    if(a < 1 & b <1){\n      mode <- \"0 and 1\"\n    }else if (a <= 1 & b > 1){\n      mode <- 0\n    }else if (a > 1 & b < 1){\n      mode <- 1\n    }\n    else{\n      mode <- (a - 1)/(a + b - 2)\n    }\n  }\n  beta_var <- function(a, b) {\n    a * b/((a + b)^2 * (a + b + 1))\n  }\n  prior_mean <- beta_mean(alpha, beta)\n  prior_mode <- beta_mode(alpha, beta)\n  prior_var <- beta_var(alpha, beta)\n  prior_sd  <- sqrt(prior_var)\n  if (is.null(y) & is.null(n)) {\n    return(data.frame(model = c(\"prior\"), \n                      alpha = alpha,\n                      beta = beta, \n                      mean = prior_mean, \n                      mode = prior_mode,\n                      var = prior_var,\n                      sd = prior_sd))\n  }\n  else {\n    post_alpha <- y + alpha\n    post_beta <- n - y + beta\n    post_mean <- beta_mean(post_alpha, post_beta)\n    post_mode <- beta_mode(post_alpha, post_beta)\n    post_var  <- beta_var(post_alpha, post_beta)\n    post_sd   <- sqrt(post_var)\n    return(data.frame(model = c(\"prior\", \"posterior\"), \n                      alpha = c(alpha, post_alpha), \n                      beta = c(beta, post_beta), \n                      mean = c(prior_mean, post_mean), \n                      mode = c(prior_mode, post_mode), \n                      var = c(prior_var, post_var),\n                      sd = c(prior_sd, post_sd)))\n  }\n}\n\ncnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep(\"Colby\", times = 15*100)) # We will replace this with actual data\n","options":{"output":"true","read-only":"false","context":"setup","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"true","label":"unnamed-chunk-1","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":2,"code":"my_prediction <- plot_beta(number_correct, number_wrong) +\n  labs(title = \"My Prediction\")\n\nmy_prediction","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-2","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":3,"code":"cnn_onion_2010 <- cnn_onion |>\n  filter(year == 2010,\n         student %in% c(1:10))\n\nsummary(cnn_onion_2010)","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-3","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":4,"code":"count(cnn_onion_2010, correct)","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-4","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":5,"code":"summarize_beta_binomial(___, ___, y = 45, n = 150)","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-5","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":6,"code":"plot_beta_binomial(___, ___, y = 45, n = 150)","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-6","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":7,"code":"good <- plot_beta_binomial(14, 1, y = 45, n = 150) +\n  labs(title = \"Good Guesser\")\n\nunpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +\n  labs(title = \"Unpredictable Guesser\")\n\npoor <- plot_beta_binomial(4, 11, y = 45, n = 150) +\n  labs(title = \"Poor Guesser\")","options":{"output":"true","read-only":"false","context":"setup","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"true","label":"unnamed-chunk-7","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}},{"id":8,"code":"library(patchwork)\n\nyour_plot <- plot_beta_binomial(1, 1, y = 45, n = 150) +\n  labs(title = \"Your Guess\")\n\ngridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)","options":{"output":"true","read-only":"false","context":"interactive","fig-cap":"","classes":"","out-width":"700px","editor-font-scale":"1","results":"markup","out-height":"","autorun":"false","label":"unnamed-chunk-8","message":"true","fig-width":7,"dpi":72,"warning":"true","editor-max-height":"","editor-quick-suggestions":"false","comment":"","fig-height":5,"editor-word-wrap":"true"}}];
+globalThis.qwebrCellDetails = [{"options":{"fig-width":7,"editor-max-height":"","autorun":"true","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-1","editor-font-scale":"1","context":"setup","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":1,"code":"library(tidyverse)\nlibrary(gridExtra)\n\n#' Plot a Beta-Binomial Bayesian Model\n#'\n#' Consider a Beta-Binomial Bayesian model for parameter \\eqn{\\pi} with \n#' a Beta(alpha, beta) prior on \\eqn{\\pi} and Binomial likelihood with n trials\n#' and y successes. Given information on the prior (alpha and data) and data (y and n),\n#' this function produces a plot of any combination of the corresponding prior pdf, \n#' scaled likelihood function, and posterior pdf.  All three are included by default.\n#'\n#' @param alpha,beta positive shape parameters of the prior Beta model\n#' @param y observed number of successes\n#' @param n observed number of trials\n#' @param prior a logical value indicating whether the prior model should be plotted\n#' @param likelihood a logical value indicating whether the scaled likelihood should be plotted\n#' @param posterior a logical value indicating whether posterior model should be plotted\n#'\n#' @return a ggplot\n#' @export\n#' @import ggplot2\n#' @importFrom stats dbeta dbinom integrate\n#' @examples\n#'\n#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50)\n#' plot_beta_binomial(alpha = 1, beta = 13, y = 25, n = 50, posterior = FALSE)\n#' \nplot_beta_binomial <- function (alpha,\n                                beta,\n                                y = NULL,\n                                n = NULL,\n                                prior = TRUE,\n                                likelihood = TRUE,\n                                posterior = TRUE){\n  if (is.null(y) | is.null(n))\n    warning(\"To visualize the posterior,\n            specify data y and n\")\n\n  g <- ggplot(data = data.frame(x = c(0, 1)), aes(x)) +\n    labs(x = expression(pi),\n         y = \"density\") +\n    scale_fill_manual(\"\",\n                      values = c(prior = \"#f0e442\",\n                                 `(scaled) likelihood` = \"#0071b2\",\n                                 posterior = \"#009e74\"),\n                      breaks = c(\"prior\",\n                                 \"(scaled) likelihood\",\n                                 \"posterior\"))\n  \n  if (prior == TRUE) {\n    g <- g +\n      stat_function(fun = dbeta,\n                           args = list(shape1 = alpha,\n                                       shape2 = beta)) +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha,\n                                shape2 = beta),\n                    geom = \"area\",\n                    alpha = 0.5,\n                    aes(fill = \"prior\"))\n    }\n\n  if (!is.null(y) & !is.null(n)) {\n    alpha_post <- alpha + y\n    beta_post <- beta + n - y\n    y_data <- y\n    like_scaled <- function(x) {\n      like_fun <- function(x) {\n        dbinom(x = y_data, size = n, prob = x)\n      }\n      scale_c <- integrate(like_fun, lower = 0, upper = 1)[[1]]\n      like_fun(x)/scale_c\n    }\n  }\n  if (!is.null(y) & !is.null(n) & (likelihood != FALSE)) {\n    g <- g +\n      stat_function(fun = like_scaled) +\n      stat_function(fun = like_scaled,\n                    geom = \"area\",\n                    alpha = 0.5,\n                    aes(fill = \"(scaled) likelihood\"))\n  }\n  if (!is.null(y) & !is.null(n) & posterior == TRUE) {\n    g <- g +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha_post,\n                                shape2 = beta_post)) +\n      stat_function(fun = dbeta,\n                    args = list(shape1 = alpha_post,\n                                shape2 = beta_post),\n                    geom = \"area\", alpha = 0.5,\n                    aes(fill = \"posterior\"))\n  }\n  g\n} # end of function\n\n#' @title Plot a Beta Model for \\eqn{\\pi} \n#'\n#' @description Plots the probability density function (pdf) for\n#' a Beta(alpha, beta) model of variable \\eqn{\\pi}.\n#'\n#' @param alpha,beta positive shape parameters of the Beta model\n#' @param mean,mode a logical value indicating whether to display the model mean and mode\n#'\n#' @return A density plot for the Beta model.\n#' @export\n#' @import ggplot2\n#' @importFrom stats dbeta\n#'\n#' @examples\n#' plot_beta(alpha = 1, beta = 12, mean = TRUE, mode = TRUE)\nplot_beta <- function(alpha, beta, mean = FALSE, mode = FALSE){\n  \n  \n  p <- ggplot(data = data.frame(x = c(0, 1)),\n              aes(x)) +\n    stat_function(fun = stats::dbeta,\n                  n = 101,\n                  args = list(shape1 = alpha,\n                              shape2=beta)) +\n    labs(x = expression(pi),\n         y = expression(paste(\"f(\",pi,\")\")))\n\n  \n  if (mean == TRUE & mode == FALSE){\n    mean <- alpha / (alpha + beta)\n    \n    p <- p +\n      geom_segment(aes(x = mean, y = 0, \n                       xend = mean, \n                       yend = dbeta(mean, alpha, beta),\n                       linetype = \"mean\")) +\n      scale_linetype_manual(values = c(mean = \"solid\")) +\n      theme(legend.title = element_blank())\n  }\n  \n  if (mean == FALSE & mode == TRUE){\n    mode <- (alpha - 1)/(alpha + beta - 2)\n    \n    p <- p +\n      geom_segment(aes(x = mode, y = 0, \n                       xend = mode, \n                       yend = dbeta(mode, alpha, beta), \n                       linetype = \"mode\"))+\n      scale_linetype_manual(values = c(mode = \"dashed\")) +\n      theme(legend.title = element_blank())\n    \n    \n  }\n  \n  if (mean == TRUE & mode == TRUE){\n    mean <- alpha / (alpha + beta)\n    mode <- (alpha - 1)/(alpha + beta - 2)\n    \n    \n    p <- p +\n      geom_segment(aes(x = mean, y = 0, \n                       xend = mean, \n                       yend = dbeta(mean, alpha, beta),\n                       linetype = \"mean\")) +\n      geom_segment(aes(x = mode, y = 0, \n                       xend = mode, \n                       yend = stats::dbeta(mode, alpha, beta), \n                       linetype = \"mode\"))+\n      scale_linetype_manual(values = c(mean = \"solid\", mode = \"dashed\")) +\n      theme(legend.title = element_blank())\n  }\np\n}\n\n#' @title Summarize a Beta-Binomial Bayesian model\n#' \n#' @description Consider a Beta-Binomial Bayesian model for parameter \\eqn{\\pi} with \n#' a Beta(alpha, beta) prior on \\eqn{\\pi} and Binomial likelihood with n trials\n#' and y successes. Given information on the prior (alpha and data) and data (y and n),\n#' this function summarizes the mean, mode, and variance of the \n#' prior and posterior Beta models of \\eqn{\\pi}.\n#' \n#' @param alpha,beta positive shape parameters of the prior Beta model\n#' @param y number of successes\n#' @param n number of trials\n#'\n#' @return a summary table\n#' @export\n#'\n#' @examples \n#' summarize_beta_binomial(alpha = 1, beta = 15, y = 25, n = 50)\nsummarize_beta_binomial <- function (alpha, \n                                     beta, \n                                     y = NULL, \n                                     n = NULL)\n{\n  if (is.null(y) | is.null(n))\n    warning(\"To summarize the posterior, \n            specify data y and n\")\n  beta_mean <- function(a, b) {\n    a/(a + b)\n  }\n  beta_mode <- function(a, b) {\n    if(a < 1 & b <1){\n      mode <- \"0 and 1\"\n    }else if (a <= 1 & b > 1){\n      mode <- 0\n    }else if (a > 1 & b < 1){\n      mode <- 1\n    }\n    else{\n      mode <- (a - 1)/(a + b - 2)\n    }\n  }\n  beta_var <- function(a, b) {\n    a * b/((a + b)^2 * (a + b + 1))\n  }\n  prior_mean <- beta_mean(alpha, beta)\n  prior_mode <- beta_mode(alpha, beta)\n  prior_var <- beta_var(alpha, beta)\n  prior_sd  <- sqrt(prior_var)\n  if (is.null(y) & is.null(n)) {\n    return(data.frame(model = c(\"prior\"), \n                      alpha = alpha,\n                      beta = beta, \n                      mean = prior_mean, \n                      mode = prior_mode,\n                      var = prior_var,\n                      sd = prior_sd))\n  }\n  else {\n    post_alpha <- y + alpha\n    post_beta <- n - y + beta\n    post_mean <- beta_mean(post_alpha, post_beta)\n    post_mode <- beta_mode(post_alpha, post_beta)\n    post_var  <- beta_var(post_alpha, post_beta)\n    post_sd   <- sqrt(post_var)\n    return(data.frame(model = c(\"prior\", \"posterior\"), \n                      alpha = c(alpha, post_alpha), \n                      beta = c(beta, post_beta), \n                      mean = c(prior_mean, post_mean), \n                      mode = c(prior_mode, post_mode), \n                      var = c(prior_var, post_var),\n                      sd = c(prior_sd, post_sd)))\n  }\n}\n\ncnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep(\"Colby\", times = 15*100)) # We will replace this with actual data\n"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-2","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":2,"code":"my_prediction <- plot_beta(alpha = approx_number_correct, beta = approx_number_wrong) +\n  labs(title = \"My Prediction\")\n\nmy_prediction"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-3","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":3,"code":"cnn_onion_2010 <- cnn_onion |>\n  filter(year == 2010,\n         student %in% c(1:10))\n\ncount(cnn_onion_2010, correct)"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-4","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":4,"code":"cnn_onion_2010 %>%\n  group_by(student) %>%\n  summarize(correct_count = sum(correct))"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-5","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":5,"code":"summarize_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-6","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":6,"code":"plot_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"true","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-7","editor-font-scale":"1","context":"setup","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":7,"code":"good <- plot_beta_binomial(14, 1, y = 45, n = 150) +\n  labs(title = \"Good Guesser\")\n\nunpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +\n  labs(title = \"Unpredictable Guesser\")\n\npoor <- plot_beta_binomial(4, 11, y = 45, n = 150) +\n  labs(title = \"Poor Guesser\")"},{"options":{"fig-width":7,"editor-max-height":"","autorun":"false","fig-cap":"","classes":"","fig-height":5,"out-height":"","read-only":"false","label":"unnamed-chunk-8","editor-font-scale":"1","context":"interactive","comment":"","dpi":72,"results":"markup","warning":"true","message":"true","editor-word-wrap":"true","editor-quick-suggestions":"false","output":"true","out-width":"700px"},"id":8,"code":"library(patchwork)\n\nyour_plot <- plot_beta_binomial(alpha = , beta = , y = 45, n = 150) +\n  labs(title = \"Your Guess\")\n\ngridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)"}];
 
 </script>
 <script type="module">
@@ -1900,8 +1900,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2 class="anchored" data-anchor-id="cnn-vs-the-onion">CNN vs The Onion</h2>
 <p>CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization. It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.” Another way of putting it - The Onion is “fake news” for entertainment purposes.</p>
 <p>In this exercise you will assess your ability to determine real news stories published on <a href="cnn.com">cnn.com</a> from fake news stories published on <a href="theonion.com">theonion.com</a>.</p>
-<p>Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our <a href="https://forms.gle/eVvFHZQwvtsBYa9r9">google form</a>:</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
@@ -1909,6 +1907,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>Explore the effect of different priors on posteriors</li>
 <li>Introduce the concept of a prior</li>
 <li>Plotting priors and posteriors</li>
+<li>Calculating summary statistics of the prior and posteriors</li>
 </ul>
 </section>
 <section id="packages" class="level2">
@@ -1957,16 +1956,18 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="where-does-your-prediction-fall" class="level3">
 <h3 class="anchored" data-anchor-id="where-does-your-prediction-fall">Where does your prediction fall?</h3>
-<p>Tip: You can break this down into how many questions out of 15 you expect to get correct: Beta(number_correct, number_wrong).</p>
-<p>Replace <code>number_correct</code> and <code>number_wrong</code> with your predictions.</p>
+<p>The CNN vs.&nbsp;The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines you will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.</p>
+<p>For our prior from the Beta distribution, the shape parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: <code>Beta(approx_number_correct, approx_number_wrong)</code>.</p>
+<p>Replace <code>approx_number_correct</code> and <code>approx_number_wrong</code> with your predictions.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Which guesser is your prior closest to or most different from?</p>
+<p>Looking at the graph of your prior. Which guesser is your prior most similar to: Good, Unpredictable or Poor?</p>
 </section>
 <section id="vocabulary" class="level3">
 <h3 class="anchored" data-anchor-id="vocabulary">Vocabulary</h3>
+<p>We often describe priors in terms of how much information they give about the unknown variable.</p>
 <ul>
-<li><p><strong>Informative prior:</strong> An informative prior reflects specific information about the unknown variable with high certainty (ie. low variability).</p></li>
+<li><p><strong>Informative prior:</strong> An informative prior reflects specific information about the unknown variable with high certainty (i.e.&nbsp;low variability).</p></li>
 <li><p><strong>Vague (diffuse) prior:</strong> A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.</p></li>
 </ul>
 </section>
@@ -1976,84 +1977,47 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <ul>
-<li><p>Our data is a data frame called <code>cnn_onion</code>. Select the data from the year the quiz began.</p></li>
+<li><p>Our data is a data frame called <code>cnn_onion</code>.</p></li>
 <li><p>Based on the observed data, we will update the posterior for our three guessers and our own prior.</p></li>
-<li><p>Next, we calculate the summary statistics for the prior and posterior for all four.</p></li>
-</ul>
-<p><code>summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)</code> function summarizes the mean, mode, and variance of the prior and posterior Beta models of <span class="math inline">\(\pi\)</span></p>
-<ul>
+<li><p>Next, we calculate the summary statistics for the prior and posterior for all four priors using the function:</p></li>
+<li><p><code>summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)</code> function summarizes the mean, mode, and variance of the prior and posterior Beta models of <span class="math inline">\(\pi\)</span></p></li>
 <li><p>Arguments:</p>
 <ul>
 <li><code>alpha, beta</code>: positive shape parameters of the prior Beta model</li>
 <li><code>y</code>: number of successes</li>
 <li><code>n</code>: number of trials</li>
 </ul></li>
-<li><p>We plot the prior, likelihood, and the posterior for all four.</p></li>
-<li><p>We examine the effect of different priors on the posterior.</p></li>
+<li><p>Next, we plot the prior, likelihood, and the posterior for all four.</p></li>
+<li><p>Lastly, we examine the effect of different priors on the posterior.</p></li>
 </ul>
 </section>
 <section id="quiz-scores" class="level3">
 <h3 class="anchored" data-anchor-id="quiz-scores">Quiz scores</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cnn_onion <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">student =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">each =</span> <span class="dv">15</span>), <span class="at">question =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">times =</span> <span class="dv">100</span>), <span class="at">correct =</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.65</span>), <span class="at">year =</span> <span class="fu">rep</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2024</span>, <span class="at">each =</span> <span class="dv">15</span>, <span class="at">times =</span> <span class="dv">100</span>), <span class="at">institution =</span> <span class="fu">rep</span>(<span class="st">"Colby"</span>, <span class="at">times =</span> <span class="dv">15</span><span class="sc">*</span><span class="dv">100</span>)) <span class="co"># We will replace this with actual data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cnn_onion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  student question correct year institution
 1       1        1       1 2010       Colby
-2       1        2       0 2010       Colby
-3       1        3       0 2010       Colby
+2       1        2       1 2010       Colby
+3       1        3       1 2010       Colby
 4       1        4       0 2010       Colby
-5       1        5       0 2010       Colby
+5       1        5       1 2010       Colby
 6       1        6       1 2010       Colby</code></pre>
 </div>
 </div>
 <p>Reading in the data from the google form.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cnn_onion_survey <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cnn_onion_survey)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 20
-  Timestamp           Score Institution Year      `Correct Guesses` `Question 1`
-  &lt;dttm&gt;              &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;       
-1 2024-11-04 08:56:02     9 Bates       College …                 8 CNN         
-# ℹ 14 more variables: `Question 2` &lt;chr&gt;, `Question 3` &lt;chr&gt;,
-#   `Question 4` &lt;chr&gt;, `Question 5` &lt;chr&gt;, `Question 6` &lt;chr&gt;,
-#   `Question 7` &lt;chr&gt;, `Question 8` &lt;chr&gt;, `Question 9` &lt;chr&gt;,
-#   `Question 10` &lt;chr&gt;, `Question 11` &lt;chr&gt;, `Question 12` &lt;chr&gt;,
-#   `Question 13` &lt;chr&gt;, `Question 14` &lt;chr&gt;, `Question 15` &lt;chr&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cnn_onion_survey_clean <span class="ot">&lt;-</span> cnn_onion_survey <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Question"</span>), <span class="at">names_to =</span> <span class="st">"Question"</span>, <span class="at">names_prefix =</span> <span class="st">"Question "</span>, <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Correct</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">case_when</span>(Question <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">13</span>, <span class="dv">15</span>) <span class="sc">&amp;</span> Response <span class="sc">==</span> <span class="st">"CNN"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                      Question <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">14</span>) <span class="sc">&amp;</span> Response <span class="sc">==</span> <span class="st">"The Onion"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Institution, Year, Score, <span class="st">`</span><span class="at">Correct Guesses</span><span class="st">`</span>, Question, Correct) <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cnn_onion_survey_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  institution year                score correct_guesses question correct
-  &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
-1 Bates       College Fourth Year     9               8 1              1
-2 Bates       College Fourth Year     9               8 2              0
-3 Bates       College Fourth Year     9               8 3              1
-4 Bates       College Fourth Year     9               8 4              1
-5 Bates       College Fourth Year     9               8 5              0
-6 Bates       College Fourth Year     9               8 6              1</code></pre>
-</div>
-</div>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Let’s see how our quiz takers did:</p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
+</section>
+<section id="calculating-the-summary-statistics-and-plotting-the-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-summary-statistics-and-plotting-the-distribution">Calculating the summary statistics and plotting the distribution</h2>
 <section id="the-good-guesser" class="level3">
 <h3 class="anchored" data-anchor-id="the-good-guesser">The Good Guesser</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">14</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">14</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      model alpha beta      mean      mode         var         sd
 1     prior    14    1 0.9333333 1.0000000 0.003888889 0.06236096
@@ -2061,7 +2025,49 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="dv">14</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">14</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-unpredictable-guesser" class="level3">
+<h3 class="anchored" data-anchor-id="the-unpredictable-guesser">The Unpredictable Guesser</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean mode         var         sd
+1     prior     1    1 0.5000000  NaN 0.083333333 0.28867513
+2 posterior    46  106 0.3026316  0.3 0.001379384 0.03714006</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-poor-guesser" class="level3">
+<h3 class="anchored" data-anchor-id="the-poor-guesser">The Poor Guesser</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">4</span>, <span class="at">beta =</span> <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      model alpha beta      mean      mode         var         sd
+1     prior     4   11 0.2666667 0.2307692 0.012222222 0.11055416
+2 posterior    49  116 0.2969697 0.2944785 0.001257703 0.03546411</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">4</span>, <span class="at">beta =</span> <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -2071,72 +2077,37 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </section>
-<section id="the-unpredictable-guesser" class="level3">
-<h3 class="anchored" data-anchor-id="the-unpredictable-guesser">The Unpredictable Guesser</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean mode         var         sd
-1     prior     1    1 0.5000000  NaN 0.083333333 0.28867513
-2 posterior    46  106 0.3026316  0.3 0.001379384 0.03714006</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="the-poor-guesser" class="level3">
-<h3 class="anchored" data-anchor-id="the-poor-guesser">The Poor Guesser</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="dv">4</span>, <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean      mode         var         sd
-1     prior     4   11 0.2666667 0.2307692 0.012222222 0.11055416
-2 posterior    49  116 0.2969697 0.2944785 0.001257703 0.03546411</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="dv">4</span>, <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="you" class="level3">
-<h3 class="anchored" data-anchor-id="you">You</h3>
+<section id="your-turn" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn">Your turn</h3>
+<p>Fill in the alpha and beta shape parameters from your prior.</p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 </section>
-<section id="comparison" class="level2">
-<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<section id="comparison-of-the-priors" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-the-priors">Comparison of the priors</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
+<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Fill in the gap alpha and beta shape parameters with your guess:</p>
+<p>Fill in the gaps to add your alpha and beta shape parameters with your guess:</p>
 <div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="take-the-quiz" class="level2">
+<h2 class="anchored" data-anchor-id="take-the-quiz">Take the quiz</h2>
+<p>Now that we’ve updated our posteriors, let’s take the quiz and add our data to the dataset of trials and successes.</p>
+<p>Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our <a href="https://forms.gle/eVvFHZQwvtsBYa9r9">google form</a>:</p>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 </section>
 
 </main>

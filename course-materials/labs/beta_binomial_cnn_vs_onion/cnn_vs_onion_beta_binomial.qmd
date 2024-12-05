@@ -483,6 +483,8 @@ gridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)
 
 ```
 
+## Recap
+
 
 ## Take the quiz
 

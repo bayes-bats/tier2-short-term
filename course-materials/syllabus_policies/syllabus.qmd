@@ -21,15 +21,15 @@ In this course, we will explore the basics of probability and how it pertains to
 -   Compare and contrast Bayesian methods with frequentist statistical methods
 -   Use Bayes theorem to update probabilities with prior knowledge
 -   Understand the basics concepts of likelihood, prior and posterior distributions
--   Perform Bayesian inference for a single mean and a single proportion
+-   Perform Bayesian inference for a single proportion and simple linear regression
 -   Create and interpret credible intervals
 -   Use computational methods to perform analyses
 
 ### Assessment
 
-Some possibilities to explore:
+-   Weekly Quiz
+-   Weekly Problem Set
+-   Two Lab Write Ups
+-   Final Project\*
 
--   Weekly in-class quizzes (LB: I think these will work well in the 3.5 week version of the class)
--   Weekly Homework (Larger homework or lab each week)
--   Final exam
--   Final Project (Perhaps homework will slowly build towards this?)
+\*A final project may be explored in the semester long half credit course.

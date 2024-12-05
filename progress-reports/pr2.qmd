@@ -49,7 +49,6 @@ We plan to create a problem set in learnr where students will complete and be gr
 
 ## Updated Gantt Chart
 
-This is an example gantt chart
 
 ```{r, echo=FALSE}
 g <- new("gantt")

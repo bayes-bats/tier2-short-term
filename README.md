@@ -1,5 +1,10 @@
 # A Gentle Introduction to Probability and Bayesian Statistics
 
+
+The course syllabus and activities for *A Gentle Introduction to Probability and Bayesian Statistics* was created by Laurie Baker and Jim Scott as part of the Bayes BATS program, with mentorship and advising from Mine Dogucu.
+
+This material is based upon work supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.
+
 ## Outputs from Progress Report 1
 
 -   [Draft Syllabus](course-materials/syllabus_policies/syllabus.html)

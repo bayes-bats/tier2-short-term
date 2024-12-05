@@ -1,5 +1,5 @@
 ---
-title: "Diarrhea Disease Transmission"
+title: "Disease Transmission"
 format: html
 engine: knitr
 ---
@@ -32,8 +32,6 @@ In this lab, students will analyze how geographic factors (like road access and 
 
 Y.  
 
--   Compare these models to a model with multiple linear regression.
-
 ## Libraries
 
 ```{r message = FALSE}
@@ -60,14 +58,15 @@ The data contains information on:
 
 -   `city`: the city id
 -   `pop`: population (number of people)
--   `meandeg`:
--   `meanind`:
--   `lnmeanind`:
+-   `meandeg`: mean degree of separation
+-   `meanind`: mean index
+-   `lnmeanind`: natural log of the mean index
 -   `remoteness`: measure of remoteness
 
 ## Specifying the data model
 
 We are interested in understanding the relationship between ____ (Y) and ___ (X). 
+
 Diarrheal disease are spread through fecal-oral contact and through several transmission mechanisms that relate to population density. We might therefore expect that there's a **positive linear relationship** between Y and X --- the ___ it is, the more likely _____.
 
 Assuming the relationship between Y and X is linear, we can write $\mu_i$ as:
@@ -82,8 +81,6 @@ where we can interpret the **model coefficients** $\beta_0$ and $\beta_1$ as fol
 
 Questions:
 
-- Would it be useful to show simulated scenarios with a $\mu$ and $\sigma$ assumed?
-- I noticed that in your example you replace the global mean $\mu$ with the explantory variable specific local mean $\mu_i$ (for temperature). Is this just specific to the bike data example?
 
 ## Specifying the priors
 

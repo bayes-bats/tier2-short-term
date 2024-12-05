@@ -31,8 +31,6 @@ Specifically we have identified the following tasks:
 
 ## Updated Gantt Chart
 
-This is an example gantt chart
-
 ```{r, echo=FALSE}
 g <- new("gantt")
 g <- ganttAddTask(g, "Work Plan")

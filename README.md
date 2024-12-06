@@ -27,6 +27,10 @@ You can access our materials using the links below:
 
 This material is based upon work supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.
 
+**Presentation**
+
+- [A Gentle Introduction to Probability and Bayesian Statistics Presentation Slides](https://docs.google.com/presentation/d/1ALwRv7Xje3z_SRBKh88_HNX_5W-tFBLGB0zKVbGRNbM/edit?usp=sharing)
+
 ## Outputs from Progress Report 1
 
 -   [Draft Syllabus](course-materials/syllabus_policies/syllabus.html)

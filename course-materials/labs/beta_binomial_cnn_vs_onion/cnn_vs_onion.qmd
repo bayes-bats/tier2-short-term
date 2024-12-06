@@ -129,17 +129,41 @@ correct_answers_prob_0_95_df |>
 
 ```
 
+4. Explore some other parameters of your choosing using the widget below:
+
+```{=html}
+<iframe src="https://isle.stat.cmu.edu/widgets/binomial-distribution/" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+```
+
+
+You can also access the widget through Carnegie Mellon University's [Integrated Statistics Learning Environment](https://isle.stat.cmu.edu/widgets/binomial-distribution/).
 
 ## Activity
 
-Let X = the number of questions you answer correctly.  
+Let X = the number of questions you answer correctly on the CNN vs. The Onion quiz.  
 
 
-1.  Does X follow a binomial distribution? What assumptions must you make if you want to treat X as a binomial count? (Hint: think about the 4 things that must be true for a binomial variable). 
+1.  Does X follow a binomial distribution? What assumptions must you make if you want to treat X as a binomial count?
+
+::: {.callout-note collapse="true"}
+### Binomial Assumptions (Click to view)
+
+1. The number of observations n is fixed.
+2. Each observation is independent.
+3. Each observation represents one of two outcomes: "success" or "failure".
+4. The probability of "success" p is the same for each outcome.
+:::
 
 2.  Let p denote the proportion of questions that you answer correctly.  Make a prediction – what do you think your value of p is?
 
 3.  Take the Quiz.  Make sure you record the number that you answer correctly.
+
+Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our [google form](https://forms.gle/eVvFHZQwvtsBYa9r9):
+
+```{=html}
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+```
+
 
 4.  Suppose that instead of thinking about each question and answering to the best of your ability, you randomly guessed answers (e.g. you flipped a coin – heads = CNN, tails = The Onion).  Under this scenario, what would you expect p to be?  What would you expect X to be?
 
@@ -163,39 +187,29 @@ ___binom(x = , size = , prob = )
 
 ```
 
-7. Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores.  If everyone simply guessed at random, the average score of the class should be about 7.5.  Is it? Write your code in R
+7. Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores.  If everyone simply guessed at random, the average score of the class should be about 7.5.  Is it? Fill in the blanks below
 
 
 ```{webr}
 
-class_scores <- c(______________)
+scores <- c(______________)
 
-# Look at the code above
+class_scores <- as.data.frame(scores)
+
+class_scores |>
+  ggplot() +
+  geom_bar(aes(x = ______))
+
+
+class_scores |>
+  summarize(mean_score = ____(scores, na.rm = TRUE))
 ```
 
 8.  What percent of your classmates scored 12 or more?  8 or more?  How do these proportions compare to the probabilities you calculated earlier?  What does this tell you about your ability to correctly distinguish between headlines from CNN and The Onion?
 
 ```{webr}
 
-class_scores <- c(______________)
+scores <- c(______________)
 
-```
-
-(Later, when ready to do hypothesis testing)
-
-9.  Test the hypothesis that your value for p, the proportion of questions you answer correctly, is greater than 0.5.  (Bayesian vs traditional method).
-
-
-[at a later time]
-Have someone enter the data for the class [one row per student, each column recording if they answered the question correctly or not]
-
-```{webr}
-
-class_scores <- c(______________)
-
-class_data <- data.frame(student = seq(from = 1, to = length(class_scores)), class_scores = class_scores)
-
-head(class_data)
-
-# Look at the code above
+# add code here
 ```

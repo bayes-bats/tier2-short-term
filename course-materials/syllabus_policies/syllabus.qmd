@@ -25,11 +25,17 @@ In this course, we will explore the basics of probability and how it pertains to
 -   Create and interpret credible intervals
 -   Use computational methods to perform analyses
 
+### Resources and Technology
+
+- Probability readings and problem sets will be drawn from [Stat 20](https://stat20.org) by Andrew Bray and colleagues at UC Berkeley.
+- Bayesian statistics readings and exercises will be drawn from [Bayes Rules](https://www.bayesrulesbook.com/) by Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu.
+
 ### Assessment
 
--   Weekly Quiz
--   Weekly Problem Set
--   Two Lab Write Ups
+-   Weekly Quiz: 10%
+-   Weekly Problem Set: 30%
+-   Two Lab Write Ups: 50%
+-   Participation: 10%
 -   Final Project\*
 
 \*A final project may be explored in the semester long half credit course.

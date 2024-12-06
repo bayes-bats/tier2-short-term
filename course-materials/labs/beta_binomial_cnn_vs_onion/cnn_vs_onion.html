@@ -323,7 +323,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-1","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)\n\ncorrect_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)\n\ncorrect_answers_n100_prob_50_df |>\n  group_by(correct_answers_n100_prob_50)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))"},{"id":2,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-2","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_big_n_prob_50 <- rbinom(n = __, size = 15, prob = 0.5)\n\ncorrect_answers_big_n_prob_50_df <- data.frame(correct_answers_big_n_prob_50)\n\ncorrect_answers_big_n_prob_50_df |>\n  group_by(correct_answers_big_n_prob_50)|>\n  summarize(prob_outcomes = n()/___) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_big_n_prob_50, y = prob_outcomes))"},{"id":3,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-3","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_05 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_05_df <- data.frame(correct_answers_prob_0_05)\n\ncorrect_answers_prob_0_05_df |>\n  group_by(correct_answers_prob_0_05)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_05, y = prob_outcomes))"},{"id":4,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-4","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_95 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_95_df <- data.frame(correct_answers_prob_0_95)\n\ncorrect_answers_prob_0_95_df |>\n  group_by(correct_answers_prob_0_95)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_95, y = prob_outcomes))"},{"id":5,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-5","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"___binom(x = , size = , prob = )"},{"id":6,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-6","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"# options: rbinom, pbinom, dbinom"},{"id":7,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-7","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)\n\n# Look at the code above"},{"id":8,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-8","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)"},{"id":9,"options":{"editor-max-height":"","context":"interactive","classes":"","autorun":"false","comment":"","warning":"true","fig-cap":"","read-only":"false","message":"true","label":"unnamed-chunk-9","editor-quick-suggestions":"false","out-height":"","output":"true","editor-font-scale":"1","dpi":72,"fig-width":7,"fig-height":5,"out-width":"700px","editor-word-wrap":"true","results":"markup"},"code":"class_scores <- c(______________)\n\nclass_data <- data.frame(student = seq(from = 1, to = length(class_scores)), class_scores = class_scores)\n\nhead(class_data)\n\n# Look at the code above"}];
+globalThis.qwebrCellDetails = [{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-1","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":1,"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_n100_prob_50 <- rbinom(n = 100, size = 15, prob = 0.5)\n\ncorrect_answers_n100_prob_50_df <- data.frame(correct_answers_n100_prob_50)\n\ncorrect_answers_n100_prob_50_df |>\n  group_by(correct_answers_n100_prob_50)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_n100_prob_50, y = prob_outcomes))"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-2","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":2,"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_big_n_prob_50 <- rbinom(n = __, size = 15, prob = 0.5)\n\ncorrect_answers_big_n_prob_50_df <- data.frame(correct_answers_big_n_prob_50)\n\ncorrect_answers_big_n_prob_50_df |>\n  group_by(correct_answers_big_n_prob_50)|>\n  summarize(prob_outcomes = n()/___) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_big_n_prob_50, y = prob_outcomes))"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-3","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":3,"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_05 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_05_df <- data.frame(correct_answers_prob_0_05)\n\ncorrect_answers_prob_0_05_df |>\n  group_by(correct_answers_prob_0_05)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_05, y = prob_outcomes))"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-4","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":4,"code":"library(tidyverse)\nlibrary(ggplot2)\n\nset.seed(100)\ncorrect_answers_prob_0_95 <- rbinom(n = 100, size = 15, prob = ___)\n\ncorrect_answers_prob_0_95_df <- data.frame(correct_answers_prob_0_95)\n\ncorrect_answers_prob_0_95_df |>\n  group_by(correct_answers_prob_0_95)|>\n  summarize(prob_outcomes = n()/100) |>\n  ggplot() +\n  geom_col(aes(x = correct_answers_prob_0_95, y = prob_outcomes))"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-5","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":5,"code":"___binom(x = , size = , prob = )"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-6","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":6,"code":"# options: rbinom, pbinom, dbinom\n# hint use ?rbinom to find out the arguments you need"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-7","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":7,"code":"scores <- c(______________)\n\nclass_scores <- as.data.frame(scores)\n\nclass_scores |>\n  ggplot() +\n  geom_bar(aes(x = ______))\n\n\nclass_scores |>\n  summarize(mean_score = ____(scores, na.rm = TRUE))"},{"options":{"comment":"","classes":"","context":"interactive","fig-width":7,"message":"true","results":"markup","autorun":"false","editor-word-wrap":"true","fig-cap":"","label":"unnamed-chunk-8","fig-height":5,"editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","warning":"true","editor-font-scale":"1","out-height":"","output":"true","dpi":72,"out-width":"700px"},"id":8,"code":"scores <- c(______________)\n\n# add code here"}];
 
 </script>
 <script type="module">
@@ -1882,7 +1882,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="bernoullip-and-binomialnp" class="level3">
 <h3 class="anchored" data-anchor-id="bernoullip-and-binomialnp">Bernoulli<span class="math inline">\((p)\)</span> and Binomial<span class="math inline">\((n,p)\)</span></h3>
 <ol type="1">
-<li><code>dbinom</code> computes the pmf of <span class="math inline">\(X\)</span>, <span class="math inline">\(f(k) = P(X = k)\)</span>, for <span class="math inline">\(k = 0, 1, \ldots, n\)</span>.</li>
+<li><code>dbinom</code> computes the probability mass function (pmf) of <span class="math inline">\(X\)</span>, <span class="math inline">\(f(k) = P(X = k)\)</span>, for <span class="math inline">\(k = 0, 1, \ldots, n\)</span>.</li>
 </ol>
 <ul>
 <li>Arguments:
@@ -1893,7 +1893,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </ul></li>
 </ul>
 <ol start="2" type="1">
-<li><code>pbinom</code> computes the cdf <span class="math inline">\(F(x) = P(X \le x)\)</span><br>
+<li><code>pbinom</code> computes the cumulative distribution function (cdf) <span class="math inline">\(F(x) = P(X \le x)\)</span><br>
 </li>
 </ol>
 <ul>
@@ -1915,7 +1915,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><code>prob</code>: the parameter <span class="math inline">\(p\)</span>, the probability of success</li>
 </ul></li>
 </ul>
-<p>Explore the binomial distribution using applet or R. Show large n vs small n with p = .5, with n = 100, vary p from 0.05 to 0.95. What do you observe? When is the binomial distribution skewed vs symmetric?</p>
+<p>Explore the binomial distribution in the following exercises. What do you observe? When is the binomial distribution skewed vs symmetric?</p>
 <div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -1941,15 +1941,47 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ol start="4" type="1">
+<li>Explore some other parameters of your choosing using the widget below:</li>
+</ol>
+<iframe src="https://isle.stat.cmu.edu/widgets/binomial-distribution/" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<p>You can also access the widget through Carnegie Mellon University’s <a href="https://isle.stat.cmu.edu/widgets/binomial-distribution/">Integrated Statistics Learning Environment</a>.</p>
 </section>
 </section>
 <section id="activity" class="level2">
 <h2 class="anchored" data-anchor-id="activity">Activity</h2>
-<p>Let X = the number of questions you answer correctly.</p>
+<p>Let X = the number of questions you answer correctly on the CNN vs.&nbsp;The Onion quiz.</p>
 <ol type="1">
-<li><p>Does X follow a binomial distribution? What assumptions must you make if you want to treat X as a binomial count? (Hint: think about the 4 things that must be true for a binomial variable).</p></li>
+<li>Does X follow a binomial distribution? What assumptions must you make if you want to treat X as a binomial count?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Binomial Assumptions (Click to view)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The number of observations n is fixed.</li>
+<li>Each observation is independent.</li>
+<li>Each observation represents one of two outcomes: “success” or “failure”.</li>
+<li>The probability of “success” p is the same for each outcome.</li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
 <li><p>Let p denote the proportion of questions that you answer correctly. Make a prediction – what do you think your value of p is?</p></li>
 <li><p>Take the Quiz. Make sure you record the number that you answer correctly.</p></li>
+</ol>
+<p>Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our <a href="https://forms.gle/eVvFHZQwvtsBYa9r9">google form</a>:</p>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<ol start="4" type="1">
 <li><p>Suppose that instead of thinking about each question and answering to the best of your ability, you randomly guessed answers (e.g.&nbsp;you flipped a coin – heads = CNN, tails = The Onion). Under this scenario, what would you expect p to be? What would you expect X to be?</p></li>
 <li><p>Suppose you chose to take the quiz using the ‘random guessing’ strategy. A passing grade on most exams is scoring above the 60th percentile. Using this rubric, you would need to answer 9 questions correctly in order to pass. Use the binomial formula to calculate the probability of getting exactly 9 questions right.</p></li>
 </ol>
@@ -1966,7 +1998,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 <ol start="7" type="1">
-<li>Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores. If everyone simply guessed at random, the average score of the class should be about 7.5. Is it? Write your code in R</li>
+<li>Using data from everyone in class, create an appropriate figure that displays the distribution of quiz scores. If everyone simply guessed at random, the average score of the class should be about 7.5. Is it? Fill in the blanks below</li>
 </ol>
 <div class="cell">
 <div id="qwebr-insertion-location-7"></div>
@@ -1977,15 +2009,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </ol>
 <div class="cell">
 <div id="qwebr-insertion-location-8"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-<p>(Later, when ready to do hypothesis testing)</p>
-<ol start="9" type="1">
-<li>Test the hypothesis that your value for p, the proportion of questions you answer correctly, is greater than 0.5. (Bayesian vs traditional method).</li>
-</ol>
-<p>[at a later time] Have someone enter the data for the class [one row per student, each column recording if they answered the question correctly or not]</p>
-<div class="cell">
-<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </section>

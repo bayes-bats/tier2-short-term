@@ -481,6 +481,7 @@ gridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)
 ## Recap
 
 
+
 ## Take the quiz
 
 Now that we've updated our posteriors, let's take the quiz and add our data to the dataset of trials and successes.

@@ -284,9 +284,9 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 
 ## Priors
 
-Let's revisit our predictions of the number of answers we would get correct on the quiz. Let $\pi$ be the proportion of correct answers we guess right in the CNN vs the Onion quiz.
+The CNN vs. The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines you will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.
 
-The table shows three different people with three different priors about $\pi$
+Let $\pi$ be the proportion of correct answers you guess right in the CNN vs the Onion quiz. Keeping that number in mind, let's explore in the table below, three different priors from three different people $\pi$
 
 | Good Guesser | Unpredictable Guesser | Poor Guesser |
 |--------------|-----------------------|--------------|
@@ -310,11 +310,9 @@ gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
 
 ### Where does your prediction fall?
 
-The CNN vs. The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines you will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.
+When we construct our priors from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: `Beta(approx_number_correct, approx_number_wrong)`.
 
-For our prior from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: `Beta(approx_number_correct, approx_number_wrong)`.
-
-Replace `approx_number_correct` and `approx_number_wrong` with your predictions.
+Returning to your own prediction, replace `approx_number_correct` and `approx_number_wrong` with your predictions.
 
 ```{webr-r}
 
@@ -324,11 +322,11 @@ my_prediction <- plot_beta(alpha = approx_number_correct, beta = approx_number_w
 my_prediction
 ```
 
-Looking at the graph of your prior. Which guesser is your prior most similar to: Good, Unpredictable or Poor?
+Looking at the graph of your prior, which guesser is your prior most similar to: Good, Unpredictable or Poor?
 
 ### Vocabulary
 
-We often describe priors in terms of how much information they give about the unknown variable.  
+We often describe priors in terms of how much information they give about the unknown variable. Priors are often described as:
 
 -   **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (i.e. low variability).
 
@@ -338,10 +336,9 @@ We often describe priors in terms of how much information they give about the un
 
 ### Data
 
--   Our data is a data frame called `cnn_onion`.
+-   Our data with the results from the quiz in a data frame called `cnn_onion`.
 
 -   Based on the observed data, we will update the posterior for our three guessers and our own prior.
-
 
 -   Next, we calculate the summary statistics for the prior and posterior for all four priors using the function:
 
@@ -359,8 +356,6 @@ We often describe priors in terms of how much information they give about the un
 
 ### Quiz scores
 
-
-
 ```{r simulated data, echo = FALSE}
 set.seed(10)
 
@@ -369,7 +364,7 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 head(cnn_onion)
 ```
 
-Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data.
+<!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
 
 ```{r data from google form, echo = FALSE, message = FALSE, warning = FALSE}
 cnn_onion_survey <- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")

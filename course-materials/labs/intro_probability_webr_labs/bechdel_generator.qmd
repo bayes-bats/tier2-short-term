@@ -42,6 +42,8 @@ bechdel |>
 ### Randomly select several movies and summarize pass and fail.
 
 ```{webr}
+set.seed(17) # to keep the same results even as we increase the sample
+
 (bechdel_sample <- bechdel |>
   filter(year >= 2000 & year <= 2010) |>
   slice_sample(n = 10)) |>

@@ -31,11 +31,6 @@ bechdel |>
   select(year, title, clean_test, binary) |>
 DT::datatable()
 ```
-
-```{webr}
-summary(bechdel)
-```
-
 ### Randomly select a movie
 
 ```{webr}

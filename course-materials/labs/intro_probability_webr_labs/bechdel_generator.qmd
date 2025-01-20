@@ -1,0 +1,58 @@
+---
+title: "Bechdel Sampler"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+# The Rule
+
+## [![The Rule - Comic by Alison Bechdel](images/Bechdel_Test.jpg)](https://dykestowatchoutfor.com/the-rule/)Packages
+
+```{r packages, message = FALSE}
+library(tidyverse)
+library(fivethirtyeight)
+library(DT)
+```
+
+```{webr-r}
+#| context: setup
+
+library(tidyverse)
+library(fivethirtyeight)
+library(DT)
+```
+
+```{r}
+bechdel |>
+  select(year, title, clean_test, binary) |>
+DT::datatable()
+```
+
+```{webr}
+summary(bechdel)
+```
+
+### Randomly select a movie
+
+```{webr}
+bechdel |>
+  slice_sample(n = 1) |>
+  select(year, title, clean_test, binary)
+```
+
+### Randomly select several movies and summarize pass and fail.
+
+```{webr}
+(bechdel_sample <- bechdel |>
+  filter(year >= 2000 & year <= 2010) |>
+  slice_sample(n = 10)) |>
+  select(year, title, clean_test, binary)
+
+
+bechdel_sample |>
+  count(binary)
+```

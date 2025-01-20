@@ -163,11 +163,11 @@ ___binom(___ = 4, size = ___, prob = 0.2)
 
 -   $7 \le X \le 10$
 
-Hint: Your answer should come out to be 0.6296483
+Hint: Your answer should come out to be 0.0861291. Use the help file to check the formulas used and be careful with the less than or equal to signs.
 
 ```{webr}
 # P(7 <= X <= 10)
-___binom(___ = __, size = 20, prob = 0.2) - ___binom(___ = ___, size = 20, prob = 0.2)
+___binom(___ = ___, size = 20, prob = 0.2) - ___binom(___ = ___, size = 20, prob = 0.2)
 ```
 
 

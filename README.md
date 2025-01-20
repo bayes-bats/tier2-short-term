@@ -25,7 +25,7 @@ You can access our materials using the links below:
 
 - [CNN vs. The Onion: Priors, Posterior, and Summary Statistics with the Beta-Binomial Distribution](course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html)
 - [Draft Normal Regression Lab](course-materials/labs/ecuador_villages/Ecuador_villages.html)
-
+- [Bechdel Sampler for Updating Priors Lab](course-materials/labs/intro_probability_webr_labs/bechdel_generator.html)
 
 This material is based upon work supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.
 

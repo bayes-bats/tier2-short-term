@@ -71,23 +71,17 @@ cat("Posterior Beta:", beta_posterior, "\n")
 
 ```{webr}
 
-x <- seq(0, 1, length.out = 100)
-prior_dist <- dbeta(x, alpha_prior, beta_prior)
-posterior_dist <- dbeta(x, alpha_posterior, beta_posterior)
-
-library(ggplot2)
-library(dplyr)
-
 # Parameter space (range of possible values for probability)
 parameter_space <- seq(0, 1, length.out = 100)
 
-# Prior and posterior distributions
-prior_dist <- dbeta(parameter_space, 2, 2)        # Example Beta(2,2) prior
-posterior_dist <- dbeta(parameter_space, 9, 5)    # Example Beta(9,5) posterior after observing data
+# Prior and Posterior
+prior_dist <- dbeta(parameter_space, alpha_prior, beta_prior)
+posterior_dist <- dbeta(parameter_space, alpha_posterior, beta_posterior)
+
 
 # Create a data frame for ggplot2
 df <- data.frame(
-  parameter_space = rep(x, 2),
+  parameter_space = rep(parameter_space, 2),
   Density = c(prior_dist, posterior_dist),
   Distribution = rep(c("Prior", "Posterior"), each = length(parameter_space))
 )

@@ -88,7 +88,7 @@ df <- data.frame(
 
 # Plot using ggplot2
 ggplot(df, aes(x = parameter_space, y = Density, color = Distribution, linetype = Distribution)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_color_manual(values = c("Prior" = "blue", "Posterior" = "red")) +
   scale_linetype_manual(values = c("Prior" = "solid", "Posterior" = "dashed")) +
   labs(
@@ -134,7 +134,7 @@ library(ggplot2)
 
 # Plot the likelihood function
 ggplot(df_likelihood, aes(x = theta, y = likelihood)) +
-  geom_line(color = "green", size = 1) +
+  geom_line(color = "green", linewidth = 1) +
   labs(
     title = "Likelihood Function for Observed Data",
     x = "Theta (Probability of Success)",
@@ -164,7 +164,7 @@ posterior <- posterior / sum(posterior)
 df_posterior <- data.frame(theta = theta_values, posterior = posterior)
 
 ggplot(df_posterior, aes(x = theta, y = posterior)) +
-  geom_line(color = "red", size = 1) +
+  geom_line(color = "red", linewidth = 1) +
   labs(
     title = "Posterior Distribution",
     x = "Theta (Probability of Success)",

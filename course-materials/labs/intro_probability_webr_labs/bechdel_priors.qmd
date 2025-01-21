@@ -1,0 +1,243 @@
+---
+title: "Bechdel: Priors and Posteriors"
+format: html
+engine: knitr
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+# The Rule
+
+* More than two women
+* Who talk to eachother
+* About something other than a man
+
+Link to [Bechdel Random Sampler](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/intro_probability_webr_labs/bechdel_generator.html)
+
+```{r packages, message = FALSE}
+library(tidyverse)
+```
+
+```{webr-r}
+#| context: setup
+
+library(tidyverse)
+```
+
+
+## Choosing a prior
+
+Before we start, let's choose a prior. Base your prior on either:
+
+A. Out of 10 films, how many do you think pass the test? 
+
+B. Out of 100 films, how many do you think pass the test?
+
+C. Out of 1000 films, how many do you think pass the test?
+
+
+```{webr prior}
+# Given prior belief (Beta distribution)
+alpha_prior <- ___  # Prior successes
+beta_prior <- ___  # Prior failures
+
+```
+
+## Observed data
+
+```{webr observed_data}
+
+successes <- __   # Number of successes observed
+trials <- __    # Total number of films
+
+```
+
+## Update the prior with the data (Posterior parameters)
+
+```{webr posterior}
+
+alpha_posterior <- alpha_prior + successes
+beta_posterior <- beta_prior + (trials - successes)
+
+# Display posterior parameters
+cat("Posterior Alpha:", alpha_posterior, "\n")
+cat("Posterior Beta:", beta_posterior, "\n")
+
+```
+
+## Plot the prior and posterior distributions
+
+```{webr}
+
+x <- seq(0, 1, length.out = 100)
+prior_dist <- dbeta(x, alpha_prior, beta_prior)
+posterior_dist <- dbeta(x, alpha_posterior, beta_posterior)
+
+library(ggplot2)
+library(dplyr)
+
+# Parameter space (range of possible values for probability)
+parameter_space <- seq(0, 1, length.out = 100)
+
+# Prior and posterior distributions
+prior_dist <- dbeta(parameter_space, 2, 2)        # Example Beta(2,2) prior
+posterior_dist <- dbeta(parameter_space, 9, 5)    # Example Beta(9,5) posterior after observing data
+
+# Create a data frame for ggplot2
+df <- data.frame(
+  parameter_space = rep(x, 2),
+  Density = c(prior_dist, posterior_dist),
+  Distribution = rep(c("Prior", "Posterior"), each = length(parameter_space))
+)
+
+# Plot using ggplot2
+ggplot(df, aes(x = parameter_space, y = Density, color = Distribution, linetype = Distribution)) +
+  geom_line(size = 1) +
+  scale_color_manual(values = c("Prior" = "blue", "Posterior" = "red")) +
+  scale_linetype_manual(values = c("Prior" = "solid", "Posterior" = "dashed")) +
+  labs(
+    title = "Prior vs Posterior Distribution",
+    x = "Parameter Space (Probability of Success)",
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+## Summarize the posterior mean and credible interval
+
+```{webr}
+
+posterior_mean <- alpha_posterior / (alpha_posterior + beta_posterior)
+credible_interval <- qbeta(c(0.025, 0.975), alpha_posterior, beta_posterior)
+
+cat("Posterior Mean:", posterior_mean, "\n")
+cat("95% Credible Interval:", credible_interval, "\n")
+
+```
+
+
+```{webr}
+# Observed data
+successes <- 7  # Number of successes
+trials <- 10    # Total number of trials
+
+# Define a sequence of possible values of theta (parameter space)
+theta_values <- seq(0, 1, length.out = 100)
+
+# Calculate the likelihood for each value of theta
+likelihood <- dbinom(successes, trials, theta_values)
+
+# Create a data frame for plotting
+df_likelihood <- data.frame(
+  theta = theta_values,
+  likelihood = likelihood
+)
+
+# Load ggplot2 for visualization
+library(ggplot2)
+
+# Plot the likelihood function
+ggplot(df_likelihood, aes(x = theta, y = likelihood)) +
+  geom_line(color = "green", size = 1) +
+  labs(
+    title = "Likelihood Function for Observed Data",
+    x = "Theta (Probability of Success)",
+    y = "Likelihood"
+  ) +
+  theme_minimal()
+```
+
+## Combining Prior and Likelihood to get the Posterior
+
+```{webr}
+# Define the prior distribution
+prior <- dbeta(theta_values, alpha_prior, beta_prior)
+
+# Compute the posterior (Likelihood * Prior)
+posterior <- likelihood * prior
+
+# Normalize posterior to make it a proper probability distribution
+posterior <- posterior / sum(posterior)
+
+# This step is equivalent to the denominator in Bayes' theorem, called the evidence (or marginal likelhiood). N.B. Since calculating the denominator explicitly can be difficult, we often compute an unnormalized posterior first and then divide by the total sum (or integral) to normalize it.
+```
+
+```{webr}
+
+# Plot the posterior distribution
+df_posterior <- data.frame(theta = theta_values, posterior = posterior)
+
+ggplot(df_posterior, aes(x = theta, y = posterior)) +
+  geom_line(color = "red", size = 1) +
+  labs(
+    title = "Posterior Distribution",
+    x = "Theta (Probability of Success)",
+    y = "Posterior Density"
+  ) +
+  theme_minimal()
+
+```
+
+
+::: {.callout-note collapse="true"}
+## The Beta-Binomial: Click to Expand
+
+# Understanding the Relationship
+
+## Binomial Distribution (Likelihood)
+
+The **Binomial distribution** models the number of successes in a fixed number of trials when each trial has the same probability of success \( \theta \). It is given by:
+
+$$
+P(k \mid \theta, n) = \binom{n}{k} \theta^k (1 - \theta)^{n-k}
+$$
+
+Where:
+
+- $k$ = number of successes,
+- $n$ = total trials,
+- $\theta$ = unknown probability of success (the parameter we want to estimate).
+
+## Beta Distribution (Prior)
+
+The **Beta distribution** is a flexible probability distribution used to model a probability parameter $\theta$ on the interval [0,1]. The prior is expressed as:
+
+$$
+P(\theta \mid \alpha, \beta) \propto \theta^{\alpha - 1} (1 - \theta)^{\beta - 1}
+$$
+
+Where:
+
+- $\alpha$ and $\beta$ are shape parameters that determine the prior belief about $\theta$.
+  - $\alpha$ represents prior "successes" (pseudo-successes).
+  - $\beta$ represents prior "failures" (pseudo-failures).
+
+
+
+# Why Do Beta and Binomial Work Well Together? (Conjugacy)
+
+In Bayesian inference, if the prior and posterior distributions belong to the same family of distributions, the prior is said to be **conjugate** to the likelihood. 
+
+The **Beta distribution is the conjugate prior** to the Binomial likelihood because:
+
+$$
+\text{Posterior} \propto \text{Likelihood} \times \text{Prior}
+$$
+
+Substituting the Binomial likelihood and the Beta prior:
+
+$$
+P(\theta \mid k, n, \alpha, \beta) \propto \theta^{k + \alpha - 1} (1 - \theta)^{(n - k) + \beta - 1}
+$$
+
+This results in a **Beta posterior distribution** with updated parameters:
+
+$$
+\theta \mid \text{data} \sim \text{Beta}(\alpha + k, \beta + n - k)
+$$
+
+Thus, the Beta distribution and Binomial distribution work well together because the posterior remains in the Beta family, making it easy to update beliefs.
+
+:::

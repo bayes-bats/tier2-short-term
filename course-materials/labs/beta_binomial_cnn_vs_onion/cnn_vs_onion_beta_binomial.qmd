@@ -8,18 +8,27 @@ filters:
   - webr
 ---
 
+## Activity Introduction
+
+The goal of this activity is to explore how prior beliefs, what we think is likely before seeing any data, can influence the conclusions we draw after seeing new evidence: our posterior. To make things interesting, we will use a quiz where you'll try to tell whether a headline came from CNN (a real news site) or The Onion (a fake, satirical news site).
+
+Before taking the quiz, you'll think about how many headlines you expect to guess correctly, and you'll turn that guess into a *prior*, or starting point for your beliefs. Then, you'll update your beliefs using data from actual quiz results and compare your updated beliefs, *posterior*, to those of other types of guessers: someone confident (optimistic), someone unsure (unsure), and someone not very confident (pessimistic) about how many answers they will get correct in the game. 
+
+**Learning objectives**
+
+By the end of the activity you'll be able to:
+* Understand what a prior and posterior are
+* See how beliefs change when we get new infromation
+* Make and interpret plots of different prior and posterior distributions
+* Calculate and compare summary statistics like the mean, mode, and standard deviation of these distributions. 
+
+Let's dive in and see how well we can guess the news from fiction and learn about Bayesian thinking along the way!
+
 ## CNN vs The Onion
 
 CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization. It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.” Another way of putting it - The Onion is “fake news” for entertainment purposes.
 
 In this exercise you will assess your ability to determine real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com).
-
-## Learning Objectives
-
--   Explore the effect of different priors on posteriors
--   Introduce the concept of a prior
--   Plotting priors and posteriors
--   Calculating summary statistics of the prior and posteriors
 
 ## Packages
 
@@ -288,7 +297,7 @@ The CNN vs. The Onion quiz consists of 15 questions. Each question has the same 
 
 Let $\pi$ be the proportion of correct answers you guess right in the CNN vs the Onion quiz. Keeping that number in mind, let's explore in the table below, three different priors from three different people $\pi$
 
-| Good Guesser | Unpredictable Guesser | Poor Guesser |
+| Optimistic | Unsure | Pessimistic |
 |--------------|-----------------------|--------------|
 | Beta(14, 1)  | Beta(1, 1)            | Beta(5, 10)  |
 
@@ -367,6 +376,9 @@ head(cnn_onion)
 <!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
 
 ```{r data from google form, echo = FALSE, message = FALSE, warning = FALSE}
+
+# gs4_auth() - Bates email
+
 cnn_onion_survey <- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")
 
 
@@ -393,7 +405,7 @@ count(cnn_onion_2010, correct)
 
 ## Calculating the summary statistics and plotting the distribution
 
-### The Good Guesser
+### The Optimist
 
 ```{r summarize Colby 2010 good}
 summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
@@ -403,7 +415,7 @@ summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 plot_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 ```
 
-### The Unpredictable Guesser
+### Unsure
 
 ```{r summarize Colby 2010 unpredictable}
 summarize_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
@@ -413,7 +425,7 @@ summarize_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 plot_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 ```
 
-### The Poor Guesser
+### The Pessimist
 
 ```{r summarize Colby 2010 poor}
 summarize_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)
@@ -440,29 +452,29 @@ plot_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)
 ```{r fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
 library(patchwork)
 
-good <- plot_beta_binomial(14, 1, y = 45, n = 150) +
-  labs(title = "Good Guesser")
+optimist <- plot_beta_binomial(14, 1, y = 45, n = 150) +
+  labs(title = "Optimistic")
 
-unpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +
-  labs(title = "Unpredictable Guesser")
+unsure <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Unsure")
 
-poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
-  labs(title = "Poor Guesser")
+pessimist <- plot_beta_binomial(4, 11, y = 45, n = 150) +
+  labs(title = "Pessimistic")
 
-gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
+gridExtra::grid.arrange(optimist, unsure, pessimist, ncol = 3)
 
 ```
 
 ```{webr-r}
 #| context: setup
-good <- plot_beta_binomial(14, 1, y = 45, n = 150) +
-  labs(title = "Good Guesser")
+optimist <- plot_beta_binomial(14, 1, y = 45, n = 150) +
+  labs(title = "Optimistic")
 
-unpredictable <- plot_beta_binomial(1, 1, y = 45, n = 150) +
-  labs(title = "Unpredictable Guesser")
+unsure <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Unsure")
 
-poor <- plot_beta_binomial(4, 11, y = 45, n = 150) +
-  labs(title = "Poor Guesser")
+pessimist <- plot_beta_binomial(4, 11, y = 45, n = 150) +
+  labs(title = "Pessimistic")
 
 ```
 
@@ -474,13 +486,41 @@ library(patchwork)
 your_plot <- plot_beta_binomial(alpha = , beta = , y = 45, n = 150) +
   labs(title = "Your Guess")
 
-gridExtra::grid.arrange(good, unpredictable, poor, your_plot, ncol = 2)
+gridExtra::grid.arrange(optimist, unsure, pessimist, your_plot, ncol = 2)
 
 ```
 
 ## Recap
 
+In this activity, you:
 
+* Made a prediction about how well you'd do on a quiz and turned that into a prior distribution
+
+* Learned about different types of priors: confident, unsure, and pessimistic
+
+* Updated your prior using data from the quiz to get a posterior distribution
+
+* Compared how different priors affect the posterior, even when we see the same data
+
+* Practiced reading and interpreting plots of priors, likelihoods, and posteriors
+
+* Calculated key summary statistics like the mean, mode, and standard deviation
+
+This exercise shows how Bayesian thinking helps us combine what we already believe with new evidence to make better, more informed decisions. And sometimes, it reminds us that even when we think we’re great at telling real news from fake news, the data might say otherwise!
+
+## Reflection
+
+Think about your prior prediction and how it compared to the data.
+
+* How similar or different was your prior to the actual results?
+
+* Did updating your beliefs with data change your thinking? In what way?
+
+* If you had chosen a different prior (e.g., more vague or more confident), how would your posterior have changed?
+
+* What does this activity show about the role of prior knowledge or assumptions in data analysis?
+
+Take a few minutes to jot down your thoughts before share your ideas with a partner or group.
 
 ## Take the quiz
 

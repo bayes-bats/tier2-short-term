@@ -305,16 +305,16 @@ Let $\pi$ be the proportion of correct answers you guess right in the CNN vs the
 
 ```{r echo = FALSE, fig.align='center', fig.height=6.5, fig.width=13}
 
-good <- plot_beta(14, 1) +
-  labs(title = "Good Guesser")
+optimistic <- plot_beta(14, 1) +
+  labs(title = "Optimistic")
 
-unpredictable <- plot_beta(1, 1) +
-  labs(title = "Unpredictable Guesser")
+unsure <- plot_beta(1, 1) +
+  labs(title = "Unsure")
 
-poor <- plot_beta(5, 11) +
-  labs(title = "Poor Guesser")
+pessimistic <- plot_beta(5, 11) +
+  labs(title = "Pessimistic")
 
-gridExtra::grid.arrange(good, unpredictable, poor, ncol = 3)
+gridExtra::grid.arrange(optimistic, unsure, pessimistic, ncol = 3)
 ```
 
 ### Where does your prediction fall?
@@ -331,7 +331,7 @@ my_prediction <- plot_beta(alpha = approx_number_correct, beta = approx_number_w
 my_prediction
 ```
 
-Looking at the graph of your prior, which guesser is your prior most similar to: Good, Unpredictable or Poor?
+Looking at the graph of your prior, which guesser is your prior most similar to: Optimistic, Unsure or Pessimistic?
 
 ### Vocabulary
 
@@ -340,6 +340,9 @@ We often describe priors in terms of how much information they give about the un
 -   **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (i.e. low variability).
 
 -   **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
+
+**Reflection:**
+- How would you classify your prior? Is it informative or vague? Why? 
 
 ## Activity
 

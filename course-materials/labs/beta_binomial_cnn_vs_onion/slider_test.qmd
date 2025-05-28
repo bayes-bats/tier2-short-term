@@ -1,0 +1,28 @@
+---
+title: "WebR Slider Test"
+format: html
+webr: true
+---
+
+## 🎛️ Interactive Beta Distribution
+
+<webr-input id="alpha" label="Alpha" type="slider" min="1" max="20" value="5"></webr-input>
+<webr-input id="beta" label="Beta" type="slider" min="1" max="20" value="5"></webr-input>
+
+```{webr-r}
+alpha <- as.integer(get_input("alpha"))
+beta <- as.integer(get_input("beta"))
+
+df <- data.frame(x = seq(0, 1, length.out = 200))
+df$y <- dbeta(df$x, alpha, beta)
+
+library(ggplot2)
+ggplot(df, aes(x, y)) +
+  geom_line(linewidth = 1.2) +
+  labs(
+    title = paste0("Beta(", alpha, ", ", beta, ")"),
+    x = expression(pi),
+    y = "Density"
+  ) +
+  theme_minimal()
+```

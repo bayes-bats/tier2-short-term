@@ -379,13 +379,13 @@ gridExtra::grid.arrange(optimistic, undecided, pessimistic, ncol = 3)
 
 ### Where does your prediction fall?
 
-When we construct our priors from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: `Beta(approx_number_correct, approx_number_wrong)`.
+When we construct our priors from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: `Beta(approx_num_correct, approx_num_wrong)`.
 
-Returning to your own prediction, replace `approx_number_correct` and `approx_number_wrong` with your predictions.
+Returning to your own prediction, replace `approx_num_correct` and `approx_num_wrong` with your predictions.
 
 ```{webr-r}
 
-my_prediction <- plot_beta(alpha = approx_number_correct, beta = approx_number_wrong) +
+my_prediction <- plot_beta(alpha = approx_num_correct, beta = approx_num_wrong) +
   labs(title = "My Prediction")
 
 my_prediction
@@ -402,12 +402,11 @@ We often describe priors in terms of how much information they give about the un
 
 -   **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
 
-:::
-
 Let's take a look at a very informative prior from someone who is *very optimistic* about individuals getting answers correct.
 
+:::
 
-```webr-rvery optimistic, fig.align = "center", fig.height = 5}
+```webr-r, very optimistic, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 140, beta = 10)  +
   labs(title = "Very Optimistic")
 ```
@@ -459,7 +458,7 @@ Note down how many you get correct. We will compare this with our neighbors and 
 
 Choose the priors that interest you and we will update them as follows: 
 
-:::{.callout-tip}
+
 ## Adding data
 
 :::{.callout-note collapse="true"}
@@ -469,15 +468,11 @@ Let's update the prior with some data. Add the number you got correct and enter 
 :::
 
 :::{.callout-note collapse="true"}
-## Compare with the classmate to your left
+## Compare with your classmates
 
-Let's now update your prior with your classmate to your left's score. Your column should now be 30 to reflect the two quizzes. 
-:::
+* Let's now update your prior with your classmate to your **left's** score. Your column should now be 30 to reflect the two quizzes. 
 
-:::{.callout-note collapse="true"}
-## Compare with the classmate to your left
-
-Let's now update your prior with your classmate to your right's score. Your column should now be 45 to reflect the three quizzes. 
+* Let's now update your prior with your classmate to your **right's** score. Your column should now be 45 to reflect the three quizzes. 
 
 :::
 
@@ -485,25 +480,23 @@ Let's now update your prior with your classmate to your right's score. Your colu
 
 
 :::{.callout-note collapse="true"}
+
 ### The Optimist
 
 ```{webr-r}
-summarize_beta_binomial(alpha = 14, beta = 1, y = number_correct, n = total_questions)
-```
+summarize_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
 
-```webr-rfig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 14, beta = 1, y = number_correct, n = total_questions)
+plot_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
 ```
+:::
 
 :::{.callout-note collapse="true"}
 ### Undecided
 
 ```{webr-r}
-summarize_beta_binomial(alpha = 1, beta = 1, y = number_correct, n = total_questions)
-```
+summarize_beta_binomial(alpha = 1, beta = 1, y = num_correct, n = total_questions)
 
-```{webr-rfig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 1, beta = 1, y = number_correct, n = total_questions)
+plot_beta_binomial(alpha = 1, beta = 1, y = num_correct, n = total_questions)
 ```
 
 :::
@@ -512,26 +505,21 @@ plot_beta_binomial(alpha = 1, beta = 1, y = number_correct, n = total_questions)
 ### The Pessimist
 
 ```{webr-r}
-summarize_beta_binomial(alpha = 4, beta = 11, y = number_correct, n = total_questions)
-```
+summarize_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questions)
 
-```{webr-rfig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 4, beta = 11, y = number_correct, n = total_questions)
+plot_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questions)
 ```
 
 :::
 
-:::
 
 :::{.callout-note collapse="true"}
 ### Very Optimistic
 
 ```{webr-r}
 summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = data_correct, n = total_questions)
-```
 
-```{webr-rfig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 140, beta = 10, y = number_correct, n = total_questions)
+plot_beta_binomial(alpha = 140, beta = 10, y = num_correct, n = total_questions)
 ```
 
 :::
@@ -541,11 +529,9 @@ plot_beta_binomial(alpha = 140, beta = 10, y = number_correct, n = total_questio
 ### Your prior
 
 ```{webr-r}
-summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = number_correct, n = total_questions)
-```
+summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = total_questions)
 
-```{webr-rfig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = number_correct, n = total_questions)
+plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = total_questions)
 ```
 
 :::
@@ -564,7 +550,7 @@ plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = number_correct, n =
 
 ### Add the class or choose from a year in our dataset
 
-```{webr-rsimulated data, echo = FALSE}
+```{r, simulated data, echo = FALSE}
 set.seed(10)
 
 cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15*100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep("Colby", times = 15*100)) # We will replace this with actual data
@@ -574,7 +560,7 @@ head(cnn_onion)
 
 <!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
 
-```{webr-rdata from google form, echo = FALSE, message = FALSE, warning = FALSE}
+```{r, data from google form, echo = FALSE, message = FALSE, warning = FALSE}
 
 # gs4_auth() - Bates email
 
@@ -609,60 +595,49 @@ Calculating the summary statistics and plotting the distribution
 
 ### The Optimist
 
-```{webr-r summarize Colby 2010 optimist}
+```{webr-r, summarize Colby 2010 optimist}
 summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 ```
 
-```{webr-r fig.align = "center", fig.height = 5}
+```{webr-r, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)
 ```
 
 ### Undecided
 
-```{webr-r summarize Colby 2010 undecided}
+```{webr-r, summarize Colby 2010 undecided}
 summarize_beta_binomial(alpha = 1, beta = 1, y = 50, n = 150)
 ```
 
-```{webr-r fig.align = "center", fig.height = 5}
+```{webr-r, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 ```
 
 ### The Pessimist
 
-```{webr-r summarize Colby 2010 pessimist}
+```{webr-r, summarize Colby 2010 pessimist}
 summarize_beta_binomial(alpha = 4, beta = 11, y = 50, n = 150)
 ```
 
-```{webr-r fig.align = "center", fig.height = 5}
+```{webr-r, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)
 ```
 
 
 ### Very Optimistic
 
-```{webr-r summarize Colby 2010 very optimistic}
+```{webr-r, summarize Colby 2010 very optimistic}
 summarize_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
 ```
 
-```{webr-r fig.align = "center", fig.height = 5}
+```{webr-r, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
 ```
 
-### Your Prior
-
-Fill in the alpha and beta shape parameters from your prior.
-
-```{webr-r}
-summarize_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)
-```
-
-```{webr-r}
-plot_beta_binomial(alpha = ___, beta = ___, y = 45, n = 150)
-```
 
 ## Comparison of the priors
 
-```{webr-r fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
+```{webr-r, fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
 library(patchwork)
 
 optimist <- plot_beta_binomial(14, 1, y = 45, n = 150) +
@@ -709,6 +684,7 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, your_pl
 
 ```
 
+:::
 
 ::: {.callout-tip}
 

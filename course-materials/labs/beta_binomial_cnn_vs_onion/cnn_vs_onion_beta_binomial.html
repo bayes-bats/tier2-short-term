@@ -168,7 +168,7 @@ window.Quarto = {
 <section id="activity-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="activity-introduction">Activity Introduction</h2>
 <p>The goal of this activity is to explore how prior beliefs, what we think is likely before seeing any data, can influence the conclusions we draw after seeing new evidence: our posterior. To make things interesting, we will use a quiz where you’ll try to tell whether a headline came from CNN (a real news site) or The Onion (a fake, satirical news site).</p>
-<p>Before taking the quiz, you’ll think about how many headlines you expect to guess correctly, and you’ll turn that guess into a <em>prior</em>, or starting point for your beliefs. Then, you’ll update your beliefs using data from actual quiz results and compare your updated beliefs, <em>posterior</em>, to those of other types of guessers: someone expecting to guess most answers correctly (optimistic), someone unsure whether they will guess many right or wrong (unsure), and someone expecting to guess most answers incorrectly (pessimistic) about how many answers they will get correct in the game.</p>
+<p>Before taking the quiz, you’ll think about how many headlines you expect a person might guess correctly, and you’ll turn that guess into a <em>prior</em>, or starting point for your beliefs. Then, you’ll update your beliefs using data from actual quiz results and compare your updated beliefs, <em>posterior</em>, to priors representing other beliefs: someone expecting a person to guess most answers correctly (optimistic), someone undecided (no prior knowledge) about whether a person will guess many right or wrong (undecided), and someone expecting to guess most answers incorrectly (pessimistic) about how many answers they will get correct in the game.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -184,20 +184,20 @@ Learning objectives
 <li><p>Understand what a prior and posterior are</p></li>
 <li><p>See how beliefs change when we get new information</p></li>
 <li><p>Make and interpret plots of different prior and posterior distributions</p></li>
+<li><p>Calculate and compare summary statistics like the mean, mode, and standard deviation of these distributions.</p></li>
 </ul>
 </div>
 </div>
-<!-- -   Calculate and compare summary statistics like the mean, mode, and standard deviation of these distributions. -->
 <p>Let’s dive in and see how well we can guess the news from fiction and learn about Bayesian thinking along the way!</p>
 </section>
 <section id="cnn-vs-the-onion" class="level2">
 <h2 class="anchored" data-anchor-id="cnn-vs-the-onion">CNN vs The Onion</h2>
 <p>CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization. It is an entertainment newspaper and a website featuring satirical articles reporting on international, national, and local news.” Another way of putting it - The Onion is “fake news” for entertainment purposes.</p>
-<p>In this exercise you will assess your ability to determine real news stories published on <a href="cnn.com">cnn.com</a> from fake news stories published on <a href="theonion.com">theonion.com</a>.</p>
+<p>In this exercise you will assess people’s ability to determine real news stories published on <a href="cnn.com">cnn.com</a> from fake news stories published on <a href="theonion.com">theonion.com</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="the_onion.jpg" class="img-fluid figure-img" alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"></p>
-<figcaption>Front page of the Onion. Photo: Casey Bisson, via Flickr</figcaption>
+<figcaption>Frontpage of the Onion. Photo: Casey Bisson, via Flickr</figcaption>
 </figure>
 </div>
 </section>
@@ -210,51 +210,48 @@ Learning objectives
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googledrive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="code-set-up" class="level1">
+<h1>Code Set Up</h1>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Run this set up code to load the functions first
+Run this set up code to load the functions from Bayes Rule package first
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>The package Bayes Rule is not available in the webr server at this time, so we will include the functions here.</p>
+<!-- ```{webr setup-adam} -->
+<!-- source("https://raw.githubusercontent.com/agmath/Bayes-BATS-tier2/refs/heads/main/bayesrulesfunctions.R") -->
+<!-- print("I've made plot_beta_binomial(), summarise_beta_binomial(), and plot_beta_ci() available to you!") -->
+<!-- ``` -->
 <div class="cell">
 <div>
 <div id="webr-1" class="exercise-cell">
 
 </div>
 <script type="webr-1-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoic291cmNlKFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FnbWF0aC9CYXllcy1CQVRTLXRpZXIyL3JlZnMvaGVhZHMvbWFpbi9iYXllc3J1bGVzZnVuY3Rpb25zLlJcIilcblxucHJpbnQoXCJJJ3ZlIG1hZGUgcGxvdF9iZXRhX2Jpbm9taWFsKCksIHN1bW1hcmlzZV9iZXRhX2Jpbm9taWFsKCksIGFuZCBwbG90X2JldGFfY2koKSBhdmFpbGFibGUgdG8geW91IVwiKSJ9
-</script>
-</div>
-</div>
-<div class="cell">
-<div>
-<div id="webr-2" class="exercise-cell">
-
-</div>
-<script type="webr-2-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoiXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkoZ3JpZEV4dHJhKVxuXG4jJyBQbG90IGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBNb2RlbFxuIydcbiMnIENvbnNpZGVyIGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBtb2RlbCBmb3IgcGFyYW1ldGVyIFxcZXFue1xccGl9IHdpdGggXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIHByaW9yIG9uIFxcZXFue1xccGl9IGFuZCBCaW5vbWlhbCBsaWtlbGlob29kIHdpdGggbiB0cmlhbHNcbiMnIGFuZCB5IHN1Y2Nlc3Nlcy4gR2l2ZW4gaW5mb3JtYXRpb24gb24gdGhlIHByaW9yIChhbHBoYSBhbmQgZGF0YSkgYW5kIGRhdGEgKHkgYW5kIG4pLFxuIycgdGhpcyBmdW5jdGlvbiBwcm9kdWNlcyBhIHBsb3Qgb2YgYW55IGNvbWJpbmF0aW9uIG9mIHRoZSBjb3JyZXNwb25kaW5nIHByaW9yIHBkZiwgXG4jJyBzY2FsZWQgbGlrZWxpaG9vZCBmdW5jdGlvbiwgYW5kIHBvc3RlcmlvciBwZGYuICBBbGwgdGhyZWUgYXJlIGluY2x1ZGVkIGJ5IGRlZmF1bHQuXG4jJ1xuIycgQHBhcmFtIGFscGhhLGJldGEgcG9zaXRpdmUgc2hhcGUgcGFyYW1ldGVycyBvZiB0aGUgcHJpb3IgQmV0YSBtb2RlbFxuIycgQHBhcmFtIHkgb2JzZXJ2ZWQgbnVtYmVyIG9mIHN1Y2Nlc3Nlc1xuIycgQHBhcmFtIG4gb2JzZXJ2ZWQgbnVtYmVyIG9mIHRyaWFsc1xuIycgQHBhcmFtIHByaW9yIGEgbG9naWNhbCB2YWx1ZSBpbmRpY2F0aW5nIHdoZXRoZXIgdGhlIHByaW9yIG1vZGVsIHNob3VsZCBiZSBwbG90dGVkXG4jJyBAcGFyYW0gbGlrZWxpaG9vZCBhIGxvZ2ljYWwgdmFsdWUgaW5kaWNhdGluZyB3aGV0aGVyIHRoZSBzY2FsZWQgbGlrZWxpaG9vZCBzaG91bGQgYmUgcGxvdHRlZFxuIycgQHBhcmFtIHBvc3RlcmlvciBhIGxvZ2ljYWwgdmFsdWUgaW5kaWNhdGluZyB3aGV0aGVyIHBvc3RlcmlvciBtb2RlbCBzaG91bGQgYmUgcGxvdHRlZFxuIydcbiMnIEByZXR1cm4gYSBnZ3Bsb3RcbiMnIEBleHBvcnRcbiMnIEBpbXBvcnQgZ2dwbG90MlxuIycgQGltcG9ydEZyb20gc3RhdHMgZGJldGEgZGJpbm9tIGludGVncmF0ZVxuIycgQGV4YW1wbGVzXG4jJ1xuIycgcGxvdF9iZXRhX2Jpbm9taWFsKGFscGhhID0gMSwgYmV0YSA9IDEzLCB5ID0gMjUsIG4gPSA1MClcbiMnIHBsb3RfYmV0YV9iaW5vbWlhbChhbHBoYSA9IDEsIGJldGEgPSAxMywgeSA9IDI1LCBuID0gNTAsIHBvc3RlcmlvciA9IEZBTFNFKVxuIycgXG5wbG90X2JldGFfYmlub21pYWwgPC0gZnVuY3Rpb24gKGFscGhhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZXRhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB5ID0gTlVMTCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiA9IE5VTEwsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByaW9yID0gVFJVRSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGlrZWxpaG9vZCA9IFRSVUUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBvc3RlcmlvciA9IFRSVUUpe1xuICBpZiAoaXMubnVsbCh5KSB8IGlzLm51bGwobikpXG4gICAgd2FybmluZyhcIlRvIHZpc3VhbGl6ZSB0aGUgcG9zdGVyaW9yLFxuICAgICAgICAgICAgc3BlY2lmeSBkYXRhIHkgYW5kIG5cIilcblxuICBnIDwtIGdncGxvdChkYXRhID0gZGF0YS5mcmFtZSh4ID0gYygwLCAxKSksIGFlcyh4KSkgK1xuICAgIGxhYnMoeCA9IGV4cHJlc3Npb24ocGkpLFxuICAgICAgICAgeSA9IFwiZGVuc2l0eVwiKSArXG4gICAgc2NhbGVfZmlsbF9tYW51YWwoXCJcIixcbiAgICAgICAgICAgICAgICAgICAgICB2YWx1ZXMgPSBjKHByaW9yID0gXCIjZjBlNDQyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBgKHNjYWxlZCkgbGlrZWxpaG9vZGAgPSBcIiMwMDcxYjJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBvc3RlcmlvciA9IFwiIzAwOWU3NFwiKSxcbiAgICAgICAgICAgICAgICAgICAgICBicmVha3MgPSBjKFwicHJpb3JcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiKHNjYWxlZCkgbGlrZWxpaG9vZFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJwb3N0ZXJpb3JcIikpXG4gIFxuICBpZiAocHJpb3IgPT0gVFJVRSkge1xuICAgIGcgPC0gZyArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhKSkgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBkYmV0YSxcbiAgICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNoYXBlMiA9IGJldGEpLFxuICAgICAgICAgICAgICAgICAgICBnZW9tID0gXCJhcmVhXCIsXG4gICAgICAgICAgICAgICAgICAgIGFscGhhID0gMC41LFxuICAgICAgICAgICAgICAgICAgICBhZXMoZmlsbCA9IFwicHJpb3JcIikpXG4gICAgfVxuXG4gIGlmICghaXMubnVsbCh5KSAmICFpcy5udWxsKG4pKSB7XG4gICAgYWxwaGFfcG9zdCA8LSBhbHBoYSArIHlcbiAgICBiZXRhX3Bvc3QgPC0gYmV0YSArIG4gLSB5XG4gICAgeV9kYXRhIDwtIHlcbiAgICBsaWtlX3NjYWxlZCA8LSBmdW5jdGlvbih4KSB7XG4gICAgICBsaWtlX2Z1biA8LSBmdW5jdGlvbih4KSB7XG4gICAgICAgIGRiaW5vbSh4ID0geV9kYXRhLCBzaXplID0gbiwgcHJvYiA9IHgpXG4gICAgICB9XG4gICAgICBzY2FsZV9jIDwtIGludGVncmF0ZShsaWtlX2Z1biwgbG93ZXIgPSAwLCB1cHBlciA9IDEpW1sxXV1cbiAgICAgIGxpa2VfZnVuKHgpL3NjYWxlX2NcbiAgICB9XG4gIH1cbiAgaWYgKCFpcy5udWxsKHkpICYgIWlzLm51bGwobikgJiAobGlrZWxpaG9vZCAhPSBGQUxTRSkpIHtcbiAgICBnIDwtIGcgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBsaWtlX3NjYWxlZCkgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBsaWtlX3NjYWxlZCxcbiAgICAgICAgICAgICAgICAgICAgZ2VvbSA9IFwiYXJlYVwiLFxuICAgICAgICAgICAgICAgICAgICBhbHBoYSA9IDAuNSxcbiAgICAgICAgICAgICAgICAgICAgYWVzKGZpbGwgPSBcIihzY2FsZWQpIGxpa2VsaWhvb2RcIikpXG4gIH1cbiAgaWYgKCFpcy5udWxsKHkpICYgIWlzLm51bGwobikgJiBwb3N0ZXJpb3IgPT0gVFJVRSkge1xuICAgIGcgPC0gZyArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICBhcmdzID0gbGlzdChzaGFwZTEgPSBhbHBoYV9wb3N0LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhX3Bvc3QpKSArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICBhcmdzID0gbGlzdChzaGFwZTEgPSBhbHBoYV9wb3N0LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhX3Bvc3QpLFxuICAgICAgICAgICAgICAgICAgICBnZW9tID0gXCJhcmVhXCIsIGFscGhhID0gMC41LFxuICAgICAgICAgICAgICAgICAgICBhZXMoZmlsbCA9IFwicG9zdGVyaW9yXCIpKVxuICB9XG4gIGdcbn0gIyBlbmQgb2YgZnVuY3Rpb25cblxuIycgQHRpdGxlIFBsb3QgYSBCZXRhIE1vZGVsIGZvciBcXGVxbntcXHBpfSBcbiMnXG4jJyBAZGVzY3JpcHRpb24gUGxvdHMgdGhlIHByb2JhYmlsaXR5IGRlbnNpdHkgZnVuY3Rpb24gKHBkZikgZm9yXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIG1vZGVsIG9mIHZhcmlhYmxlIFxcZXFue1xccGl9LlxuIydcbiMnIEBwYXJhbSBhbHBoYSxiZXRhIHBvc2l0aXZlIHNoYXBlIHBhcmFtZXRlcnMgb2YgdGhlIEJldGEgbW9kZWxcbiMnIEBwYXJhbSBtZWFuLG1vZGUgYSBsb2dpY2FsIHZhbHVlIGluZGljYXRpbmcgd2hldGhlciB0byBkaXNwbGF5IHRoZSBtb2RlbCBtZWFuIGFuZCBtb2RlXG4jJ1xuIycgQHJldHVybiBBIGRlbnNpdHkgcGxvdCBmb3IgdGhlIEJldGEgbW9kZWwuXG4jJyBAZXhwb3J0XG4jJyBAaW1wb3J0IGdncGxvdDJcbiMnIEBpbXBvcnRGcm9tIHN0YXRzIGRiZXRhXG4jJ1xuIycgQGV4YW1wbGVzXG4jJyBwbG90X2JldGEoYWxwaGEgPSAxLCBiZXRhID0gMTIsIG1lYW4gPSBUUlVFLCBtb2RlID0gVFJVRSlcbnBsb3RfYmV0YSA8LSBmdW5jdGlvbihhbHBoYSwgYmV0YSwgbWVhbiA9IEZBTFNFLCBtb2RlID0gRkFMU0Upe1xuICBcbiAgXG4gIHAgPC0gZ2dwbG90KGRhdGEgPSBkYXRhLmZyYW1lKHggPSBjKDAsIDEpKSxcbiAgICAgICAgICAgICAgYWVzKHgpKSArXG4gICAgc3RhdF9mdW5jdGlvbihmdW4gPSBzdGF0czo6ZGJldGEsXG4gICAgICAgICAgICAgICAgICBuID0gMTAxLFxuICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTI9YmV0YSkpICtcbiAgICBsYWJzKHggPSBleHByZXNzaW9uKHBpKSxcbiAgICAgICAgIHkgPSBleHByZXNzaW9uKHBhc3RlKFwiZihcIixwaSxcIilcIikpKVxuXG4gIFxuICBpZiAobWVhbiA9PSBUUlVFICYgbW9kZSA9PSBGQUxTRSl7XG4gICAgbWVhbiA8LSBhbHBoYSAvIChhbHBoYSArIGJldGEpXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1lYW4sIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1lYW4sIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobWVhbiwgYWxwaGEsIGJldGEpLFxuICAgICAgICAgICAgICAgICAgICAgICBsaW5ldHlwZSA9IFwibWVhblwiKSkgK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobWVhbiA9IFwic29saWRcIikpICtcbiAgICAgIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSlcbiAgfVxuICBcbiAgaWYgKG1lYW4gPT0gRkFMU0UgJiBtb2RlID09IFRSVUUpe1xuICAgIG1vZGUgPC0gKGFscGhhIC0gMSkvKGFscGhhICsgYmV0YSAtIDIpXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1vZGUsIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1vZGUsIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobW9kZSwgYWxwaGEsIGJldGEpLCBcbiAgICAgICAgICAgICAgICAgICAgICAgbGluZXR5cGUgPSBcIm1vZGVcIikpK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobW9kZSA9IFwiZGFzaGVkXCIpKSArXG4gICAgICB0aGVtZShsZWdlbmQudGl0bGUgPSBlbGVtZW50X2JsYW5rKCkpXG4gICAgXG4gICAgXG4gIH1cbiAgXG4gIGlmIChtZWFuID09IFRSVUUgJiBtb2RlID09IFRSVUUpe1xuICAgIG1lYW4gPC0gYWxwaGEgLyAoYWxwaGEgKyBiZXRhKVxuICAgIG1vZGUgPC0gKGFscGhhIC0gMSkvKGFscGhhICsgYmV0YSAtIDIpXG4gICAgXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1lYW4sIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1lYW4sIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobWVhbiwgYWxwaGEsIGJldGEpLFxuICAgICAgICAgICAgICAgICAgICAgICBsaW5ldHlwZSA9IFwibWVhblwiKSkgK1xuICAgICAgZ2VvbV9zZWdtZW50KGFlcyh4ID0gbW9kZSwgeSA9IDAsIFxuICAgICAgICAgICAgICAgICAgICAgICB4ZW5kID0gbW9kZSwgXG4gICAgICAgICAgICAgICAgICAgICAgIHllbmQgPSBzdGF0czo6ZGJldGEobW9kZSwgYWxwaGEsIGJldGEpLCBcbiAgICAgICAgICAgICAgICAgICAgICAgbGluZXR5cGUgPSBcIm1vZGVcIikpK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobWVhbiA9IFwic29saWRcIiwgbW9kZSA9IFwiZGFzaGVkXCIpKSArXG4gICAgICB0aGVtZShsZWdlbmQudGl0bGUgPSBlbGVtZW50X2JsYW5rKCkpXG4gIH1cbnBcbn1cblxuIycgQHRpdGxlIFN1bW1hcml6ZSBhIEJldGEtQmlub21pYWwgQmF5ZXNpYW4gbW9kZWxcbiMnIFxuIycgQGRlc2NyaXB0aW9uIENvbnNpZGVyIGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBtb2RlbCBmb3IgcGFyYW1ldGVyIFxcZXFue1xccGl9IHdpdGggXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIHByaW9yIG9uIFxcZXFue1xccGl9IGFuZCBCaW5vbWlhbCBsaWtlbGlob29kIHdpdGggbiB0cmlhbHNcbiMnIGFuZCB5IHN1Y2Nlc3Nlcy4gR2l2ZW4gaW5mb3JtYXRpb24gb24gdGhlIHByaW9yIChhbHBoYSBhbmQgZGF0YSkgYW5kIGRhdGEgKHkgYW5kIG4pLFxuIycgdGhpcyBmdW5jdGlvbiBzdW1tYXJpemVzIHRoZSBtZWFuLCBtb2RlLCBhbmQgdmFyaWFuY2Ugb2YgdGhlIFxuIycgcHJpb3IgYW5kIHBvc3RlcmlvciBCZXRhIG1vZGVscyBvZiBcXGVxbntcXHBpfS5cbiMnIFxuIycgQHBhcmFtIGFscGhhLGJldGEgcG9zaXRpdmUgc2hhcGUgcGFyYW1ldGVycyBvZiB0aGUgcHJpb3IgQmV0YSBtb2RlbFxuIycgQHBhcmFtIHkgbnVtYmVyIG9mIHN1Y2Nlc3Nlc1xuIycgQHBhcmFtIG4gbnVtYmVyIG9mIHRyaWFsc1xuIydcbiMnIEByZXR1cm4gYSBzdW1tYXJ5IHRhYmxlXG4jJyBAZXhwb3J0XG4jJ1xuIycgQGV4YW1wbGVzIFxuIycgc3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSAxLCBiZXRhID0gMTUsIHkgPSAyNSwgbiA9IDUwKVxuc3VtbWFyaXplX2JldGFfYmlub21pYWwgPC0gZnVuY3Rpb24gKGFscGhhLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZXRhLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB5ID0gTlVMTCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiA9IE5VTEwpXG57XG4gIGlmIChpcy5udWxsKHkpIHwgaXMubnVsbChuKSlcbiAgICB3YXJuaW5nKFwiVG8gc3VtbWFyaXplIHRoZSBwb3N0ZXJpb3IsIFxuICAgICAgICAgICAgc3BlY2lmeSBkYXRhIHkgYW5kIG5cIilcbiAgYmV0YV9tZWFuIDwtIGZ1bmN0aW9uKGEsIGIpIHtcbiAgICBhLyhhICsgYilcbiAgfVxuICBiZXRhX21vZGUgPC0gZnVuY3Rpb24oYSwgYikge1xuICAgIGlmKGEgPCAxICYgYiA8MSl7XG4gICAgICBtb2RlIDwtIFwiMCBhbmQgMVwiXG4gICAgfWVsc2UgaWYgKGEgPD0gMSAmIGIgPiAxKXtcbiAgICAgIG1vZGUgPC0gMFxuICAgIH1lbHNlIGlmIChhID4gMSAmIGIgPCAxKXtcbiAgICAgIG1vZGUgPC0gMVxuICAgIH1cbiAgICBlbHNle1xuICAgICAgbW9kZSA8LSAoYSAtIDEpLyhhICsgYiAtIDIpXG4gICAgfVxuICB9XG4gIGJldGFfdmFyIDwtIGZ1bmN0aW9uKGEsIGIpIHtcbiAgICBhICogYi8oKGEgKyBiKV4yICogKGEgKyBiICsgMSkpXG4gIH1cbiAgcHJpb3JfbWVhbiA8LSBiZXRhX21lYW4oYWxwaGEsIGJldGEpXG4gIHByaW9yX21vZGUgPC0gYmV0YV9tb2RlKGFscGhhLCBiZXRhKVxuICBwcmlvcl92YXIgPC0gYmV0YV92YXIoYWxwaGEsIGJldGEpXG4gIHByaW9yX3NkICA8LSBzcXJ0KHByaW9yX3ZhcilcbiAgaWYgKGlzLm51bGwoeSkgJiBpcy5udWxsKG4pKSB7XG4gICAgcmV0dXJuKGRhdGEuZnJhbWUobW9kZWwgPSBjKFwicHJpb3JcIiksIFxuICAgICAgICAgICAgICAgICAgICAgIGFscGhhID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgYmV0YSA9IGJldGEsIFxuICAgICAgICAgICAgICAgICAgICAgIG1lYW4gPSBwcmlvcl9tZWFuLCBcbiAgICAgICAgICAgICAgICAgICAgICBtb2RlID0gcHJpb3JfbW9kZSxcbiAgICAgICAgICAgICAgICAgICAgICB2YXIgPSBwcmlvcl92YXIsXG4gICAgICAgICAgICAgICAgICAgICAgc2QgPSBwcmlvcl9zZCkpXG4gIH1cbiAgZWxzZSB7XG4gICAgcG9zdF9hbHBoYSA8LSB5ICsgYWxwaGFcbiAgICBwb3N0X2JldGEgPC0gbiAtIHkgKyBiZXRhXG4gICAgcG9zdF9tZWFuIDwtIGJldGFfbWVhbihwb3N0X2FscGhhLCBwb3N0X2JldGEpXG4gICAgcG9zdF9tb2RlIDwtIGJldGFfbW9kZShwb3N0X2FscGhhLCBwb3N0X2JldGEpXG4gICAgcG9zdF92YXIgIDwtIGJldGFfdmFyKHBvc3RfYWxwaGEsIHBvc3RfYmV0YSlcbiAgICBwb3N0X3NkICAgPC0gc3FydChwb3N0X3ZhcilcbiAgICByZXR1cm4oZGF0YS5mcmFtZShtb2RlbCA9IGMoXCJwcmlvclwiLCBcInBvc3RlcmlvclwiKSwgXG4gICAgICAgICAgICAgICAgICAgICAgYWxwaGEgPSBjKGFscGhhLCBwb3N0X2FscGhhKSwgXG4gICAgICAgICAgICAgICAgICAgICAgYmV0YSA9IGMoYmV0YSwgcG9zdF9iZXRhKSwgXG4gICAgICAgICAgICAgICAgICAgICAgbWVhbiA9IGMocHJpb3JfbWVhbiwgcG9zdF9tZWFuKSwgXG4gICAgICAgICAgICAgICAgICAgICAgbW9kZSA9IGMocHJpb3JfbW9kZSwgcG9zdF9tb2RlKSwgXG4gICAgICAgICAgICAgICAgICAgICAgdmFyID0gYyhwcmlvcl92YXIsIHBvc3RfdmFyKSxcbiAgICAgICAgICAgICAgICAgICAgICBzZCA9IGMocHJpb3Jfc2QsIHBvc3Rfc2QpKSlcbiAgfVxufVxuXG5jbm5fb25pb24gPC0gZGF0YS5mcmFtZShzdHVkZW50ID0gcmVwKDE6MTAwLCBlYWNoID0gMTUpLCBxdWVzdGlvbiA9IHJlcCgxOjE1LCB0aW1lcyA9IDEwMCksIGNvcnJlY3QgPSByYmlub20obiA9IDE1KjEwMCwgc2l6ZSA9IDEsIHByb2IgPSAwLjY1KSwgeWVhciA9IHJlcCgyMDEwOjIwMjQsIGVhY2ggPSAxNSwgdGltZXMgPSAxMDApLCBpbnN0aXR1dGlvbiA9IHJlcChcIkNvbGJ5XCIsIHRpbWVzID0gMTUqMTAwKSkgIyBXZSB3aWxsIHJlcGxhY2UgdGhpcyB3aXRoIGFjdHVhbCBkYXRhIn0=
+eyJjb2RlIjoiXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkoZ3JpZEV4dHJhKVxuXG4jJyBQbG90IGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBNb2RlbFxuIydcbiMnIENvbnNpZGVyIGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBtb2RlbCBmb3IgcGFyYW1ldGVyIFxcZXFue1xccGl9IHdpdGggXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIHByaW9yIG9uIFxcZXFue1xccGl9IGFuZCBCaW5vbWlhbCBsaWtlbGlob29kIHdpdGggbiB0cmlhbHNcbiMnIGFuZCB5IHN1Y2Nlc3Nlcy4gR2l2ZW4gaW5mb3JtYXRpb24gb24gdGhlIHByaW9yIChhbHBoYSBhbmQgZGF0YSkgYW5kIGRhdGEgKHkgYW5kIG4pLFxuIycgdGhpcyBmdW5jdGlvbiBwcm9kdWNlcyBhIHBsb3Qgb2YgYW55IGNvbWJpbmF0aW9uIG9mIHRoZSBjb3JyZXNwb25kaW5nIHByaW9yIHBkZiwgXG4jJyBzY2FsZWQgbGlrZWxpaG9vZCBmdW5jdGlvbiwgYW5kIHBvc3RlcmlvciBwZGYuICBBbGwgdGhyZWUgYXJlIGluY2x1ZGVkIGJ5IGRlZmF1bHQuXG4jJ1xuIycgQHBhcmFtIGFscGhhLGJldGEgcG9zaXRpdmUgc2hhcGUgcGFyYW1ldGVycyBvZiB0aGUgcHJpb3IgQmV0YSBtb2RlbFxuIycgQHBhcmFtIHkgb2JzZXJ2ZWQgbnVtYmVyIG9mIHN1Y2Nlc3Nlc1xuIycgQHBhcmFtIG4gb2JzZXJ2ZWQgbnVtYmVyIG9mIHRyaWFsc1xuIycgQHBhcmFtIHByaW9yIGEgbG9naWNhbCB2YWx1ZSBpbmRpY2F0aW5nIHdoZXRoZXIgdGhlIHByaW9yIG1vZGVsIHNob3VsZCBiZSBwbG90dGVkXG4jJyBAcGFyYW0gbGlrZWxpaG9vZCBhIGxvZ2ljYWwgdmFsdWUgaW5kaWNhdGluZyB3aGV0aGVyIHRoZSBzY2FsZWQgbGlrZWxpaG9vZCBzaG91bGQgYmUgcGxvdHRlZFxuIycgQHBhcmFtIHBvc3RlcmlvciBhIGxvZ2ljYWwgdmFsdWUgaW5kaWNhdGluZyB3aGV0aGVyIHBvc3RlcmlvciBtb2RlbCBzaG91bGQgYmUgcGxvdHRlZFxuIydcbiMnIEByZXR1cm4gYSBnZ3Bsb3RcbiMnIEBleHBvcnRcbiMnIEBpbXBvcnQgZ2dwbG90MlxuIycgQGltcG9ydEZyb20gc3RhdHMgZGJldGEgZGJpbm9tIGludGVncmF0ZVxuIycgQGV4YW1wbGVzXG4jJ1xuIycgcGxvdF9iZXRhX2Jpbm9taWFsKGFscGhhID0gMSwgYmV0YSA9IDEzLCB5ID0gMjUsIG4gPSA1MClcbiMnIHBsb3RfYmV0YV9iaW5vbWlhbChhbHBoYSA9IDEsIGJldGEgPSAxMywgeSA9IDI1LCBuID0gNTAsIHBvc3RlcmlvciA9IEZBTFNFKVxuIycgXG5wbG90X2JldGFfYmlub21pYWwgPC0gZnVuY3Rpb24gKGFscGhhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZXRhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB5ID0gTlVMTCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiA9IE5VTEwsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByaW9yID0gVFJVRSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGlrZWxpaG9vZCA9IFRSVUUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBvc3RlcmlvciA9IFRSVUUpe1xuICBpZiAoaXMubnVsbCh5KSB8IGlzLm51bGwobikpXG4gICAgd2FybmluZyhcIlRvIHZpc3VhbGl6ZSB0aGUgcG9zdGVyaW9yLFxuICAgICAgICAgICAgc3BlY2lmeSBkYXRhIHkgYW5kIG5cIilcblxuICBnIDwtIGdncGxvdChkYXRhID0gZGF0YS5mcmFtZSh4ID0gYygwLCAxKSksIGFlcyh4KSkgK1xuICAgIGxhYnMoeCA9IGV4cHJlc3Npb24ocGkpLFxuICAgICAgICAgeSA9IFwiZGVuc2l0eVwiKSArXG4gICAgc2NhbGVfZmlsbF9tYW51YWwoXCJcIixcbiAgICAgICAgICAgICAgICAgICAgICB2YWx1ZXMgPSBjKHByaW9yID0gXCIjZjBlNDQyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBgKHNjYWxlZCkgbGlrZWxpaG9vZGAgPSBcIiMwMDcxYjJcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBvc3RlcmlvciA9IFwiIzAwOWU3NFwiKSxcbiAgICAgICAgICAgICAgICAgICAgICBicmVha3MgPSBjKFwicHJpb3JcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiKHNjYWxlZCkgbGlrZWxpaG9vZFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJwb3N0ZXJpb3JcIikpXG4gIFxuICBpZiAocHJpb3IgPT0gVFJVRSkge1xuICAgIGcgPC0gZyArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhKSkgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBkYmV0YSxcbiAgICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNoYXBlMiA9IGJldGEpLFxuICAgICAgICAgICAgICAgICAgICBnZW9tID0gXCJhcmVhXCIsXG4gICAgICAgICAgICAgICAgICAgIGFscGhhID0gMC41LFxuICAgICAgICAgICAgICAgICAgICBhZXMoZmlsbCA9IFwicHJpb3JcIikpXG4gICAgfVxuXG4gIGlmICghaXMubnVsbCh5KSAmICFpcy5udWxsKG4pKSB7XG4gICAgYWxwaGFfcG9zdCA8LSBhbHBoYSArIHlcbiAgICBiZXRhX3Bvc3QgPC0gYmV0YSArIG4gLSB5XG4gICAgeV9kYXRhIDwtIHlcbiAgICBsaWtlX3NjYWxlZCA8LSBmdW5jdGlvbih4KSB7XG4gICAgICBsaWtlX2Z1biA8LSBmdW5jdGlvbih4KSB7XG4gICAgICAgIGRiaW5vbSh4ID0geV9kYXRhLCBzaXplID0gbiwgcHJvYiA9IHgpXG4gICAgICB9XG4gICAgICBzY2FsZV9jIDwtIGludGVncmF0ZShsaWtlX2Z1biwgbG93ZXIgPSAwLCB1cHBlciA9IDEpW1sxXV1cbiAgICAgIGxpa2VfZnVuKHgpL3NjYWxlX2NcbiAgICB9XG4gIH1cbiAgaWYgKCFpcy5udWxsKHkpICYgIWlzLm51bGwobikgJiAobGlrZWxpaG9vZCAhPSBGQUxTRSkpIHtcbiAgICBnIDwtIGcgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBsaWtlX3NjYWxlZCkgK1xuICAgICAgc3RhdF9mdW5jdGlvbihmdW4gPSBsaWtlX3NjYWxlZCxcbiAgICAgICAgICAgICAgICAgICAgZ2VvbSA9IFwiYXJlYVwiLFxuICAgICAgICAgICAgICAgICAgICBhbHBoYSA9IDAuNSxcbiAgICAgICAgICAgICAgICAgICAgYWVzKGZpbGwgPSBcIihzY2FsZWQpIGxpa2VsaWhvb2RcIikpXG4gIH1cbiAgaWYgKCFpcy5udWxsKHkpICYgIWlzLm51bGwobikgJiBwb3N0ZXJpb3IgPT0gVFJVRSkge1xuICAgIGcgPC0gZyArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICBhcmdzID0gbGlzdChzaGFwZTEgPSBhbHBoYV9wb3N0LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhX3Bvc3QpKSArXG4gICAgICBzdGF0X2Z1bmN0aW9uKGZ1biA9IGRiZXRhLFxuICAgICAgICAgICAgICAgICAgICBhcmdzID0gbGlzdChzaGFwZTEgPSBhbHBoYV9wb3N0LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTIgPSBiZXRhX3Bvc3QpLFxuICAgICAgICAgICAgICAgICAgICBnZW9tID0gXCJhcmVhXCIsIGFscGhhID0gMC41LFxuICAgICAgICAgICAgICAgICAgICBhZXMoZmlsbCA9IFwicG9zdGVyaW9yXCIpKVxuICB9XG4gIGdcbn0gIyBlbmQgb2YgZnVuY3Rpb25cblxuIycgQHRpdGxlIFBsb3QgYSBCZXRhIE1vZGVsIGZvciBcXGVxbntcXHBpfSBcbiMnXG4jJyBAZGVzY3JpcHRpb24gUGxvdHMgdGhlIHByb2JhYmlsaXR5IGRlbnNpdHkgZnVuY3Rpb24gKHBkZikgZm9yXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIG1vZGVsIG9mIHZhcmlhYmxlIFxcZXFue1xccGl9LlxuIydcbiMnIEBwYXJhbSBhbHBoYSxiZXRhIHBvc2l0aXZlIHNoYXBlIHBhcmFtZXRlcnMgb2YgdGhlIEJldGEgbW9kZWxcbiMnIEBwYXJhbSBtZWFuLG1vZGUgYSBsb2dpY2FsIHZhbHVlIGluZGljYXRpbmcgd2hldGhlciB0byBkaXNwbGF5IHRoZSBtb2RlbCBtZWFuIGFuZCBtb2RlXG4jJ1xuIycgQHJldHVybiBBIGRlbnNpdHkgcGxvdCBmb3IgdGhlIEJldGEgbW9kZWwuXG4jJyBAZXhwb3J0XG4jJyBAaW1wb3J0IGdncGxvdDJcbiMnIEBpbXBvcnRGcm9tIHN0YXRzIGRiZXRhXG4jJ1xuIycgQGV4YW1wbGVzXG4jJyBwbG90X2JldGEoYWxwaGEgPSAxLCBiZXRhID0gMTIsIG1lYW4gPSBUUlVFLCBtb2RlID0gVFJVRSlcbnBsb3RfYmV0YSA8LSBmdW5jdGlvbihhbHBoYSwgYmV0YSwgbWVhbiA9IEZBTFNFLCBtb2RlID0gRkFMU0Upe1xuICBcbiAgXG4gIHAgPC0gZ2dwbG90KGRhdGEgPSBkYXRhLmZyYW1lKHggPSBjKDAsIDEpKSxcbiAgICAgICAgICAgICAgYWVzKHgpKSArXG4gICAgc3RhdF9mdW5jdGlvbihmdW4gPSBzdGF0czo6ZGJldGEsXG4gICAgICAgICAgICAgICAgICBuID0gMTAxLFxuICAgICAgICAgICAgICAgICAgYXJncyA9IGxpc3Qoc2hhcGUxID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaGFwZTI9YmV0YSkpICtcbiAgICBsYWJzKHggPSBleHByZXNzaW9uKHBpKSxcbiAgICAgICAgIHkgPSBleHByZXNzaW9uKHBhc3RlKFwiZihcIixwaSxcIilcIikpKVxuXG4gIFxuICBpZiAobWVhbiA9PSBUUlVFICYgbW9kZSA9PSBGQUxTRSl7XG4gICAgbWVhbiA8LSBhbHBoYSAvIChhbHBoYSArIGJldGEpXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1lYW4sIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1lYW4sIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobWVhbiwgYWxwaGEsIGJldGEpLFxuICAgICAgICAgICAgICAgICAgICAgICBsaW5ldHlwZSA9IFwibWVhblwiKSkgK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobWVhbiA9IFwic29saWRcIikpICtcbiAgICAgIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSlcbiAgfVxuICBcbiAgaWYgKG1lYW4gPT0gRkFMU0UgJiBtb2RlID09IFRSVUUpe1xuICAgIG1vZGUgPC0gKGFscGhhIC0gMSkvKGFscGhhICsgYmV0YSAtIDIpXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1vZGUsIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1vZGUsIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobW9kZSwgYWxwaGEsIGJldGEpLCBcbiAgICAgICAgICAgICAgICAgICAgICAgbGluZXR5cGUgPSBcIm1vZGVcIikpK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobW9kZSA9IFwiZGFzaGVkXCIpKSArXG4gICAgICB0aGVtZShsZWdlbmQudGl0bGUgPSBlbGVtZW50X2JsYW5rKCkpXG4gICAgXG4gICAgXG4gIH1cbiAgXG4gIGlmIChtZWFuID09IFRSVUUgJiBtb2RlID09IFRSVUUpe1xuICAgIG1lYW4gPC0gYWxwaGEgLyAoYWxwaGEgKyBiZXRhKVxuICAgIG1vZGUgPC0gKGFscGhhIC0gMSkvKGFscGhhICsgYmV0YSAtIDIpXG4gICAgXG4gICAgXG4gICAgcCA8LSBwICtcbiAgICAgIGdlb21fc2VnbWVudChhZXMoeCA9IG1lYW4sIHkgPSAwLCBcbiAgICAgICAgICAgICAgICAgICAgICAgeGVuZCA9IG1lYW4sIFxuICAgICAgICAgICAgICAgICAgICAgICB5ZW5kID0gZGJldGEobWVhbiwgYWxwaGEsIGJldGEpLFxuICAgICAgICAgICAgICAgICAgICAgICBsaW5ldHlwZSA9IFwibWVhblwiKSkgK1xuICAgICAgZ2VvbV9zZWdtZW50KGFlcyh4ID0gbW9kZSwgeSA9IDAsIFxuICAgICAgICAgICAgICAgICAgICAgICB4ZW5kID0gbW9kZSwgXG4gICAgICAgICAgICAgICAgICAgICAgIHllbmQgPSBzdGF0czo6ZGJldGEobW9kZSwgYWxwaGEsIGJldGEpLCBcbiAgICAgICAgICAgICAgICAgICAgICAgbGluZXR5cGUgPSBcIm1vZGVcIikpK1xuICAgICAgc2NhbGVfbGluZXR5cGVfbWFudWFsKHZhbHVlcyA9IGMobWVhbiA9IFwic29saWRcIiwgbW9kZSA9IFwiZGFzaGVkXCIpKSArXG4gICAgICB0aGVtZShsZWdlbmQudGl0bGUgPSBlbGVtZW50X2JsYW5rKCkpXG4gIH1cbnBcbn1cblxuIycgQHRpdGxlIFN1bW1hcml6ZSBhIEJldGEtQmlub21pYWwgQmF5ZXNpYW4gbW9kZWxcbiMnIFxuIycgQGRlc2NyaXB0aW9uIENvbnNpZGVyIGEgQmV0YS1CaW5vbWlhbCBCYXllc2lhbiBtb2RlbCBmb3IgcGFyYW1ldGVyIFxcZXFue1xccGl9IHdpdGggXG4jJyBhIEJldGEoYWxwaGEsIGJldGEpIHByaW9yIG9uIFxcZXFue1xccGl9IGFuZCBCaW5vbWlhbCBsaWtlbGlob29kIHdpdGggbiB0cmlhbHNcbiMnIGFuZCB5IHN1Y2Nlc3Nlcy4gR2l2ZW4gaW5mb3JtYXRpb24gb24gdGhlIHByaW9yIChhbHBoYSBhbmQgZGF0YSkgYW5kIGRhdGEgKHkgYW5kIG4pLFxuIycgdGhpcyBmdW5jdGlvbiBzdW1tYXJpemVzIHRoZSBtZWFuLCBtb2RlLCBhbmQgdmFyaWFuY2Ugb2YgdGhlIFxuIycgcHJpb3IgYW5kIHBvc3RlcmlvciBCZXRhIG1vZGVscyBvZiBcXGVxbntcXHBpfS5cbiMnIFxuIycgQHBhcmFtIGFscGhhLGJldGEgcG9zaXRpdmUgc2hhcGUgcGFyYW1ldGVycyBvZiB0aGUgcHJpb3IgQmV0YSBtb2RlbFxuIycgQHBhcmFtIHkgbnVtYmVyIG9mIHN1Y2Nlc3Nlc1xuIycgQHBhcmFtIG4gbnVtYmVyIG9mIHRyaWFsc1xuIydcbiMnIEByZXR1cm4gYSBzdW1tYXJ5IHRhYmxlXG4jJyBAZXhwb3J0XG4jJ1xuIycgQGV4YW1wbGVzIFxuIycgc3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSAxLCBiZXRhID0gMTUsIHkgPSAyNSwgbiA9IDUwKVxuc3VtbWFyaXplX2JldGFfYmlub21pYWwgPC0gZnVuY3Rpb24gKGFscGhhLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZXRhLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB5ID0gTlVMTCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiA9IE5VTEwpXG57XG4gIGlmIChpcy5udWxsKHkpIHwgaXMubnVsbChuKSlcbiAgICB3YXJuaW5nKFwiVG8gc3VtbWFyaXplIHRoZSBwb3N0ZXJpb3IsIFxuICAgICAgICAgICAgc3BlY2lmeSBkYXRhIHkgYW5kIG5cIilcbiAgYmV0YV9tZWFuIDwtIGZ1bmN0aW9uKGEsIGIpIHtcbiAgICBhLyhhICsgYilcbiAgfVxuICBiZXRhX21vZGUgPC0gZnVuY3Rpb24oYSwgYikge1xuICAgIGlmKGEgPCAxICYgYiA8MSl7XG4gICAgICBtb2RlIDwtIFwiMCBhbmQgMVwiXG4gICAgfWVsc2UgaWYgKGEgPD0gMSAmIGIgPiAxKXtcbiAgICAgIG1vZGUgPC0gMFxuICAgIH1lbHNlIGlmIChhID4gMSAmIGIgPCAxKXtcbiAgICAgIG1vZGUgPC0gMVxuICAgIH1cbiAgICBlbHNle1xuICAgICAgbW9kZSA8LSAoYSAtIDEpLyhhICsgYiAtIDIpXG4gICAgfVxuICB9XG4gIGJldGFfdmFyIDwtIGZ1bmN0aW9uKGEsIGIpIHtcbiAgICBhICogYi8oKGEgKyBiKV4yICogKGEgKyBiICsgMSkpXG4gIH1cbiAgcHJpb3JfbWVhbiA8LSBiZXRhX21lYW4oYWxwaGEsIGJldGEpXG4gIHByaW9yX21vZGUgPC0gYmV0YV9tb2RlKGFscGhhLCBiZXRhKVxuICBwcmlvcl92YXIgPC0gYmV0YV92YXIoYWxwaGEsIGJldGEpXG4gIHByaW9yX3NkICA8LSBzcXJ0KHByaW9yX3ZhcilcbiAgaWYgKGlzLm51bGwoeSkgJiBpcy5udWxsKG4pKSB7XG4gICAgcmV0dXJuKGRhdGEuZnJhbWUobW9kZWwgPSBjKFwicHJpb3JcIiksIFxuICAgICAgICAgICAgICAgICAgICAgIGFscGhhID0gYWxwaGEsXG4gICAgICAgICAgICAgICAgICAgICAgYmV0YSA9IGJldGEsIFxuICAgICAgICAgICAgICAgICAgICAgIG1lYW4gPSBwcmlvcl9tZWFuLCBcbiAgICAgICAgICAgICAgICAgICAgICBtb2RlID0gcHJpb3JfbW9kZSxcbiAgICAgICAgICAgICAgICAgICAgICB2YXIgPSBwcmlvcl92YXIsXG4gICAgICAgICAgICAgICAgICAgICAgc2QgPSBwcmlvcl9zZCkpXG4gIH1cbiAgZWxzZSB7XG4gICAgcG9zdF9hbHBoYSA8LSB5ICsgYWxwaGFcbiAgICBwb3N0X2JldGEgPC0gbiAtIHkgKyBiZXRhXG4gICAgcG9zdF9tZWFuIDwtIGJldGFfbWVhbihwb3N0X2FscGhhLCBwb3N0X2JldGEpXG4gICAgcG9zdF9tb2RlIDwtIGJldGFfbW9kZShwb3N0X2FscGhhLCBwb3N0X2JldGEpXG4gICAgcG9zdF92YXIgIDwtIGJldGFfdmFyKHBvc3RfYWxwaGEsIHBvc3RfYmV0YSlcbiAgICBwb3N0X3NkICAgPC0gc3FydChwb3N0X3ZhcilcbiAgICByZXR1cm4oZGF0YS5mcmFtZShtb2RlbCA9IGMoXCJwcmlvclwiLCBcInBvc3RlcmlvclwiKSwgXG4gICAgICAgICAgICAgICAgICAgICAgYWxwaGEgPSBjKGFscGhhLCBwb3N0X2FscGhhKSwgXG4gICAgICAgICAgICAgICAgICAgICAgYmV0YSA9IGMoYmV0YSwgcG9zdF9iZXRhKSwgXG4gICAgICAgICAgICAgICAgICAgICAgbWVhbiA9IGMocHJpb3JfbWVhbiwgcG9zdF9tZWFuKSwgXG4gICAgICAgICAgICAgICAgICAgICAgbW9kZSA9IGMocHJpb3JfbW9kZSwgcG9zdF9tb2RlKSwgXG4gICAgICAgICAgICAgICAgICAgICAgdmFyID0gYyhwcmlvcl92YXIsIHBvc3RfdmFyKSxcbiAgICAgICAgICAgICAgICAgICAgICBzZCA9IGMocHJpb3Jfc2QsIHBvc3Rfc2QpKSlcbiAgfVxufVxuXG5jbm5fb25pb24gPC0gZGF0YS5mcmFtZShzdHVkZW50ID0gcmVwKDE6MTAwLCBlYWNoID0gMTUpLCBxdWVzdGlvbiA9IHJlcCgxOjE1LCB0aW1lcyA9IDEwMCksIGNvcnJlY3QgPSByYmlub20obiA9IDE1KjEwMCwgc2l6ZSA9IDEsIHByb2IgPSAwLjY1KSwgeWVhciA9IHJlcCgyMDEwOjIwMjQsIGVhY2ggPSAxNSwgdGltZXMgPSAxMDApLCBpbnN0aXR1dGlvbiA9IHJlcChcIkNvbGJ5XCIsIHRpbWVzID0gMTUqMTAwKSkgIyBXZSB3aWxsIHJlcGxhY2UgdGhpcyB3aXRoIGFjdHVhbCBkYXRhIiwiYXR0ciI6eyJldmFsIjp0cnVlLCJlZGl0Ijp0cnVlfX0=
 </script>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section>
 <section id="priors" class="level2">
 <h2 class="anchored" data-anchor-id="priors">Priors</h2>
-<p>The CNN vs.&nbsp;The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines you will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.</p>
-<p>Let <span class="math inline">\(\pi\)</span> be the proportion of correct answers you guess right in the CNN vs the Onion quiz. Keeping that number in mind, let’s explore in the table below, three different priors from three different people <span class="math inline">\(\pi\)</span></p>
+<p>The CNN vs.&nbsp;The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines a person will guess correctly out of 15. You might think about your ability to determine fact from fiction or your familiarity with CNN and The Onion.</p>
+<p>Let <span class="math inline">\(\pi\)</span> be the proportion of correct answers a person guesses right in the CNN vs the Onion quiz. Keeping that number in mind, let’s explore in the table below, three different priors for <span class="math inline">\(\pi\)</span></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Optimistic</th>
-<th>Unsure</th>
+<th>Undecided</th>
 <th>Pessimistic</th>
 </tr>
 </thead>
@@ -280,7 +277,7 @@ eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoiXG5saWJyYXJ5KHRpZHl2ZXJz
 <p><em>Before seeing any new data, I’ve seen about</em> <span class="math inline">\(\alpha - 1\)</span> cases where this went right, and <span class="math inline">\(\beta - 1\)</span> where it didn’t.</p>
 </blockquote>
 <p>This interpretation helps ground priors in real-world expectations.</p>
-<p>When you construct your own prior, you can use your guess for how many headlines you’ll get right as your “prior successes” and how many you’ll get wrong as your “prior failures”. For example, if you are pessimistic about the number you might get correct and think you’ll get 5 out of 15 correct, you might choose:</p>
+<p>When you construct your own prior, you can use your guess for how many headlines you think a person will get right as your “prior successes” and how many they’ll get wrong as your “prior failures”. For example, if you are pessimistic about the number people might get correct and think they’ll get 5 out of 15 correct, you might choose:</p>
 <p><span class="math display">\[
 \text{Beta}(5, 10)
 \]</span></p>
@@ -301,14 +298,14 @@ eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoiXG5saWJyYXJ5KHRpZHl2ZXJz
 <p>When we construct our priors from the Beta distribution, the shape parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect to get correct: <code>Beta(approx_number_correct, approx_number_wrong)</code>.</p>
 <p>Returning to your own prediction, replace <code>approx_number_correct</code> and <code>approx_number_wrong</code> with your predictions.</p>
 <div>
-<div id="webr-3" class="exercise-cell">
+<div id="webr-2" class="exercise-cell">
 
 </div>
-<script type="webr-3-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoiXG5teV9wcmVkaWN0aW9uIDwtIHBsb3RfYmV0YShhbHBoYSA9IGFwcHJveF9udW1iZXJfY29ycmVjdCwgYmV0YSA9IGFwcHJveF9udW1iZXJfd3JvbmcpICtcbiAgbGFicyh0aXRsZSA9IFwiTXkgUHJlZGljdGlvblwiKVxuXG5teV9wcmVkaWN0aW9uIn0=
+<script type="webr-2-contents">
+eyJjb2RlIjoiXG5teV9wcmVkaWN0aW9uIDwtIHBsb3RfYmV0YShhbHBoYSA9IGFwcHJveF9udW1iZXJfY29ycmVjdCwgYmV0YSA9IGFwcHJveF9udW1iZXJfd3JvbmcpICtcbiAgbGFicyh0aXRsZSA9IFwiTXkgUHJlZGljdGlvblwiKVxuXG5teV9wcmVkaWN0aW9uIiwiYXR0ciI6eyJldmFsIjp0cnVlLCJlZGl0Ijp0cnVlfX0=
 </script>
 </div>
-<p>Looking at the graph of your prior, which guesser is your prior most similar to: Optimistic, Unsure or Pessimistic?</p>
+<p>Looking at the graph of your prior, which guesser is your prior most similar to: Optimistic, Undecided or Pessimistic?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -326,6 +323,8 @@ Vocabulary
 </ul>
 </div>
 </div>
+<p>Let’s take a look at a very informative prior from someone who is <em>very optimistic</em> about individuals getting answers correct.</p>
+<p><code>webr-rvery optimistic, fig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 140, beta = 10)  +   labs(title = "Very Optimistic")</code></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -337,19 +336,17 @@ Reflection:
 </div>
 <div class="callout-body-container callout-body">
 <ul>
+<li>What do you notice about the very optimistic prior. Is it more informative? What do you notice about the plot?</li>
 <li>How would you classify your prior? Is it informative or vague? Why?</li>
 </ul>
 </div>
 </div>
 </section>
 </section>
-<section id="activity" class="level2">
-<h2 class="anchored" data-anchor-id="activity">Activity</h2>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
+<section id="updating-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="updating-with-data">Updating with data</h2>
 <ul>
-<li><p>Our data with the results from the quiz in a data frame called <code>cnn_onion</code>.</p></li>
-<li><p>Based on the observed data, we will update the posterior for our three guessers and our own prior.</p></li>
+<li><p>Based on observed data, we will update the posterior for our four priors and our own prior. We will do this with our own score, our neighbor’s scores, and the class or dataset score.</p></li>
 <li><p>Next, we calculate the summary statistics for the prior and posterior for all four priors using the function <code>summarize_beta_binomial</code>:</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -378,164 +375,319 @@ summarize_beta_binomial
 <li><p>Lastly, we examine the effect of different priors on the posterior.</p></li>
 </ul>
 </section>
-<section id="quiz-scores" class="level3">
-<h3 class="anchored" data-anchor-id="quiz-scores">Quiz scores</h3>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  student question correct year institution
-1       1        1       1 2010       Colby
-2       1        2       1 2010       Colby
-3       1        3       1 2010       Colby
-4       1        4       0 2010       Colby
-5       1        5       1 2010       Colby
-6       1        6       1 2010       Colby</code></pre>
+<section id="take-the-quiz" class="level2">
+<h2 class="anchored" data-anchor-id="take-the-quiz">Take the quiz</h2>
+<p>Let’s take the quiz and add our data to the dataset of trials and successes for a person taking this quiz.</p>
+<p>Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our <a href="https://forms.gle/eVvFHZQwvtsBYa9r9">google form</a>:</p>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<p>Note down how many you get correct. We will compare this with our neighbors and pool data from the class.</p>
+<p>Choose the priors that interest you and we will update them as follows:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Adding data
 </div>
 </div>
-<!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
-<p>Let’s take a look at the student results from 2010.</p>
+<div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Add your data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let’s update the prior with some data. Add the number you got correct and enter your prior from before. Your n column should be 15 to reflect that you answered 15 questions.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Compare with the classmate to your left
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let’s now update your prior with your classmate to your left’s score. Your column should now be 30 to reflect the two quizzes.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Compare with the classmate to your left
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let’s now update your prior with your classmate to your right’s score. Your column should now be 45 to reflect the three quizzes.</p>
+</div>
+</div>
+</div>
+<section id="calculating-the-summary-statistics-and-plotting-the-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-summary-statistics-and-plotting-the-distribution">Calculating the summary statistics and plotting the distribution</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Optimist
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div id="webr-3" class="exercise-cell">
+
+</div>
+<script type="webr-3-contents">
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSAxNCwgYmV0YSA9IDEsIHkgPSBudW1iZXJfY29ycmVjdCwgbiA9IHRvdGFsX3F1ZXN0aW9ucykiLCJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9fQ==
+</script>
+</div>
+<p><code>webr-rfig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 14, beta = 1, y = number_correct, n = total_questions)</code></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Undecided
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div>
 <div id="webr-4" class="exercise-cell">
 
 </div>
 <script type="webr-4-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoiXG5jbm5fb25pb25fMjAxMCA8LSBjbm5fb25pb24gfD5cbiAgZmlsdGVyKHllYXIgPT0gMjAxMCxcbiAgICAgICAgIHN0dWRlbnQgJWluJSBjKDE6MTApKVxuXG5jb3VudChjbm5fb25pb25fMjAxMCwgY29ycmVjdCkifQ==
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSAxLCBiZXRhID0gMSwgeSA9IG51bWJlcl9jb3JyZWN0LCBuID0gdG90YWxfcXVlc3Rpb25zKSIsImF0dHIiOnsiZXZhbCI6dHJ1ZSwiZWRpdCI6dHJ1ZX19
 </script>
 </div>
-</section>
-</section>
-<section id="calculating-the-summary-statistics-and-plotting-the-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="calculating-the-summary-statistics-and-plotting-the-distribution">Calculating the summary statistics and plotting the distribution</h2>
-<section id="the-optimist" class="level3">
-<h3 class="anchored" data-anchor-id="the-optimist">The Optimist</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">14</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean      mode         var         sd
-1     prior    14    1 0.9333333 1.0000000 0.003888889 0.06236096
-2 posterior    59  106 0.3575758 0.3558282 0.001383827 0.03719983</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">14</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
+<p><code>{webr-rfig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 1, beta = 1, y = number_correct, n = total_questions)</code></p>
 </div>
 </div>
 </div>
-</section>
-<section id="unsure" class="level3">
-<h3 class="anchored" data-anchor-id="unsure">Unsure</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean mode         var         sd
-1     prior     1    1 0.5000000  NaN 0.083333333 0.28867513
-2 posterior    46  106 0.3026316  0.3 0.001379384 0.03714006</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+The Pessimist
 </div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-</div>
-</div>
-</section>
-<section id="the-pessimist" class="level3">
-<h3 class="anchored" data-anchor-id="the-pessimist">The Pessimist</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">4</span>, <span class="at">beta =</span> <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean      mode         var         sd
-1     prior     4   11 0.2666667 0.2307692 0.012222222 0.11055416
-2 posterior    49  116 0.2969697 0.2944785 0.001257703 0.03546411</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">4</span>, <span class="at">beta =</span> <span class="dv">11</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="very-optimistic" class="level3">
-<h3 class="anchored" data-anchor-id="very-optimistic">Very Optimistic</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">140</span>, <span class="at">beta =</span> <span class="dv">10</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model alpha beta      mean      mode          var         sd
-1     prior   140   10 0.9333333 0.9391892 0.0004120677 0.02029945
-2 posterior   185  115 0.6166667 0.6174497 0.0007853451 0.02802401</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_beta_binomial</span>(<span class="at">alpha =</span> <span class="dv">140</span>, <span class="at">beta =</span> <span class="dv">10</span>, <span class="at">y =</span> <span class="dv">45</span>, <span class="at">n =</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="your-turn" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn">Your turn</h3>
-<p>Fill in the alpha and beta shape parameters from your prior.</p>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div>
 <div id="webr-5" class="exercise-cell">
 
 </div>
 <script type="webr-5-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSBfX18sIGJldGEgPSBfX18sIHkgPSA0NSwgbiA9IDE1MCkifQ==
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSA0LCBiZXRhID0gMTEsIHkgPSBudW1iZXJfY29ycmVjdCwgbiA9IHRvdGFsX3F1ZXN0aW9ucykiLCJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9fQ==
 </script>
 </div>
+<p><code>{webr-rfig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 4, beta = 11, y = number_correct, n = total_questions)</code></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Very Optimistic
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div>
 <div id="webr-6" class="exercise-cell">
 
 </div>
 <script type="webr-6-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoicGxvdF9iZXRhX2Jpbm9taWFsKGFscGhhID0gX19fLCBiZXRhID0gX19fLCB5ID0gNDUsIG4gPSAxNTApIn0=
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSB5b3VyX2FscGhhLCBiZXRhID0geW91cl9iZXRhLCB5ID0gZGF0YV9jb3JyZWN0LCBuID0gdG90YWxfcXVlc3Rpb25zKSIsImF0dHIiOnsiZXZhbCI6dHJ1ZSwiZWRpdCI6dHJ1ZX19
+</script>
+</div>
+<p><code>{webr-rfig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 140, beta = 10, y = number_correct, n = total_questions)</code></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Your prior
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSB5b3VyX2FscGhhLCBiZXRhID0geW91cl9iZXRhLCB5ID0gbnVtYmVyX2NvcnJlY3QsIG4gPSB0b3RhbF9xdWVzdGlvbnMpIiwiYXR0ciI6eyJldmFsIjp0cnVlLCJlZGl0Ijp0cnVlfX0=
+</script>
+</div>
+<p><code>{webr-rfig.align = "center", fig.height = 5} plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = number_correct, n = total_questions)</code></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reflection
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>How does observing more data affect the shape of the posterior?</p></li>
+<li><p>What happens to the posterior mean as you observe more correct or incorrect outcomes?</p></li>
+<li><p>In what ways does the posterior reflect a compromise between prior belief and observed data?</p></li>
+</ul>
+</div>
+</div>
+<section id="add-the-class-or-choose-from-a-year-in-our-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="add-the-class-or-choose-from-a-year-in-our-dataset">Add the class or choose from a year in our dataset</h3>
+<p>```{webr-rsimulated data, echo = FALSE} set.seed(10)</p>
+<p>cnn_onion &lt;- data.frame(student = rep(1:100, each = 15), question = rep(1:15, times = 100), correct = rbinom(n = 15<em>100, size = 1, prob = 0.65), year = rep(2010:2024, each = 15, times = 100), institution = rep(“Colby”, times = 15</em>100)) # We will replace this with actual data</p>
+<p>head(cnn_onion)</p>
+<pre><code>
+&lt;!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. --&gt;
+
+```{webr-rdata from google form, echo = FALSE, message = FALSE, warning = FALSE}
+
+# gs4_auth() - Bates email
+
+cnn_onion_survey &lt;- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")
+
+
+cnn_onion_survey_clean &lt;- cnn_onion_survey |&gt;
+  pivot_longer(cols = starts_with("Question"), names_to = "Question", names_prefix = "Question ", values_to = "Response") |&gt;
+  mutate(`Correct` = case_when(Question %in% c(1,3:4, 6, 8:10, 12:13, 15) &amp; Response == "CNN" ~ 1,
+                                      Question %in% c(2, 5, 7, 11, 14) &amp; Response == "The Onion" ~ 1,
+                                      TRUE ~ 0)) |&gt;
+  select(Institution, Year, Score, `Correct Guesses`, Question, Correct) |&gt;
+  janitor::clean_names()
+
+</code></pre>
+</section>
+</section>
+<section id="more-quiz-data" class="level2">
+<h2 class="anchored" data-anchor-id="more-quiz-data">More Quiz Data</h2>
+<p>Let’s take a look at the student results from 2010.</p>
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJjb2RlIjoiXG5jbm5fb25pb25fMjAxMCA8LSBjbm5fb25pb24gfD5cbiAgZmlsdGVyKHllYXIgPT0gMjAxMCxcbiAgICAgICAgIHN0dWRlbnQgJWluJSBjKDE6MTApKVxuXG5jb3VudChjbm5fb25pb25fMjAxMCwgY29ycmVjdCkiLCJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9fQ==
+</script>
+</div>
+<p>Calculating the summary statistics and plotting the distribution</p>
+<section id="the-optimist-1" class="level3">
+<h3 class="anchored" data-anchor-id="the-optimist-1">The Optimist</h3>
+<pre class="{webr-r summarize Colby 2010 optimist}"><code>summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)</code></pre>
+<p><code>{webr-r fig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)</code></p>
+</section>
+<section id="undecided-1" class="level3">
+<h3 class="anchored" data-anchor-id="undecided-1">Undecided</h3>
+<pre class="{webr-r summarize Colby 2010 undecided}"><code>summarize_beta_binomial(alpha = 1, beta = 1, y = 50, n = 150)</code></pre>
+<p><code>{webr-r fig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)</code></p>
+</section>
+<section id="the-pessimist-1" class="level3">
+<h3 class="anchored" data-anchor-id="the-pessimist-1">The Pessimist</h3>
+<pre class="{webr-r summarize Colby 2010 pessimist}"><code>summarize_beta_binomial(alpha = 4, beta = 11, y = 50, n = 150)</code></pre>
+<p><code>{webr-r fig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)</code></p>
+</section>
+<section id="very-optimistic-1" class="level3">
+<h3 class="anchored" data-anchor-id="very-optimistic-1">Very Optimistic</h3>
+<pre class="{webr-r summarize Colby 2010 very optimistic}"><code>summarize_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)</code></pre>
+<p><code>{webr-r fig.align = "center", fig.height = 5} plot_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)</code></p>
+</section>
+<section id="your-prior-1" class="level3">
+<h3 class="anchored" data-anchor-id="your-prior-1">Your Prior</h3>
+<p>Fill in the alpha and beta shape parameters from your prior.</p>
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJjb2RlIjoic3VtbWFyaXplX2JldGFfYmlub21pYWwoYWxwaGEgPSBfX18sIGJldGEgPSBfX18sIHkgPSA0NSwgbiA9IDE1MCkiLCJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9fQ==
+</script>
+</div>
+<div>
+<div id="webr-10" class="exercise-cell">
+
+</div>
+<script type="webr-10-contents">
+eyJjb2RlIjoicGxvdF9iZXRhX2Jpbm9taWFsKGFscGhhID0gX19fLCBiZXRhID0gX19fLCB5ID0gNDUsIG4gPSAxNTApIiwiYXR0ciI6eyJldmFsIjp0cnVlLCJlZGl0Ijp0cnVlfX0=
 </script>
 </div>
 </section>
 </section>
 <section id="comparison-of-the-priors" class="level2">
 <h2 class="anchored" data-anchor-id="comparison-of-the-priors">Comparison of the priors</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="cnn_vs_onion_beta_binomial_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
-</figure>
-</div>
-</div>
-</div>
-<div>
-<div id="webr-7" class="exercise-cell">
+<p>```{webr-r fig.align = “center”, fig.width = 15, echo = FALSE, fig.height=5} library(patchwork)</p>
+<p>optimist &lt;- plot_beta_binomial(14, 1, y = 45, n = 150) + labs(title = “Optimistic”)</p>
+<p>undecided &lt;- plot_beta_binomial(1, 1, y = 45, n = 150) + labs(title = “Undecided”)</p>
+<p>pessimist &lt;- plot_beta_binomial(4, 11, y = 45, n = 150) + labs(title = “Pessimistic”)</p>
+<p>very_optimistic &lt;- plot_beta_binomial(140, 10, y = 45, n = 150) + labs(title = “Very Optimistic”)</p>
+<p>gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, ncol = 2)</p>
+<pre><code>
+```{webr-r}
+#| context: setup
+optimist &lt;- plot_beta_binomial(14, 1, y = 45, n = 150) +
+  labs(title = "Optimistic")
 
-</div>
-<script type="webr-7-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWUsImNvbnRleHQiOiJzZXR1cCJ9LCJjb2RlIjoib3B0aW1pc3QgPC0gcGxvdF9iZXRhX2Jpbm9taWFsKDE0LCAxLCB5ID0gNDUsIG4gPSAxNTApICtcbiAgbGFicyh0aXRsZSA9IFwiT3B0aW1pc3RpY1wiKVxuXG51bnN1cmUgPC0gcGxvdF9iZXRhX2Jpbm9taWFsKDEsIDEsIHkgPSA0NSwgbiA9IDE1MCkgK1xuICBsYWJzKHRpdGxlID0gXCJVbnN1cmVcIilcblxucGVzc2ltaXN0IDwtIHBsb3RfYmV0YV9iaW5vbWlhbCg0LCAxMSwgeSA9IDQ1LCBuID0gMTUwKSArXG4gIGxhYnModGl0bGUgPSBcIlBlc3NpbWlzdGljXCIpXG5cbnZlcnlfb3B0aW1pc3RpYyA8LSBwbG90X2JldGFfYmlub21pYWwoMTQwLCAxMCwgeSA9IDQ1LCBuID0gMTUwKSArXG4gIGxhYnModGl0bGUgPSBcIlZlcnkgT3B0aW1pc3RpY1wiKSJ9
-</script>
-</div>
+undecided &lt;- plot_beta_binomial(1, 1, y = 45, n = 150) +
+  labs(title = "Undecided")
+
+pessimist &lt;- plot_beta_binomial(4, 11, y = 45, n = 150) +
+  labs(title = "Pessimistic")
+
+very_optimistic &lt;- plot_beta_binomial(140, 10, y = 45, n = 150) +
+  labs(title = "Very Optimistic")
+</code></pre>
 <p>Fill in the gaps to add your alpha and beta shape parameters with your guess:</p>
 <div>
-<div id="webr-8" class="exercise-cell">
+<div id="webr-11" class="exercise-cell">
 
 </div>
-<script type="webr-8-contents">
-eyJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9LCJjb2RlIjoibGlicmFyeShwYXRjaHdvcmspXG5cbnlvdXJfcGxvdCA8LSBwbG90X2JldGFfYmlub21pYWwoYWxwaGEgPSAsIGJldGEgPSAsIHkgPSA0NSwgbiA9IDE1MCkgK1xuICBsYWJzKHRpdGxlID0gXCJZb3VyIEd1ZXNzXCIpXG5cbmdyaWRFeHRyYTo6Z3JpZC5hcnJhbmdlKG9wdGltaXN0LCB1bnN1cmUsIHBlc3NpbWlzdCwgdmVyeV9vcHRpbWlzdGljLCB5b3VyX3Bsb3QsIG5jb2wgPSAyKSJ9
+<script type="webr-11-contents">
+eyJjb2RlIjoibGlicmFyeShwYXRjaHdvcmspXG5cbnlvdXJfcGxvdCA8LSBwbG90X2JldGFfYmlub21pYWwoYWxwaGEgPSB5b3VyX2FscGhhLCBiZXRhID0geW91cl9iZXRhLCB5ID0gNDUsIG4gPSAxNTApICtcbiAgbGFicyh0aXRsZSA9IFwiWW91ciBQcmlvclwiKVxuXG5ncmlkRXh0cmE6OmdyaWQuYXJyYW5nZShvcHRpbWlzdCwgdW5kZWNpZGVkLCBwZXNzaW1pc3QsIHZlcnlfb3B0aW1pc3RpYywgeW91cl9wbG90LCBuY29sID0gMikiLCJhdHRyIjp7ImV2YWwiOnRydWUsImVkaXQiOnRydWV9fQ==
 </script>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -551,6 +703,7 @@ Reflection
 <ul>
 <li><p>Inspecting the updated posteriors, how did the posteriors change or differ based on the respective priors?</p></li>
 <li><p>What happened when you had a more informative prior, e.g.&nbsp;The Very Optimistic?</p></li>
+<li><p>Look back at the summary statistics that you calculated for the distributions. Choose one of the posteriors “Optimistic, Pessimistic, Undecided, Very Optimistic” and compare it with your own. What do each of the summary statistics (mean, mode, standard deviation) tell you about the probability of success after seeing the data?</p></li>
 </ul>
 </div>
 </div>
@@ -567,14 +720,14 @@ Recap
 <p>In this activity, you:</p>
 <ul>
 <li><p>Made a prediction about how well you’d do on a quiz and turned that into a prior distribution</p></li>
-<li><p>Learned about different types of priors: confident, unsure, and pessimistic</p></li>
+<li><p>Learned about different types of priors: confident, undecided, and pessimistic</p></li>
 <li><p>Updated your prior using data from the quiz to get a posterior distribution</p></li>
 <li><p>Compared how different priors affect the posterior, even when we see the same data</p></li>
 <li><p>Practiced reading and interpreting plots of priors and posteriors</p></li>
+<li><p>Calculated key summary statistics like the mean, mode, and standard deviation</p></li>
 </ul>
 </div>
 </div>
-<!-- -   Calculated key summary statistics like the mean, mode, and standard deviation -->
 <p>This exercise shows how Bayesian thinking helps us combine what we already believe with new evidence to make better, more informed decisions. And sometimes, it reminds us that even when we think we’re great at telling real news from fake news, the data might say otherwise!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -597,16 +750,13 @@ Reflection
 </div>
 </div>
 </section>
-<section id="take-the-quiz" class="level2">
-<h2 class="anchored" data-anchor-id="take-the-quiz">Take the quiz</h2>
-<p>Now that we’ve updated our posteriors, let’s take the quiz and add our data to the dataset of trials and successes.</p>
-<p>Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our <a href="https://forms.gle/eVvFHZQwvtsBYa9r9">google form</a>:</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+</div>
+</div>
 <script type="webr-data">
-eyJwYWNrYWdlcyI6eyJyZXBvcyI6W10sInBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyJdfSwib3B0aW9ucyI6eyJiYXNlVXJsIjoiaHR0cHM6Ly93ZWJyLnItd2FzbS5vcmcvdjAuNC4yLyJ9LCJyZW5kZXJfZGYiOiJkZWZhdWx0In0=
+eyJyZW5kZXJfZGYiOiJkZWZhdWx0IiwicGFja2FnZXMiOnsicmVwb3MiOltdLCJwa2dzIjpbImV2YWx1YXRlIiwia25pdHIiLCJodG1sdG9vbHMiXX0sIm9wdGlvbnMiOnsiYmFzZVVybCI6Imh0dHBzOi8vd2Vici5yLXdhc20ub3JnL3YwLjQuMi8ifX0=
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV84O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC04IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzggPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV84ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl84LCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7InNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNztcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTctY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNyA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNywge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzY7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4iLCJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7InNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzYsIHt9KTtcbiIsImNlbGxOYW1lIjoid2Vici02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV81O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC01IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV81ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl81LCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7InNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNCwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4iLCJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7InNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzMgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzMsIHt9KTtcbiIsImNlbGxOYW1lIjoid2Vici0zIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8yO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzIgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8yID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yLCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7InNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMSwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJzb3VyY2UiOiJ3ZWJST2pzID0ge1xuICBjb25zdCB7IFdlYlIsIENoYW5uZWxUeXBlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lLldlYlI7XG4gIGNvbnN0IHtcbiAgICBXZWJSRXZhbHVhdG9yLFxuICAgIFdlYlJFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBSLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGhcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIHdlYlIgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgLy8gVXNlIFBvc3RNZXNzYWdlIGNoYW5uZWwgZm9yIGFzeW5jIGNvbW11bmljYXRpb25cbiAgLy8gV2UgZG8gbm90IGV4cGVjdCB0byB0YWtlIG5lc3RlZCBwcm9tcHQgaW5wdXQgaW4gUXVhcnRvIExpdmUgY2VsbHNcbiAgZGF0YS5vcHRpb25zLmNoYW5uZWxUeXBlID0gQ2hhbm5lbFR5cGUuUG9zdE1lc3NhZ2U7XG5cbiAgLy8gSW5pdGlhbGlzZSB3ZWJSIGFuZCBzZXR1cCBmb3IgUiBjb2RlIGV2YWx1YXRpb25cbiAgbGV0IHdlYlJQcm9taXNlID0gKGFzeW5jICh3ZWJSKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyB3ZWJSYDtcbiAgICBhd2FpdCB3ZWJSLmluaXQoKTtcblxuICAgIC8vIEluc3RhbGwgcHJvdmlkZWQgbGlzdCBvZiBwYWNrYWdlc1xuICAgIC8vIEVuc3VyZSB3ZWJSIGRlZmF1bHQgcmVwbyBpcyBpbmNsdWRlZFxuICAgIGRhdGEucGFja2FnZXMucmVwb3MucHVzaChcImh0dHBzOi8vcmVwby5yLXdhc20ub3JnXCIpXG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gd2ViUi5ldmFsUlZvaWQoYFxuICAgICAgICB3ZWJyOjppbnN0YWxsKHBrZywgcmVwb3MgPSByZXBvcylcbiAgICAgICAgbGlicmFyeShwa2csIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSlcbiAgICAgIGAsIHsgZW52OiB7XG4gICAgICAgIHBrZzogcGtnLFxuICAgICAgICByZXBvczogZGF0YS5wYWNrYWdlcy5yZXBvcyxcbiAgICAgIH19KTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHdlYlIuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoIWUubWVzc2FnZS5pbmNsdWRlcyhcIkZTIGVycm9yXCIpKSB7XG4gICAgICAgICAgICB0aHJvdyBlO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgcmV0dXJuIGF3YWl0IHdlYlIuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5zdGFsbGluZyB3ZWJSIHNoaW1zYDtcbiAgICBhd2FpdCB3ZWJSLmV2YWxSVm9pZChgd2Vicjo6c2hpbV9pbnN0YWxsKClgKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgV2ViUiBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBSKHdlYlIsIGRhdGEpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHdlYlI7XG4gIH0pKG5ldyBXZWJSKGRhdGEub3B0aW9ucykpO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCB3ZWJSID0gYXdhaXQgd2ViUlByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFdlYlJFdmFsdWF0b3Iod2ViUiwgY29udGV4dClcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBwcm9jZXNzLFxuICAgIHdlYlJQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICB9O1xufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifV19
+eyJjb250ZW50cyI6W3siaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8xMTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTEiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTExLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzExID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMSwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTExIiwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8xMDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTAiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0xMC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTEwLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzEwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMCwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTEwIiwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV85ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl85LCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItOSIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfOCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfOCwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4iLCJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTciLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzcgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzcsIHt9KTtcbiIsImNlbGxOYW1lIjoid2Vici03IiwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV82O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC02IiwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzYgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV82ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl82LCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItNiIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNTtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtNSIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfNSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNSwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTUiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzQ7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4iLCJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzQsIHt9KTtcbiIsImNlbGxOYW1lIjoid2Vici00IiwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8zO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIiwiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0zIiwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8zID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zLCB7fSk7XG4iLCJjZWxsTmFtZSI6IndlYnItMyIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiIsImNlbGxOYW1lIjoid2Vici13aWRnZXQtMiIsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMiwge30pO1xuIiwiY2VsbE5hbWUiOiJ3ZWJyLTIiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0In0seyJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4iLCJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTEiLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQifSx7ImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici0xLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzEgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzEsIHt9KTtcbiIsImNlbGxOYW1lIjoid2Vici0xIiwibWV0aG9kTmFtZSI6ImludGVycHJldCJ9LHsiaW5saW5lIjpmYWxzZSwic291cmNlIjoid2ViUk9qcyA9IHtcbiAgY29uc3QgeyBXZWJSLCBDaGFubmVsVHlwZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZS5XZWJSO1xuICBjb25zdCB7XG4gICAgV2ViUkV2YWx1YXRvcixcbiAgICBXZWJSRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyB3ZWJSIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIC8vIFVzZSBQb3N0TWVzc2FnZSBjaGFubmVsIGZvciBhc3luYyBjb21tdW5pY2F0aW9uXG4gIC8vIFdlIGRvIG5vdCBleHBlY3QgdG8gdGFrZSBuZXN0ZWQgcHJvbXB0IGlucHV0IGluIFF1YXJ0byBMaXZlIGNlbGxzXG4gIGRhdGEub3B0aW9ucy5jaGFubmVsVHlwZSA9IENoYW5uZWxUeXBlLlBvc3RNZXNzYWdlO1xuXG4gIC8vIEluaXRpYWxpc2Ugd2ViUiBhbmQgc2V0dXAgZm9yIFIgY29kZSBldmFsdWF0aW9uXG4gIGxldCB3ZWJSUHJvbWlzZSA9IChhc3luYyAod2ViUikgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgd2ViUmA7XG4gICAgYXdhaXQgd2ViUi5pbml0KCk7XG5cbiAgICAvLyBJbnN0YWxsIHByb3ZpZGVkIGxpc3Qgb2YgcGFja2FnZXNcbiAgICAvLyBFbnN1cmUgd2ViUiBkZWZhdWx0IHJlcG8gaXMgaW5jbHVkZWRcbiAgICBkYXRhLnBhY2thZ2VzLnJlcG9zLnB1c2goXCJodHRwczovL3JlcG8uci13YXNtLm9yZ1wiKVxuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIHdlYlIuZXZhbFJWb2lkKGBcbiAgICAgICAgd2Vicjo6aW5zdGFsbChwa2csIHJlcG9zID0gcmVwb3MpXG4gICAgICAgIGxpYnJhcnkocGtnLCBjaGFyYWN0ZXIub25seSA9IFRSVUUpXG4gICAgICBgLCB7IGVudjoge1xuICAgICAgICBwa2c6IHBrZyxcbiAgICAgICAgcmVwb3M6IGRhdGEucGFja2FnZXMucmVwb3MsXG4gICAgICB9fSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCB3ZWJSLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKCFlLm1lc3NhZ2UuaW5jbHVkZXMoXCJGUyBlcnJvclwiKSkge1xuICAgICAgICAgICAgdGhyb3cgZTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHJldHVybiBhd2FpdCB3ZWJSLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluc3RhbGxpbmcgd2ViUiBzaGltc2A7XG4gICAgYXdhaXQgd2ViUi5ldmFsUlZvaWQoYHdlYnI6OnNoaW1faW5zdGFsbCgpYCk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFdlYlIgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUih3ZWJSLCBkYXRhKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiB3ZWJSO1xuICB9KShuZXcgV2ViUihkYXRhLm9wdGlvbnMpKTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3Qgd2ViUiA9IGF3YWl0IHdlYlJQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBXZWJSRXZhbHVhdG9yKHdlYlIsIGNvbnRleHQpXG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHJvY2VzcyxcbiAgICB3ZWJSUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgfTtcbn1cbiIsImNlbGxOYW1lIjoid2Vici1wcmVsdWRlIiwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0In1dfQ==
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -619,6 +769,7 @@ eyJjb250ZW50cyI6W3sic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRl
 <script type="vfs-file">
 W10=
 </script>
+</section>
 </section>
 
 </main>

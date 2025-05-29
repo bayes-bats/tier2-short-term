@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -96,26 +62,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This guide accompanies the <em>CNN vs.&nbsp;The Onion – Beta Binomial</em> activity, designed to help students explore the Bayesian updating process using real vs.&nbsp;fake news classification data. Students should enter the activity with a basic understanding of probability. This lesson will introduce how to construct and update Beta distributions as models for belief about a probability.</p>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>You can add options to executable code like this</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this activity, students will be able to:</p>
+<ul>
+<li>Define and distinguish between <strong>prior</strong> and <strong>posterior</strong> distributions.</li>
+<li>Use the <strong>Beta distribution</strong> to construct prior beliefs about a probability.</li>
+<li>Apply <strong>Bayesian updating</strong> to revise beliefs with observed data.</li>
+<li>Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.</li>
+<li>Reflect on how prior information and data interact to shape posterior conclusions.</li>
+</ul>
+</section>
+<section id="activity-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="activity-sequence">Activity Sequence</h2>
+<section id="introduce-the-context" class="level3">
+<h3 class="anchored" data-anchor-id="introduce-the-context">1. Introduce the Context</h3>
+<ul>
+<li>Present the quiz task: students will identify whether a headline came from CNN or The Onion.</li>
+<li>Explain that students will make a prior prediction, then update it using quiz results.</li>
+</ul>
+</section>
+<section id="construct-priors" class="level3">
+<h3 class="anchored" data-anchor-id="construct-priors">2. Construct Priors</h3>
+<ul>
+<li><p>Students choose an expected number of correct answers (out of 15) and translate it into a Beta distribution.</p>
+<ul>
+<li>Example: Expecting 10 correct out of 15 -&gt; Beta(10, 6)</li>
+</ul></li>
+<li><p>Discuss different prior types:</p>
+<ul>
+<li>Optimistic: Beta(14, 1)</li>
+<li>Undecided: Beta(1, 1)</li>
+<li>Pessimistic: Beta(5, 10)</li>
+<li>Very Optimistic: Beta(140, 10)</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualize-priors" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-priors">3. Visualize Priors</h3>
+<ul>
+<li>Use <code>plot_beta()</code> to examine shapes of priors.</li>
+<li>Students compare their prior to reference priors and discuss informativeness.</li>
+</ul>
+</section>
+<section id="take-the-quiz" class="level3">
+<h3 class="anchored" data-anchor-id="take-the-quiz">4. Take the Quiz</h3>
+<ul>
+<li>Students complete the quiz and count their correct responses.</li>
+</ul>
+</section>
+<section id="update-with-data" class="level3">
+<h3 class="anchored" data-anchor-id="update-with-data">5. Update with Data</h3>
+<ul>
+<li>Students update their prior using their own score: <code>plot_beta_binomial()</code> and <code>summarize_beta_binomial()</code>.</li>
+<li>Students repeat the update process adding classmates’ scores (n = 30, then n = 45) tallying the correct responses each time.</li>
+</ul>
+</section>
+<section id="update-with-the-class-data-or-the-provided-data" class="level3">
+<h3 class="anchored" data-anchor-id="update-with-the-class-data-or-the-provided-data">6. Update with the Class Data or the Provided Data</h3>
+<ul>
+<li>Use the provided data or ask each student to share their score. Add these together. <em>n</em> will become 15 x number of students.</li>
+<li>Students update their prior using the class score: <code>plot_beta_binomial()</code> and <code>summarize_beta_binomial()</code>.</li>
+</ul>
+</section>
+<section id="compare-posteriors" class="level3">
+<h3 class="anchored" data-anchor-id="compare-posteriors">7. Compare Posteriors</h3>
+<ul>
+<li>Visual comparison: look at posterior distributions from different priors side by side.</li>
+<li>Numeric comparison: interpret changes in mean, mode, and standard deviation.</li>
+</ul>
+</section>
+</section>
+<section id="reflection-guidance" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-guidance">Reflection Guidance</h2>
+<section id="prior-informativeness" class="level3">
+<h3 class="anchored" data-anchor-id="prior-informativeness">Prior Informativeness</h3>
+<ul>
+<li><p><em>Prompt:</em> Is your prior informative or vague?</p></li>
+<li><p><em>Example Responses:</em></p>
+<ul>
+<li>“My prior was vague because I used Beta(1,1).”</li>
+<li>“Beta(10, 3) was informative since I was confident in my guess.”</li>
+</ul></li>
+</ul>
+</section>
+<section id="posterior-updates" class="level3">
+<h3 class="anchored" data-anchor-id="posterior-updates">Posterior Updates</h3>
+<ul>
+<li><p><em>Prompt:</em> How did the posterior change after seeing data?</p></li>
+<li><p><em>Example Responses:</em></p>
+<ul>
+<li>“My posterior mean increased because people did better than expected on the quiz.”</li>
+<li>“Even though my prior was optimistic, the data pulled the posterior lower because people did not as well as expected.”</li>
+</ul></li>
+</ul>
+</section>
+<section id="adding-more-data" class="level3">
+<h3 class="anchored" data-anchor-id="adding-more-data">Adding More Data</h3>
+<ul>
+<li><p><em>Prompt:</em> What happens as you add more data?</p></li>
+<li><p><em>Example Responses:</em></p>
+<ul>
+<li>“The distribution became more concentrated.”</li>
+<li>“The standard deviation decreased.”</li>
+<li>“The posterior gets closer to the proportion (number correct/total questions) from the data”</li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-priors" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-priors">Comparing Priors</h3>
+<ul>
+<li><p><em>Prompt:</em> How did different priors respond to the same data?</p></li>
+<li><p><em>Example Responses:</em></p>
+<ul>
+<li>“The optimistic prior resulted in a higher posterior mean than the undecided one.”</li>
+<li>“The undecided prior was the most influenced by the data.”</li>
+</ul></li>
+</ul>
+</section>
+<section id="big-picture" class="level3">
+<h3 class="anchored" data-anchor-id="big-picture">Big Picture</h3>
+<ul>
+<li><p><em>Prompt:</em> What does this activity show about the role of prior beliefs?</p></li>
+<li><p><em>Example Responses:</em></p>
+<ul>
+<li>“Priors matter when the data is limited.”</li>
+<li>“The more data we have, the more it outweighs our prior.”</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="class-discussion-questions" class="level2">
+<h2 class="anchored" data-anchor-id="class-discussion-questions">Class Discussion Questions</h2>
+<ul>
+<li>What would a prior look like that represents being totally uncertain?</li>
+<li>In what scenarios might you want an informative prior?</li>
+<li>If two people see the same data but have different priors, should they agree?</li>
+</ul>
+</section>
+<section id="assessment-ideas" class="level2">
+<h2 class="anchored" data-anchor-id="assessment-ideas">Assessment Ideas</h2>
+<ul>
+<li>Ask students to write a short paragraph comparing their prior and posterior.</li>
+<li>Have students explain why one prior led to a very different posterior than another.</li>
+<li>Gather the class quiz results and have them compute the updated posterior.</li>
+</ul>
+</section>
+<section id="support-notes" class="level2">
+<h2 class="anchored" data-anchor-id="support-notes">Support Notes</h2>
+<ul>
+<li>Check that students understand: the Beta distribution is a model for <strong>belief</strong> about a probability.</li>
+<li>Reinforce that the prior is not “wrong” even if it differs from data—it reflects what we believed <em>before</em> seeing the data.</li>
+<li>Encourage collaborative discussion when comparing prior/posterior plots.</li>
+</ul>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h2>
+<p>This is a fun, relatable, and highly visual activity for introducing Bayesian reasoning. It helps students appreciate the interaction between prior assumptions and observed data, making abstract Bayesian ideas concrete and engaging.</p>
 </section>
 
 </main>
@@ -155,18 +262,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -198,7 +294,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -206,7 +324,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

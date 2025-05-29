@@ -4,23 +4,130 @@ format: html
 editor: visual
 ---
 
-## Quarto
+## Overview
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+This guide accompanies the *CNN vs. The Onion – Beta Binomial* activity, designed to help students explore the Bayesian updating process using real vs. fake news classification data. Students should enter the activity with a basic understanding of probability. This lesson will introduce how to construct and update Beta distributions as models for belief about a probability.
 
-## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Learning Objectives
 
-```{r}
-1 + 1
-```
+By the end of this activity, students will be able to:
 
-You can add options to executable code like this
+* Define and distinguish between **prior** and **posterior** distributions.
+* Use the **Beta distribution** to construct prior beliefs about a probability.
+* Apply **Bayesian updating** to revise beliefs with observed data.
+* Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.
+* Reflect on how prior information and data interact to shape posterior conclusions.
 
-```{r}
-#| echo: false
-2 * 2
-```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+## Activity Sequence
+
+### 1. Introduce the Context
+
+* Present the quiz task: students will identify whether a headline came from CNN or The Onion.
+* Explain that students will make a prior prediction, then update it using quiz results.
+
+### 2. Construct Priors
+
+* Students choose an expected number of correct answers (out of 15) and translate it into a Beta distribution.
+
+  * Example: Expecting 10 correct out of 15 -> Beta(10, 6)
+* Discuss different prior types:
+
+  * Optimistic: Beta(14, 1)
+  * Undecided: Beta(1, 1)
+  * Pessimistic: Beta(5, 10)
+  * Very Optimistic: Beta(140, 10)
+
+### 3. Visualize Priors
+
+* Use `plot_beta()` to examine shapes of priors.
+* Students compare their prior to reference priors and discuss informativeness.
+
+### 4. Take the Quiz
+
+* Students complete the quiz and count their correct responses.
+
+### 5. Update with Data
+
+* Students update their prior using their own score: `plot_beta_binomial()` and `summarize_beta_binomial()`.
+* Students repeat the update process adding classmates' scores (n = 30, then n = 45) tallying the correct responses each time.
+
+### 6. Update with the Class Data or the Provided Data
+
+* Use the provided data or ask each student to share their score. Add these together. *n* will become 15 x number of students.
+* Students update their prior using the class score: `plot_beta_binomial()` and `summarize_beta_binomial()`.
+
+
+### 7. Compare Posteriors
+
+* Visual comparison: look at posterior distributions from different priors side by side.
+* Numeric comparison: interpret changes in mean, mode, and standard deviation.
+
+
+## Reflection Guidance
+
+### Prior Informativeness
+
+* *Prompt:* Is your prior informative or vague?
+* *Example Responses:*
+
+  * "My prior was vague because I used Beta(1,1)."
+  * "Beta(10, 3) was informative since I was confident in my guess."
+
+### Posterior Updates
+
+* *Prompt:* How did the posterior change after seeing data?
+* *Example Responses:*
+
+  * "My posterior mean increased because people did better than expected on the quiz."
+  * "Even though my prior was optimistic, the data pulled the posterior lower because people did not as well as expected."
+
+### Adding More Data
+
+* *Prompt:* What happens as you add more data?
+* *Example Responses:*
+
+  * "The distribution became more concentrated."
+  * "The standard deviation decreased."
+  * "The posterior gets closer to the proportion (number correct/total questions) from the data"
+
+### Comparing Priors
+
+* *Prompt:* How did different priors respond to the same data?
+* *Example Responses:*
+
+  * "The optimistic prior resulted in a higher posterior mean than the undecided one."
+  * "The undecided prior was the most influenced by the data."
+
+### Big Picture
+
+* *Prompt:* What does this activity show about the role of prior beliefs?
+* *Example Responses:*
+
+  * "Priors matter when the data is limited."
+  * "The more data we have, the more it outweighs our prior."
+
+## Class Discussion Questions
+
+* What would a prior look like that represents being totally uncertain?
+* In what scenarios might you want an informative prior?
+* If two people see the same data but have different priors, should they agree?
+
+## Assessment Ideas
+
+* Ask students to write a short paragraph comparing their prior and posterior.
+* Have students explain why one prior led to a very different posterior than another.
+* Gather the class quiz results and have them compute the updated posterior.
+
+
+## Support Notes
+
+* Check that students understand: the Beta distribution is a model for **belief** about a probability.
+* Reinforce that the prior is not “wrong” even if it differs from data—it reflects what we believed *before* seeing the data.
+* Encourage collaborative discussion when comparing prior/posterior plots.
+
+
+## Final Thoughts
+
+This is a fun, relatable, and highly visual activity for introducing Bayesian reasoning. It helps students appreciate the interaction between prior assumptions and observed data, making abstract Bayesian ideas concrete and engaging.

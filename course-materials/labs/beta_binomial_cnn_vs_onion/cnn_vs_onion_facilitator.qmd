@@ -127,7 +127,8 @@ By the end of this activity, students will be able to:
 * Reinforce that the prior is not “wrong” even if it differs from data—it reflects what we believed *before* seeing the data.
 * Encourage collaborative discussion when comparing prior/posterior plots.
 
+## Common questions that might arise:
 
-## Final Thoughts
+* Students may ask why the uninformed distribution is Beta(1,1) and does not match the 15 questions. Beta(1,1) is the uniform distribution over the interval [0,1]. This means that before seeing any data, we assign equal plausibility to all possible values of $\pi$—the probability that someone guesses a headline correctly. We are not saying we expect people to get 1/15 or 15/15—rather, we’re saying we have no reason to favor any particular value of $\pi$ between 0 and 1. In contrast, Beta(8,8) assumes some structure, it implies we already believe the success rate is centered around 0.5 with some confidence.
 
-This is a fun, relatable, and highly visual activity for introducing Bayesian reasoning. It helps students appreciate the interaction between prior assumptions and observed data, making abstract Bayesian ideas concrete and engaging.
+* When interpreting a density plot, start by looking at the x-axis, which shows the possible values of the parameter (here, the probability $\pi$ of guessing correctly), and the y-axis, which shows the plausibility or density of those values. The peak of the curve indicates the most likely value (the mode), and the width reflects uncertainty—narrow curves suggest high certainty, while wide curves indicate more uncertainty. The area under the curve between two points represents how likely it is that the parameter falls in that range. When comparing prior and posterior distributions, look at how the curve shifts and narrows to see how beliefs change with data. Always describe what you see: Is the distribution centered high or low? Is it narrow or wide? Did the data change the belief significantly? This helps translate visual information into meaningful conclusions.

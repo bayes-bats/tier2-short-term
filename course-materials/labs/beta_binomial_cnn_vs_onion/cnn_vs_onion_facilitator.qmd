@@ -6,8 +6,27 @@ editor: visual
 
 ## Overview
 
-This guide accompanies the *CNN vs. The Onion – Beta Binomial* activity, designed to help students explore the Bayesian updating process using real vs. fake news classification data. Students should enter the activity with a basic understanding of probability. This lesson will introduce how to construct and update Beta distributions as models for belief about a probability.
+This guide accompanies the *CNN vs. The Onion - Beta Binomial* activity, designed to help students explore the Bayesian updating process using real vs. fake news classification data. Students should enter the activity with a basic understanding of probability. This lesson will introduce how to construct and update Beta distributions as models for belief about a probability.
 
+## Student Background and Course Placement
+
+This activity is designed for students who have a foundational understanding of:
+
+- Basic probability concepts (e.g., probability of success/failure)
+
+- What a probability distribution represents
+
+- Familiarity with the concept of conditional probability
+
+Students do not need prior exposure to Bayesian statistics, but they should be comfortable with interpreting plots and understanding how beliefs or estimates can change with new information.
+
+We expect that this activity would fit well in an Introduction to Probability and Statistics course particularly ones that includes elements of:
+
+- Statistical Inference
+- Bayesian concepts
+- Applied reasoning with real-world data
+
+It could be introduced after students have learned about conditional probability and Bayes' Rule.
 
 ## Learning Objectives
 

@@ -401,6 +401,7 @@ We often describe priors in terms of how much information they give about the un
 -   **Informative prior:** An informative prior reflects specific information about the unknown variable with high certainty (i.e. low variability).
 
 -   **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
+:::
 
 Let's take a look at a very informative prior from someone who is *very optimistic* about individuals getting answers correct.
 

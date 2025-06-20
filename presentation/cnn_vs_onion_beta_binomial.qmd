@@ -14,31 +14,29 @@ library(bayesrules)
 
 ## About Me
 
-:::: {.columns}
-
+::::: columns
 ::: {.column width="40%"}
-![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker" fig-align="left" width="6.52in"}.
+![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker" fig-align="left" width="6.52in"}. 
 ### Dr. Laurie Baker
+Assistant Professor of Mathematics, Bates College, Maine, USA
 :::
 
 ::: {.column width="60%"}
-
 -   BSc Marine Biology, University of St. Andrews
 -   Msc Marine Biology, Dalhousie University
 -   PhD Ecology and Evolution, University of Glasgow
--   Assistant Professor of Mathematics, Bates College, Maine, USA
+-   **Courses**: Probability, Statistical Inference, Intro to Data Science, Community-Engaged Data Science
+
 -   [Website: https://lauriebaker.rbind.io](https://lauriebaker.rbind.io)
 -   [Github: \@LaurieLBaker](https://github.com/laurielbaker)
-
 :::
-
-::::
+:::::
 
 ## Outline
 
 -   Introduce the course context
 -   Introduce the activity
--   Initial findings
+-   Reflections
 
 ## Course Context
 
@@ -74,10 +72,12 @@ How well do people distinguish real news stories published on [cnn.com](cnn.com)
 
 1.  Introduce the Context
 2.  Construct and Visualize Priors
-3.  Take the Quiz
-4.  Update Priors with Data and Visualize Posterior
-5.  Update Priors with Class Data and Visualize Posterior
-6.  Compare Posteriors from Different Priors
+3.  Discuss Vague vs. Informative Priors
+4.  Take the Quiz
+5.  Update Priors with Data and Visualize Posterior
+6.  Update Priors with Class Data and Visualize Posterior
+7.  Compare Posteriors from Different Priors
+8.  Discussion questions
 
 ## 1. Introduce priors
 
@@ -109,10 +109,10 @@ The shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate 
 
 ```{r}
 
-my_prediction <- plot_beta(alpha = 8, beta = 7) +
-  labs(title = "My Prediction")
+student_prior <- plot_beta(alpha = 8, beta = 7) +
+  labs(title = "Student Prior")
 
-my_prediction
+student_prior
 ```
 
 ## 3. Discuss vague vs. informative priors
@@ -130,52 +130,83 @@ gridExtra::grid.arrange(vague, informative, ncol = 2)
 
 ## 4. Take the quiz (15 CNN/Onion headlines)
 
+::::: columns
+::: {.column width="20%"}
 ![](images/qr-code-for-google-forms.png){fig-alt="Google Form QR Code"}
 
-[Link to Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
+-[Link to Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
+:::
 
-## 5. Update their prior with data
+::: {.column width="80%"}
 
-Quiz result: 10/15, Their Prior: Beta(8,7)
+```{=html}
+<iframe width="780" height="500" src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform" title="Google Form"></iframe>
+```
+
+:::
+:::::
+
+## 5. Update with data
+
+-   `summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
+
+-   `plot_beta_binomial(alpha, beta, y = NULL, n = NULL)` function produces a plot of any combination of the corresponding prior pdf, scaled likelihood function, and posterior pdf
+
+-   Arguments:
+
+    -   `alpha, beta`: positive shape parameters of the prior Beta model
+    -   `y`: number of successes
+    -   `n`: number of trials
+
+## 5. Update with data
 
 ```{r echo = TRUE}
 summarize_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
 
-plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
+plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)   + 
+  labs(title = "Student Prior")
 ```
 
 ## 6. All Priors
 
-| Optimistic  | Undecided  | Pessimistic | Their Prior |
+| Optimistic  | Undecided  | Pessimistic | Student Prior |
 |-------------|------------|-------------|-------------|
 | Beta(14, 1) | Beta(1, 1) | Beta(5, 10) | Beta(8, 7)  |
 
 ```{r echo = TRUE}
-optimistic_prior <- plot_beta_binomial(alpha = 14, beta = 1, y = 10, n = 15)
-undecided_prior <- plot_beta_binomial(alpha = 1, beta = 1, y = 10, n = 15)
-pessimistic_prior <- plot_beta_binomial(alpha = 5, beta = 10, y = 10, n = 15)
-their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
+optimistic_prior <- plot_beta_binomial(alpha = 14, beta = 1, y = 10, n = 15) + 
+  labs(title = "Optimistic")
+undecided_prior <- plot_beta_binomial(alpha = 1, beta = 1, y = 10, n = 15) + 
+  labs(title = "Undecided")
+pessimistic_prior <- plot_beta_binomial(alpha = 5, beta = 10, y = 10, n = 15) + 
+  labs(title = "Pessimistic")
+student_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)  + 
+  labs(title = "Student Prior")
 ```
 
 ## 7. All Priors
 
 ```{r echo = FALSE}
-gridExtra::grid.arrange(optimistic_prior, undecided_prior, pessimistic_prior, their_prior, ncol = 2)
+gridExtra::grid.arrange(optimistic_prior, undecided_prior, pessimistic_prior, student_prior, ncol = 2)
 ```
 
 ## 8. Pool with neighbor, then class and repeat update
 
 With class data: 80 correct out of 150 questions
 
-| Optimistic  | Undecided  | Pessimistic | Their Prior |
+| Optimistic  | Undecided  | Pessimistic | Student Prior |
 |-------------|------------|-------------|-------------|
 | Beta(14, 1) | Beta(1, 1) | Beta(5, 10) | Beta(8, 7)  |
 
 ```{r echo = TRUE}
-optimist <- plot_beta_binomial(alpha = 14, beta = 1, y = 80, n = 150)
-undecided <- plot_beta_binomial(alpha = 1, beta = 1, y = 80, n = 150)
-pessimist <- plot_beta_binomial(alpha = 5, beta = 10, y = 80, n = 150)
-their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 80, n = 150)
+optimist <- plot_beta_binomial(alpha = 14, beta = 1, y = 80, n = 150) + 
+  labs(title = "Optimistic")
+undecided <- plot_beta_binomial(alpha = 1, beta = 1, y = 80, n = 150) + 
+  labs(title = "Undecided")
+pessimist <- plot_beta_binomial(alpha = 5, beta = 10, y = 80, n = 150) + 
+  labs(title = "Pessimistic")
+student_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 80, n = 150) + 
+  labs(title = "Student Prior")
 ```
 
 ## 9. Compare effects of prior choice on the posterior
@@ -203,7 +234,5 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, their_prior, ncol = 2)
 ## Thanks
 
 Thanks to co-authors Jim Scott (Colby College) and Mine Dogucu (UC Irvine).
-
-
 
 This work was supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.

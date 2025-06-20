@@ -479,15 +479,15 @@ Let's update the prior with some data. Add the number you got correct and enter 
 
 ## Calculating the summary statistics and plotting the distribution
 
+```{webr}
+num_correct <- # Add your code here
+total_questions <- # Add your code here
+```
+
 
 :::{.callout-note collapse="true"}
 
 ### The Optimist
-
-```{webr}
-num_correct <- 
-total_questions <- 
-```
 
 ```{webr}
 summarize_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
@@ -523,7 +523,7 @@ plot_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questions)
 ### Very Optimistic
 
 ```{webr}
-summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = data_correct, n = total_questions)
+summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = total_questions)
 
 plot_beta_binomial(alpha = 140, beta = 10, y = num_correct, n = total_questions)
 ```

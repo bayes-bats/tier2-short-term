@@ -10,34 +10,35 @@ editor: visual
 library(tidyverse)
 library(gridExtra)
 library(bayesrules)
-library(fontawesome)
-library(icons)
 ```
 
 ## About Me
 
-![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker"}
+:::: {.columns}
 
+::: {.column width="40%"}
+![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker" fig-align="left" width="6.52in"}.
 ### Dr. Laurie Baker
+:::
+
+::: {.column width="60%"}
 
 -   BSc Marine Biology, University of St. Andrews
-
 -   Msc Marine Biology, Dalhousie University
-
 -   PhD Ecology and Evolution, University of Glasgow
-
--   Assistant Professor of Mathematics, Bates College
-
+-   Assistant Professor of Mathematics, Bates College, Maine, USA
 -   [Website: https://lauriebaker.rbind.io](https://lauriebaker.rbind.io)
-
 -   [Github: \@LaurieLBaker](https://github.com/laurielbaker)
+
+:::
+
+::::
 
 ## Outline
 
 -   Introduce the course context
 -   Introduce the activity
--   Construct the prior
--   Take the quiz!
+-   Initial findings
 
 ## Course Context
 
@@ -100,7 +101,7 @@ pessimistic <- plot_beta(5, 10) +
 gridExtra::grid.arrange(optimistic, undecided, pessimistic, ncol = 3)
 ```
 
-## 2. Students construct their own prior
+## 2. Constructing priors
 
 The shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and failures.
 
@@ -127,13 +128,13 @@ informative <- plot_beta(alpha = 100, beta = 100) +
 gridExtra::grid.arrange(vague, informative, ncol = 2)
 ```
 
-## 3. Take the quiz (15 CNN/Onion headlines)
+## 4. Take the quiz (15 CNN/Onion headlines)
 
 ![](images/qr-code-for-google-forms.png){fig-alt="Google Form QR Code"}
 
 [Link to Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
 
-## 4. Update their prior with data
+## 5. Update their prior with data
 
 Quiz result: 10/15, Their Prior: Beta(8,7)
 
@@ -143,7 +144,7 @@ summarize_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
 plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
 ```
 
-## 5. All priors
+## 6. All Priors
 
 | Optimistic  | Undecided  | Pessimistic | Their Prior |
 |-------------|------------|-------------|-------------|
@@ -156,13 +157,13 @@ pessimistic_prior <- plot_beta_binomial(alpha = 5, beta = 10, y = 10, n = 15)
 their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
 ```
 
-## All Priors
+## 7. All Priors
 
 ```{r echo = FALSE}
 gridExtra::grid.arrange(optimistic_prior, undecided_prior, pessimistic_prior, their_prior, ncol = 2)
 ```
 
-## 5. Pool with neighbor, then class and repeat update
+## 8. Pool with neighbor, then class and repeat update
 
 With class data: 80 correct out of 150 questions
 
@@ -177,13 +178,13 @@ pessimist <- plot_beta_binomial(alpha = 5, beta = 10, y = 80, n = 150)
 their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 80, n = 150)
 ```
 
-## 6. Compare effects of prior choice on the posterior
+## 9. Compare effects of prior choice on the posterior
 
 ```{r echo = FALSE}
 gridExtra::grid.arrange(optimist, undecided, pessimist, their_prior, ncol = 2)
 ```
 
-## Reflection Questions
+## 10. Discussion Questions
 
 -   How does observing more data affect the shape of the posterior?
 
@@ -197,10 +198,12 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, their_prior, ncol = 2)
 <iframe width="780" height="500" src="https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html" title="CNN vs The Onion - Bayesian Thinking Activity"></iframe>
 ```
 
-[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Repo Homepage Link](https://bayes-bats.github.io/tier2-short-term/) with other activities in progress.
+[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Readme Homepage Link](https://bayes-bats.github.io/tier2-short-term/)
 
 ## Thanks
 
 Thanks to co-authors Jim Scott (Colby College) and Mine Dogucu (UC Irvine).
 
-This work was funded as part of an NSF grant: 
+
+
+This work was supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.

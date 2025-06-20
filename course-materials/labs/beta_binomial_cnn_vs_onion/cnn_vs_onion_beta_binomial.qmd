@@ -485,6 +485,11 @@ Let's update the prior with some data. Add the number you got correct and enter 
 ### The Optimist
 
 ```{webr}
+num_correct <- 
+total_questions <- 
+```
+
+```{webr}
 summarize_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
 
 plot_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
@@ -705,7 +710,7 @@ In this activity, you:
 
 -   Made a prediction about how well you'd do on a quiz and turned that into a prior distribution
 
--   Learned about different types of priors: confident, undecided, and pessimistic
+-   Learned about different types of priors: optimistic, undecided, and pessimistic
 
 -   Updated your prior using data from the quiz to get a posterior distribution
 
@@ -728,7 +733,7 @@ Think about your prior prediction and how it compared to the data.
 
 -   Did updating your beliefs with data change your thinking? In what way?
 
--   If you had chosen a different prior (e.g., more vague or more confident), how would your posterior have changed?
+-   If you had chosen a different prior (e.g., more vague or more informative), how would your posterior have changed?
 
 -   What does this activity show about the role of prior knowledge or assumptions in data analysis?
 

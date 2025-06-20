@@ -1,0 +1,206 @@
+---
+title: "A Bayesian Thinking Activity: CNN vs. The Onion"
+author: "Dr. Laurie Baker, Assistant Professor of Mathematics, Bates College"
+subtitle: "UKCOTS 2025 University of Glasgow"
+format: revealjs
+editor: visual
+---
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gridExtra)
+library(bayesrules)
+library(fontawesome)
+library(icons)
+```
+
+## About Me
+
+![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker"}
+
+### Dr. Laurie Baker
+
+-   BSc Marine Biology, University of St. Andrews
+
+-   Msc Marine Biology, Dalhousie University
+
+-   PhD Ecology and Evolution, University of Glasgow
+
+-   Assistant Professor of Mathematics, Bates College
+
+-   [Website: https://lauriebaker.rbind.io](https://lauriebaker.rbind.io)
+
+-   [Github: \@LaurieLBaker](https://github.com/laurielbaker)
+
+## Outline
+
+-   Introduce the course context
+-   Introduce the activity
+-   Construct the prior
+-   Take the quiz!
+
+## Course Context
+
+-   **Target Course:** Intro to Probability and Statistics or Bayesian Statistics Course
+
+-   **Student Background:**
+
+-   Basic probability concepts (e.g., probability of success/failure)
+
+-   What a probability distribution represents
+
+-   Familiarity with the concept of conditional probability
+
+-   Some prior experience with R programming
+
+## Activity Overview
+
+-   **Goal:** Show how priors, data, and posteriors interact with a real example
+
+![Frontpage of the Onion. Photo: Casey Bisson, via Flickr](images/the_onion.jpg){fig-alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"} CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.
+
+How well do people distinguish real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com)?
+
+## Learning Objectives
+
+-   Define and distinguish between **prior** and **posterior** distributions.
+-   Use the **Beta distribution** to construct prior beliefs about a probability.
+-   Apply **Bayesian updating** to revise beliefs with observed data.
+-   Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.
+-   Reflect on how prior information and data interact to shape posterior conclusions.
+
+## Activity Sequence
+
+1.  Introduce the Context
+2.  Construct and Visualize Priors
+3.  Take the Quiz
+4.  Update Priors with Data and Visualize Posterior
+5.  Update Priors with Class Data and Visualize Posterior
+6.  Compare Posteriors from Different Priors
+
+## 1. Introduce priors
+
+Let $\pi$ be the proportion of correct answers a person guesses right in the CNN vs the Onion quiz.
+
+| Optimistic  | Undecided  | Pessimistic |
+|-------------|------------|-------------|
+| Beta(14, 1) | Beta(1, 1) | Beta(5, 10) |
+
+```{r echo = FALSE, fig.align='center', fig.height=7.5, fig.width=17}
+
+optimistic <- plot_beta(14, 1) +
+  labs(title = "Optimistic")
+
+undecided <- plot_beta(1, 1) +
+  labs(title = "Undecided")
+
+pessimistic <- plot_beta(5, 10) +
+  labs(title = "Pessimistic")
+
+gridExtra::grid.arrange(optimistic, undecided, pessimistic, ncol = 3)
+```
+
+## 2. Students construct their own prior
+
+The shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and failures.
+
+`Beta(approx_num_correct, approx_num_wrong)`.
+
+```{r}
+
+my_prediction <- plot_beta(alpha = 8, beta = 7) +
+  labs(title = "My Prediction")
+
+my_prediction
+```
+
+## 3. Discuss vague vs. informative priors
+
+```{r}
+
+vague <- plot_beta(alpha = 2, beta = 2) +
+  labs(title = "Vague: alpha = 2, beta = 2")
+
+informative <- plot_beta(alpha = 100, beta = 100) +
+  labs(title = "Vague: alpha = 100, beta = 100")
+
+gridExtra::grid.arrange(vague, informative, ncol = 2)
+```
+
+## 3. Take the quiz (15 CNN/Onion headlines)
+
+![](images/qr-code-for-google-forms.png){fig-alt="Google Form QR Code"}
+
+[Link to Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
+
+## 4. Update their prior with data
+
+Quiz result: 10/15, Their Prior: Beta(8,7)
+
+```{r echo = TRUE}
+summarize_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
+
+plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
+```
+
+## 5. All priors
+
+| Optimistic  | Undecided  | Pessimistic | Their Prior |
+|-------------|------------|-------------|-------------|
+| Beta(14, 1) | Beta(1, 1) | Beta(5, 10) | Beta(8, 7)  |
+
+```{r echo = TRUE}
+optimistic_prior <- plot_beta_binomial(alpha = 14, beta = 1, y = 10, n = 15)
+undecided_prior <- plot_beta_binomial(alpha = 1, beta = 1, y = 10, n = 15)
+pessimistic_prior <- plot_beta_binomial(alpha = 5, beta = 10, y = 10, n = 15)
+their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)
+```
+
+## All Priors
+
+```{r echo = FALSE}
+gridExtra::grid.arrange(optimistic_prior, undecided_prior, pessimistic_prior, their_prior, ncol = 2)
+```
+
+## 5. Pool with neighbor, then class and repeat update
+
+With class data: 80 correct out of 150 questions
+
+| Optimistic  | Undecided  | Pessimistic | Their Prior |
+|-------------|------------|-------------|-------------|
+| Beta(14, 1) | Beta(1, 1) | Beta(5, 10) | Beta(8, 7)  |
+
+```{r echo = TRUE}
+optimist <- plot_beta_binomial(alpha = 14, beta = 1, y = 80, n = 150)
+undecided <- plot_beta_binomial(alpha = 1, beta = 1, y = 80, n = 150)
+pessimist <- plot_beta_binomial(alpha = 5, beta = 10, y = 80, n = 150)
+their_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 80, n = 150)
+```
+
+## 6. Compare effects of prior choice on the posterior
+
+```{r echo = FALSE}
+gridExtra::grid.arrange(optimist, undecided, pessimist, their_prior, ncol = 2)
+```
+
+## Reflection Questions
+
+-   How does observing more data affect the shape of the posterior?
+
+-   What happens to the posterior mean as you observe more correct or incorrect outcomes?
+
+-   In what ways does the posterior reflect a compromise between prior belief and observed data?
+
+## Where to find the Activity
+
+```{=html}
+<iframe width="780" height="500" src="https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html" title="CNN vs The Onion - Bayesian Thinking Activity"></iframe>
+```
+
+[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Repo Homepage Link](https://bayes-bats.github.io/tier2-short-term/) with other activities in progress.
+
+## Thanks
+
+Thanks to co-authors Jim Scott (Colby College) and Mine Dogucu (UC Irvine).
+
+This work was funded as part of an NSF grant: 

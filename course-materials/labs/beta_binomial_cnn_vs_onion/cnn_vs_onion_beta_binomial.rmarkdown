@@ -11,9 +11,6 @@ author:
   - name: "Jim Scott"
     affiliations:
       - name: "Colby College"
-  - name: "Mine Dogucu"
-    affiliations:
-      - name: "UC Irvine"
 engine: knitr
 webr:
   channel-type: automatic
@@ -21,7 +18,41 @@ filters:
   - webr
 ---
 
-{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+```{r echo=FALSE}
+# Setup knitr for handling {webr} and {pyodide} blocks
+# TODO: With quarto-dev/quarto-cli#10169, we can implement this in a filter
+
+# We'll handle `include: false` in Lua, always include cell in knitr output
+knitr::opts_hooks$set(include = function(options) {
+  if (options$engine == "webr" || options$engine == "pyodide") {
+    options$include <- TRUE
+  }
+  options
+})
+
+# Passthrough engine for webr
+knitr::knit_engines$set(webr = function(options) {
+  knitr:::one_string(c(
+    "```{webr}",
+    options$yaml.code,
+    options$code,
+    "```"
+  ))
+})
+
+# Passthrough engine for pyodide
+knitr::knit_engines$set(pyodide = function(options) {
+  knitr:::one_string(c(
+    "```{pyodide}",
+    options$yaml.code,
+    options$code,
+    "```"
+  ))
+})
+```
+
+
+
 
 ## Activity Introduction
 
@@ -58,6 +89,8 @@ In this exercise you will assess people's ability to determine real news stories
 
 ## Packages
 
+
+
 ```{r packages, message = FALSE}
 library(tidyverse)
 library(bayesrules)
@@ -65,6 +98,8 @@ library(gridExtra)
 library(googlesheets4)
 library(googledrive)
 ```
+
+
 
 # Code Set Up
 
@@ -79,6 +114,8 @@ The package Bayes Rule is not available in the webr server at this time, so we w
 
 <!-- print("I've made plot_beta_binomial(), summarise_beta_binomial(), and plot_beta_ci() available to you!") -->
 <!-- ``` -->
+
+
 
 
 ```{webr setup}
@@ -331,6 +368,8 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 
 ```
 
+
+
 :::
 
 ## Priors
@@ -339,7 +378,7 @@ The CNN vs. The Onion quiz consists of 15 questions. Each question has the same 
 
 Let $\pi$ be the proportion of correct answers a person guesses right in the CNN vs the Onion quiz. Keeping that number in mind, let's explore in the table below, three different priors for $\pi$
 
-| Optimistic  | Undecided  | Pessimistic |
+| Optimistic  | Undecided     | Pessimistic |
 |-------------|------------|-------------|
 | Beta(14, 1) | Beta(1, 1) | Beta(5, 10) |
 
@@ -366,6 +405,8 @@ $$
 
 ### Plotting the Priors
 
+
+
 ```{r echo = FALSE, fig.align='center', fig.height=6.5, fig.width=13}
 
 optimistic <- plot_beta(14, 1) +
@@ -380,11 +421,15 @@ pessimistic <- plot_beta(5, 10) +
 gridExtra::grid.arrange(optimistic, undecided, pessimistic, ncol = 3)
 ```
 
+
+
 ### Where does your prediction fall?
 
 When we construct our priors from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect a person to get correct: `Beta(approx_num_correct, approx_num_wrong)`.
 
 Returning to your own prediction, replace `approx_num_correct` and `approx_num_wrong` with your predictions.
+
+
 
 ```{webr}
 
@@ -393,6 +438,8 @@ my_prediction <- plot_beta(alpha = approx_num_correct, beta = approx_num_wrong) 
 
 my_prediction
 ```
+
+
 
 Looking at the graph of your prior, which guesser is your prior most similar to: Optimistic, Undecided or Pessimistic?
 
@@ -409,11 +456,15 @@ We often describe priors in terms of how much information they give about the un
 Let's take a look at a very informative prior from someone who is *very optimistic* about individuals getting answers correct.
 
 
+
+
 ```{webr, very optimistic, fig.align = "center", fig.height = 5}
 
-plot_beta(alpha = 140, beta = 10)  +
+plot_beta_binomial(alpha = 140, beta = 10)  +
   labs(title = "Very Optimistic")
 ```
+
+
 
 
 ::: {.callout-tip}
@@ -454,9 +505,13 @@ Let's take the quiz and add our data to the dataset of trials and successes for 
 
 Each of you will take a quiz consisting of 15 questions. Each question has the same possible answers: CNN or The Onion. You can take the quiz through our [google form](https://forms.gle/eVvFHZQwvtsBYa9r9):
 
+
+
 ```{=html}
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 ```
+
+
 
 Note down how many you get correct. We will compare this with our neighbors and pool data from the class. 
 
@@ -484,15 +539,21 @@ Let's update the prior with some data. Add the number you got correct and enter 
 
 ### The Optimist
 
+
+
 ```{webr}
 summarize_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
 
 plot_beta_binomial(alpha = 14, beta = 1, y = num_correct, n = total_questions)
 ```
+
+
 :::
 
 :::{.callout-note collapse="true"}
 ### Undecided
+
+
 
 ```{webr}
 summarize_beta_binomial(alpha = 1, beta = 1, y = num_correct, n = total_questions)
@@ -500,10 +561,14 @@ summarize_beta_binomial(alpha = 1, beta = 1, y = num_correct, n = total_question
 plot_beta_binomial(alpha = 1, beta = 1, y = num_correct, n = total_questions)
 ```
 
+
+
 :::
 
 :::{.callout-note collapse="true"}
 ### The Pessimist
+
+
 
 ```{webr}
 summarize_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questions)
@@ -511,11 +576,15 @@ summarize_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questio
 plot_beta_binomial(alpha = 4, beta = 11, y = num_correct, n = total_questions)
 ```
 
+
+
 :::
 
 
 :::{.callout-note collapse="true"}
 ### Very Optimistic
+
+
 
 ```{webr}
 summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = data_correct, n = total_questions)
@@ -523,17 +592,23 @@ summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = data_correct, 
 plot_beta_binomial(alpha = 140, beta = 10, y = num_correct, n = total_questions)
 ```
 
+
+
 :::
 
 :::{.callout-note collapse="true"}
 
 ### Your prior
 
+
+
 ```{webr}
 summarize_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = total_questions)
 
 plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = total_questions)
 ```
+
+
 
 :::
 
@@ -551,6 +626,8 @@ plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = num_correct, n = to
 
 ### Compare to your class or to our dataset
 
+
+
 ```{r, simulated data, echo = FALSE}
 set.seed(10)
 
@@ -559,7 +636,11 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 head(cnn_onion)
 ```
 
+
+
 <!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
+
+
 
 ```{r, data from google form, echo = FALSE, message = FALSE, warning = FALSE}
 
@@ -580,7 +661,11 @@ cnn_onion_survey_clean <- cnn_onion_survey |>
 ```
 
 
+
+
 Let's take a look at the student results from 2010.
+
+
 
 ```{webr}
 
@@ -593,38 +678,54 @@ count(cnn_onion_2010, correct)
 
 
 
+
+
 ### The Optimist
 
+
+
 ```{webr, summarize Colby 2010 optimist}
-summarize_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)
+summarize_beta_binomial(alpha = 14, beta = 1, y = 45, n = 150)
 ```
 
 ```{webr, fig.align = "center", fig.height = 5}
 plot_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)
 ```
 
+
+
 ### Undecided
+
+
 
 ```{webr, summarize Colby 2010 undecided}
 summarize_beta_binomial(alpha = 1, beta = 1, y = 50, n = 150)
 ```
 
 ```{webr, fig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 1, beta = 1, y = 50, n = 150)
+plot_beta_binomial(alpha = 1, beta = 1, y = 45, n = 150)
 ```
 
+
+
 ### The Pessimist
+
+
 
 ```{webr, summarize Colby 2010 pessimist}
 summarize_beta_binomial(alpha = 4, beta = 11, y = 50, n = 150)
 ```
 
 ```{webr, fig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 4, beta = 11, y = 50, n = 150)
+plot_beta_binomial(alpha = 4, beta = 11, y = 45, n = 150)
 ```
 
 
+
+
 ### Very Optimistic
+
+
 
 ```{webr, summarize Colby 2010 very optimistic}
 summarize_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
@@ -635,21 +736,25 @@ plot_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
 ```
 
 
+
+
 ## Comparison of the priors
+
+
 
 ```{webr, fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
 library(patchwork)
 
-optimist <- plot_beta_binomial(14, 1, y = 50, n = 150) +
+optimist <- plot_beta_binomial(14, 1, y = 45, n = 150) +
   labs(title = "Optimistic")
 
-undecided <- plot_beta_binomial(1, 1, y = 50, n = 150) +
+undecided <- plot_beta_binomial(1, 1, y = 45, n = 150) +
   labs(title = "Undecided")
 
-pessimist <- plot_beta_binomial(4, 11, y = 50, n = 150) +
+pessimist <- plot_beta_binomial(4, 11, y = 45, n = 150) +
   labs(title = "Pessimistic")
 
-very_optimistic <- plot_beta_binomial(140, 10, y = 50, n = 150) +
+very_optimistic <- plot_beta_binomial(140, 10, y = 45, n = 150) +
   labs(title = "Very Optimistic")
 
 gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, ncol = 2)
@@ -672,7 +777,11 @@ very_optimistic <- plot_beta_binomial(140, 10, y = 45, n = 150) +
 
 ```
 
+
+
 Fill in the gaps to add your alpha and beta shape parameters with your guess:
+
+
 
 ```{webr}
 library(patchwork)
@@ -683,6 +792,8 @@ your_plot <- plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = 45, n 
 gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, your_plot, ncol = 2)
 
 ```
+
+
 
 
 ::: {.callout-tip}
@@ -734,3 +845,4 @@ Think about your prior prediction and how it compared to the data.
 
 Take a few minutes to jot down your thoughts before share your ideas with a partner or group.
 :::
+

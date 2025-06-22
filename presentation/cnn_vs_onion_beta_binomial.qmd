@@ -1,6 +1,6 @@
 ---
-title: "A Bayesian Thinking Activity: CNN vs. The Onion"
-author: "Dr. Laurie Baker, Assistant Professor of Mathematics, Bates College"
+title: "Bayes news: teaching the Beta-Binomial using real and fake headlines"
+author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, UC Irvine"
 subtitle: "UKCOTS 2025 University of Glasgow"
 format: revealjs
 editor: visual
@@ -11,26 +11,6 @@ library(tidyverse)
 library(gridExtra)
 library(bayesrules)
 ```
-
-## About Me
-
-::::: columns
-::: {.column width="40%"}
-![](images/laurie_baker.jpg){fig-alt="Photo of Laurie Baker" fig-align="left" width="4.52in"} [**Dr. Laurie Baker**](<https://lauriebaker.rbind.io>) Assistant Professor of Mathematics, Bates College, Maine, USA
-:::
-
-::: {.column width="60%"}
--   BSc Marine Biology, University of St. Andrews
-
--   Msc Marine Biology, Dalhousie University
-
--   PhD Ecology and Evolution, University of Glasgow
-
-**Courses**: Probability, Statistical Inference, Intro to Data Science, Community-Engaged Data Science
-
-[GitHub \@LaurieLBaker; lbaker@bates.edu](https://github.com/laurielbaker)
-:::
-:::::
 
 ## Outline
 
@@ -237,9 +217,7 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 -   Adapt activity for different levels of R knowledge.
 -   Streamline webr experience (missing BayesRule package).
 
-## Thanks
-
-Big thanks to co-authors Jim Scott (Colby College) and Mine Dogucu (UC Irvine).
+## Thanks and Questions
 
 ![](images/baseball_stats_joke.png){fig-alt="Onion Headline: Baseball Statisticians Unveil New Analytics Model Measuring Precise Amount of Joy They Suck From The Game"}
 

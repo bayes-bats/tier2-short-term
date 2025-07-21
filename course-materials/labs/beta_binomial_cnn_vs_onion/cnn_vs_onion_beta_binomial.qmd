@@ -564,27 +564,6 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 head(cnn_onion)
 ```
 
-<!-- Once we have more quiz results, we will read in the data from the google form. For now, we are working with simulated data. -->
-
-```{r, data from google form, echo = FALSE, message = FALSE, warning = FALSE}
-
-# gs4_auth() - Bates email
-
-cnn_onion_survey <- read_sheet("https://docs.google.com/spreadsheets/d/1fPRTThBk4Y1zrXzh1ZQIlS0Z6viG5M2_EsQLFcS3Q1A/edit?usp=drive_link")
-
-
-cnn_onion_survey_clean <- cnn_onion_survey |>
-  pivot_longer(cols = starts_with("Question"), names_to = "Question", names_prefix = "Question ", values_to = "Response") |>
-  mutate(`Correct` = case_when(Question %in% c(1,3:4, 6, 8:10, 12:13, 15) & Response == "CNN" ~ 1,
-                                      Question %in% c(2, 5, 7, 11, 14) & Response == "The Onion" ~ 1,
-                                      TRUE ~ 0)) |>
-  select(Institution, Year, Score, `Correct Guesses`, Question, Correct) |>
-  janitor::clean_names()
-
-
-```
-
-
 Let's take a look at the student results from 2010.
 
 ```{webr}

@@ -1,5 +1,18 @@
 ---
 title: "CNN vs. The Onion Facilitator Guide"
+date: "06/21/2025"
+date-modified: today
+date-format: long
+author:
+  - name: "Laurie Baker"
+    affiliations:
+      - name: "Bates College"
+  - name: "Jim Scott"
+    affiliations:
+      - name: "Colby College"
+  - name: "Mine Dogucu"
+    affiliations:
+      - name: "UC Irvine"
 format: 
   html:
     theme: united

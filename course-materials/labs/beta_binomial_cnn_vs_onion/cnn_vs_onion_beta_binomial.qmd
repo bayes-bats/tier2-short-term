@@ -399,11 +399,14 @@ library(patchwork)
 wrap_plots(plots, ncol = 3)
 ```
 
-::: {.callout-note}
+::: {.callout-note title="Questions"}
 What happens when:
+
 - $\alpha > \beta$
+
 - $\alpha < \beta$
-- $\alpha = \beta$?
+
+- $\alpha = \beta$
 
 What happens as $\alpha$ and $\beta$ get larger and further apart?
 :::

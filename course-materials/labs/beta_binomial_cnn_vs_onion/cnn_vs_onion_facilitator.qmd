@@ -1,8 +1,9 @@
 ---
 title: "CNN vs. The Onion Facilitator Guide"
 format: 
-   html:
-      theme: united
+  html:
+    theme: united
+    icons: true
 editor: visual
 ---
 
@@ -158,6 +159,6 @@ By the end of this activity, students will be able to:
 ## References and Acknowledgements
 
 -   This work was supported by the National Science Foundation under Grant Nos #2215879, #2215920, and #2215709.
--   Johnson, A.A., Ott, M.Q., & Doğucu, M. (2022). [Bayes Rules!: An Introduction to Applied Bayesian Modeling (1st ed.)](https://www.bayesrulesbook.com/). Chapman and Hall/CRC. <https://doi.org/10.1201/9780429288340>
-- Doğucu M, Johnson A, Ott M (2021). bayesrules: Datasets and Supplemental Functions from Bayes Rules! Book. R package version 0.0.2.9000, https://github.com/bayes-rules/bayesrules. 
+-   Johnson, A.A., Ott, M.Q., & Doğucu, M. (2022). Bayes Rules!: An Introduction to Applied Bayesian Modeling (1st ed.). Chapman and Hall/CRC. [DOI](https://doi.org/10.1201/9780429288340) [:book:](https://www.bayesrulesbook.com/)
+- Doğucu M, Johnson A, Ott M (2021). bayesrules: Datasets and Supplemental Functions from Bayes Rules! Book. R package version 0.0.2.9000. [:github:](https://github.com/bayes-rules/bayesrules). 
 

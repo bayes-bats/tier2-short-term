@@ -25,22 +25,22 @@ filters:
 
 ## Activity Introduction
 
-The goal of this activity is to explore how prior beliefs, what we think is likely before seeing any data, can influence the conclusions we draw after seeing new evidence: our posterior. To make things interesting, we will use a quiz where you'll try to tell whether a headline came from CNN (a real news site) or The Onion (a fake, satirical news site).
+The goal of this activity is to explore how prior beliefs, what we think is probable before seeing any data, can influence the conclusions we draw after seeing new evidence: our posterior beliefs. To make things interesting, we will use a quiz where you'll try to tell whether a headline came from CNN (a real news site) or The Onion (a fake, satirical news site).
 
-Before taking the quiz, you'll think about how many headlines you expect a person might guess correctly, and you'll turn that guess into a *prior*, or starting point for your beliefs. Then, you'll update your beliefs using data from actual quiz results and compare your updated beliefs, *posterior*, to priors representing other beliefs: someone expecting a person to guess most answers correctly (optimistic), someone undecided (no prior knowledge) about whether a person will guess many right or wrong (undecided), and someone expecting to guess most answers incorrectly (pessimistic) about how many answers they will get correct in the game.
+Before taking the quiz, you'll think about how many headlines you expect a person might guess correctly, and you'll turn that guess into a *prior model*, or starting point for your beliefs. Then, you'll update your beliefs using data from actual quiz results and arrive at a *posterior model*. You will compare three different prior models representing other beliefs: someone expecting a person to guess most answers correctly (optimistic), someone undecided (no prior knowledge) about whether a person will guess many right or wrong (undecided), and someone expecting to guess most answers incorrectly (pessimistic) about how many answers they will get correct in the game.
 
 ::: {.callout-tip} 
 ## Learning objectives
 
 By the end of the activity you'll be able to:
 
--   Understand what a prior and posterior are
+-   Construct prior and posterior models
 
--   See how beliefs change when we get new information
+-   See how models update when we get new information
 
--   Make and interpret plots of different prior and posterior distributions
+-   Make and interpret plots of different prior and posterior models
 
--   Calculate and compare summary statistics like the mean, mode, and standard deviation of these distributions.
+-   Calculate and compare summary statistics like the mean, mode, and standard deviation of these models.
 
 :::
 
@@ -70,7 +70,7 @@ library(googledrive)
 
 ::: {.callout-important collapse="true"}
 
-## Run this set up code to load the functions from Bayes Rule package first
+## Run this set up code to load the functions from the `bayesrules` package first. There is no need to understand this code.
 
 The package Bayes Rule is not available in the webr server at this time, so we will include the functions here.
 
@@ -335,7 +335,7 @@ cnn_onion <- data.frame(student = rep(1:100, each = 15), question = rep(1:15, ti
 
 ## Priors
 
-The CNN vs. The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, predict how many headlines a person will guess correctly out of 15. You might think about a person's ability to determine fact from fiction or their familiarity with CNN and The Onion.
+The CNN vs. The Onion quiz consists of 15 questions. Each question has the same possible answers: CNN or The Onion. Before we take the quiz, think about what proportion of questions you expect someone to guess correctly on the quiz. You might think about a person's ability to determine fact from fiction or their familiarity with CNN and The Onion.
 
 Let $\pi$ be the proportion of correct answers a person guesses right in the CNN vs the Onion quiz. Keeping that number in mind, let's explore in the table below, three different priors for $\pi$
 
@@ -345,7 +345,7 @@ Let $\pi$ be the proportion of correct answers a person guesses right in the CNN
 
 ## Why do we use the Beta distribution?
 
-The **Beta distribution** is commonly used as a prior for probabilities because it is defined on the interval $[0, 1]$, just like any probability.
+The **Beta distribution** is commonly used as a prior for proportions because it is defined on the interval $[0, 1]$, just like any probability.
 
 Its two shape parameters $\alpha$ and $\beta$ can be interpreted as representing **prior pseudo-observations**:
 
@@ -380,21 +380,19 @@ pessimistic <- plot_beta(5, 10) +
 gridExtra::grid.arrange(optimistic, undecided, pessimistic, ncol = 3)
 ```
 
-### Where does your prediction fall?
+### Where does your prior fall?
 
-When we construct our priors from the Beta distribution, the shape parameters $\alpha$ and $\beta$ can be interpreted as the approximate number of successes and the approximate number of failures. In constructing your prior, you can derive your alpha and beta parameters into how many questions out of 15 you expect a person to get correct: `Beta(approx_num_correct, approx_num_wrong)`.
-
-Returning to your own prediction, replace `approx_num_correct` and `approx_num_wrong` with your predictions.
+Returning to your own prior, replace `my_alpha` and `my_beta` with the $\alpha$ and $\beta$ from your prior distribution.
 
 ```{webr}
 
-my_prediction <- plot_beta(alpha = approx_num_correct, beta = approx_num_wrong) +
+my_prior <- plot_beta(alpha = my_alpha, beta = my_beta) +
   labs(title = "My Prediction")
 
-my_prediction
+my_prior
 ```
 
-Looking at the graph of your prior, which guesser is your prior most similar to: Optimistic, Undecided or Pessimistic?
+Looking at the graph of your prior, which person is your prior most similar to: Optimistic, Undecided or Pessimistic?
 
 ::: {.callout-note}
 ### Vocabulary
@@ -406,7 +404,7 @@ We often describe priors in terms of how much information they give about the un
 -   **Vague (diffuse) prior:** A vague or diffuse prior reflects little specific information about the unknown variable. A flat prior, which assigns equal prior plausibility to all possible values of the variable, is a special case.
 :::
 
-Let's take a look at a very informative prior from someone who is *very optimistic* about individuals getting answers correct.
+Let's take a look at a highly informative prior from someone who is *very optimistic* about individuals getting answers correct.
 
 
 ```{webr, very optimistic, fig.align = "center", fig.height = 5}
@@ -419,6 +417,8 @@ plot_beta(alpha = 140, beta = 10)  +
 ::: {.callout-tip}
 ### Reflection:
 
+Referring to your Reflection handout, write down your answers to the following questions:
+
 - What do you notice about the very optimistic prior. Is it more informative? What do you notice about the plot? 
 - How would you classify your prior? Is it informative or vague? Why?
 
@@ -426,7 +426,7 @@ plot_beta(alpha = 140, beta = 10)  +
 
 ## Updating with data
 
--   Based on observed data, we will update the posterior for our four priors and our own prior. We will do this with our own score, our neighbor's scores, and the class or dataset score.
+-   Based on observed data, we will update our posterior understanding using the four prior models and our own prior model. We will do this with our own score, our neighbor's scores, and the class or dataset score.
 
 -   Next, we calculate the summary statistics for the prior and posterior for all four priors using the function `summarize_beta_binomial`:
 
@@ -434,7 +434,7 @@ plot_beta(alpha = 140, beta = 10)  +
 ::: {.callout-note}
 ### summarize_beta_binomial
 
--   `summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
+-   `summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` function summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$.
 
 -   Arguments:
 
@@ -444,7 +444,7 @@ plot_beta(alpha = 140, beta = 10)  +
     
 :::
 
--   Next, we plot the prior, likelihood, and the posterior for all four.
+-   Next, we plot the prior, likelihood, and the posterior for all four people.
 
 -   Lastly, we examine the effect of different priors on the posterior.
 
@@ -467,7 +467,7 @@ Choose the priors that interest you and we will update them as follows below:
 
 1. Add your quiz data
 
-Let's update the prior with some data. Add the number you got correct and enter your prior from before. Your n column should be 15 to reflect that you answered 15 questions.
+Let's update the prior model with some data. Add the number you got correct and enter your prior from before. Your n column should be 15 to reflect that you answered 15 questions.
 
 2. Compare with your classmates
 
@@ -643,7 +643,7 @@ plot_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
 ## Comparison of the priors
 
 ```{webr, fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
-library(patchwork)
+library(gridExtra)
 
 optimist <- plot_beta_binomial(14, 1, y = 50, n = 150) +
   labs(title = "Optimistic")
@@ -680,7 +680,7 @@ very_optimistic <- plot_beta_binomial(140, 10, y = 45, n = 150) +
 Fill in the gaps to add your alpha and beta shape parameters with your guess:
 
 ```{webr}
-library(patchwork)
+library(gridExtra)
 
 your_plot <- plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = 45, n = 150) +
   labs(title = "Your Prior")
@@ -708,11 +708,11 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, your_pl
 
 In this activity, you:
 
--   Made a prediction about how well you'd do on a quiz and turned that into a prior distribution
+-   Made a prediction about how well you'd do on a quiz and turned that into a prior model
 
 -   Learned about different types of priors: optimistic, undecided, and pessimistic
 
--   Updated your prior using data from the quiz to get a posterior distribution
+-   Updated your prior using data from the quiz to get a posterior model
 
 -   Compared how different priors affect the posterior, even when we see the same data
 

@@ -62,8 +62,6 @@ In this exercise you will assess people's ability to determine real news stories
 library(tidyverse)
 library(bayesrules)
 library(gridExtra)
-library(googlesheets4)
-library(googledrive)
 ```
 
 # Code Set Up
@@ -471,11 +469,11 @@ Let's update the prior model with some data. Add the number you got correct and 
 
 2. Compare with your classmates
 
-* Let's now update your prior with your classmate to your **left's** score. Your column should now be 30 to reflect the two quizzes. 
+* Let's now update your prior with your classmate to your **left's** score. Your `n` column should now be 30 to reflect the two quizzes. 
 
-* Let's now update your prior with your classmate to your **right's** score. Your column should now be 45 to reflect the three quizzes. 
+* Let's now update your prior with your classmate to your **right's** score. Your `n` column should now be 45 to reflect the three quizzes. 
 
-3. Finally, we will compare to the full class data or quiz dataset. 
+3. Finally, we will compare to the full class data. This will require tallying all the scores from all students. 
 
 ## Calculating the summary statistics and plotting the distribution
 

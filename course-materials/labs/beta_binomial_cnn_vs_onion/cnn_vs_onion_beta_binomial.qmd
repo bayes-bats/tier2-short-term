@@ -350,17 +350,76 @@ Its two shape parameters $\alpha$ and $\beta$ can be interpreted as representing
 -   $\alpha - 1$: prior successes
 -   $\beta - 1$: prior failures
 
-This means a Beta$(\alpha, \beta)$ distribution is like saying:
+These shape parameters not only determine the mean of the distribution (calculated as $\alpha / (\alpha + \beta)$ but also control its skewness and informativeness.
 
-> *Before seeing any new data, I’ve seen about* $\alpha - 1$ cases where this went right, and $\beta - 1$ where it didn’t.
+Different values for $\alpha$ and $\beta$ lead to different shapes, skewness, and central tendencides of the Beta distribution. See if you can pick out some general patterns with the relationship between $\alpha$ and $\beta$ in the plot below:
 
-This interpretation helps ground priors in real-world expectations.
 
-When you construct your own prior, you can use your guess for how many headlines you think a person will get right as your "prior successes" and how many they'll get wrong as your "prior failures". For example, if you are pessimistic about the number people might get correct and think they'll get 5 out of 15 correct, you might choose:
+```{r echo=FALSE}
+library(tidyverse)
 
-$$
-\text{Beta}(5, 10)
-$$
+# Define a function to plot beta distributions with mean and mode
+plot_beta <- function(alpha, beta) {
+  df <- tibble(pi = seq(0, 1, length.out = 1000)) %>%
+    mutate(density = dbeta(pi, alpha, beta))
+
+  mean_val <- alpha / (alpha + beta)
+  if (alpha > 1 && beta > 1) {
+    mode_val <- (alpha - 1) / (alpha + beta - 2)
+  } else {
+    mode_val <- NULL  # set to NULL so it doesn't trigger ggplot error
+  }
+
+  p <- ggplot(df, aes(x = pi, y = density)) +
+    geom_line(color = "black", linewidth = 1) +
+    geom_vline(xintercept = mean_val, color = "blue", linetype = "solid", linewidth = 0.8) +
+    labs(title = glue::glue("Beta({alpha}, {beta})"), x = expression(pi), y = "Density") +
+    theme_minimal()
+
+  if (!is.null(mode_val)) {
+    p <- p + geom_vline(xintercept = mode_val, color = "blue", linetype = "dashed", linewidth = 0.8)
+  }
+
+  return(p)
+}
+
+
+
+# Create the 9 beta plots
+betas <- list(
+  c(1, 5), c(1, 2), c(3, 7),
+  c(1, 1), c(5, 5), c(20, 20),
+  c(7, 3), c(2, 1), c(5, 1)
+)
+
+plots <- map(betas, ~ plot_beta(.x[1], .x[2]))
+
+# Arrange in 3x3 grid
+library(patchwork)
+wrap_plots(plots, ncol = 3)
+```
+
+::: {.callout-note}
+What happens when:
+- $\alpha > \beta$
+- $\alpha < \beta$
+- $\alpha = \beta$?
+
+What happens as $\alpha$ and $\beta$ get larger and further apart?
+:::
+
+::: {.callout-tip title="Answers" collapse="true"}
+### Skewness and Symmetry
+
+- If $\alpha < \beta$, the distribution is **right-skewed**, suggesting a belief that the proportion is likely to be low (e.g., `Beta(1, 5)`).
+
+- If $\alpha > \beta$, the distribution is **left-skewed**, placing more weight on higher proportions (e.g., `Beta(5, 1)`).
+
+- If $\alpha = \beta$, the distribution is **symmetric** and centered at 0.5 (e.g., `Beta(5, 5)`).
+
+The further apart $\alpha$ and $\beta$ are, the more skewed the distribution becomes. Symmetric models like `Beta(20, 20)` or `Beta(5, 5)` show increasingly narrow concentration around the mean as the total number of pseudo-observations $\alpha + \beta$ increases.
+
+:::
 
 ### Plotting the Priors
 

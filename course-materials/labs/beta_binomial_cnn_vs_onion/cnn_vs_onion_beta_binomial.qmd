@@ -339,7 +339,7 @@ Let $\pi$ be the proportion of correct answers a person guesses right in the CNN
 
 | Optimistic  | Undecided  | Pessimistic |
 |-------------|------------|-------------|
-| Beta(14, 1) | Beta(1, 1) | Beta(5, 10) |
+| Beta(8, 3) | Beta(1, 1) | Beta(5, 10) |
 
 ## Why do we use the Beta distribution?
 
@@ -428,7 +428,7 @@ The further apart $\alpha$ and $\beta$ are, the more skewed the distribution bec
 
 ```{r echo = FALSE, fig.align='center', fig.height=6.5, fig.width=13}
 
-optimistic <- plot_beta(14, 1) +
+optimistic <- plot_beta(8, 3) +
   labs(title = "Optimistic")
 
 undecided <- plot_beta(1, 1) +
@@ -640,11 +640,11 @@ count(cnn_onion_2010, correct)
 ### The Optimist
 
 ```{webr, summarize Colby 2010 optimist}
-summarize_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)
+summarize_beta_binomial(alpha = 8, beta = 3, y = 50, n = 150)
 ```
 
 ```{webr, fig.align = "center", fig.height = 5}
-plot_beta_binomial(alpha = 14, beta = 1, y = 50, n = 150)
+plot_beta_binomial(alpha = 8, beta = 3, y = 50, n = 150)
 ```
 
 ### Undecided
@@ -684,7 +684,7 @@ plot_beta_binomial(alpha = 140, beta = 10, y = 50, n = 150)
 ```{webr, fig.align = "center", fig.width = 15, echo = FALSE, fig.height=5}
 library(gridExtra)
 
-optimist <- plot_beta_binomial(14, 1, y = 50, n = 150) +
+optimist <- plot_beta_binomial(8, 3, y = 50, n = 150) +
   labs(title = "Optimistic")
 
 undecided <- plot_beta_binomial(1, 1, y = 50, n = 150) +
@@ -702,16 +702,16 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, ncol = 
 
 ```{r echo = FALSE}
 
-optimist <- plot_beta_binomial(14, 1, y = 45, n = 150) +
+optimist <- plot_beta_binomial(8, 3, y = 50, n = 150) +
   labs(title = "Optimistic")
 
-undecided <- plot_beta_binomial(1, 1, y = 45, n = 150) +
+undecided <- plot_beta_binomial(1, 1, y = 50, n = 150) +
   labs(title = "Undecided")
 
-pessimist <- plot_beta_binomial(4, 11, y = 45, n = 150) +
+pessimist <- plot_beta_binomial(4, 11, y = 50, n = 150) +
   labs(title = "Pessimistic")
 
-very_optimistic <- plot_beta_binomial(140, 10, y = 45, n = 150) +
+very_optimistic <- plot_beta_binomial(140, 10, y = 50, n = 150) +
   labs(title = "Very Optimistic")
 
 ```
@@ -721,7 +721,7 @@ Fill in the gaps to add your alpha and beta shape parameters with your guess:
 ```{webr}
 library(gridExtra)
 
-your_plot <- plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = 45, n = 150) +
+your_plot <- plot_beta_binomial(alpha = your_alpha, beta = your_beta, y = 50, n = 150) +
   labs(title = "Your Prior")
 
 gridExtra::grid.arrange(optimist, undecided, pessimist, very_optimistic, your_plot, ncol = 2)
@@ -776,5 +776,5 @@ Think about your prior prediction and how it compared to the data.
 
 -   What does this activity show about the role of prior knowledge or assumptions in data analysis?
 
-Take a few minutes to jot down your thoughts before share your ideas with a partner or group.
+Take a few minutes to jot down your thoughts before sharing your ideas with a partner or group.
 :::

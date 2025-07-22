@@ -63,9 +63,9 @@ By the end of this activity, students will be able to:
 
 ### 2. Construct Priors
 
--   Students choose an expected proportion of correct answers on the quiz and translate it into a Beta distribution.
+-   Students choose a prior model for the proportion of correct answers they expect people to get on the quiz and translate it into a Beta distribution.
 
-    -   Optimistic: Beta(14, 1)
+    -   Optimistic: Beta(8, 3)
     -   Undecided: Beta(1, 1)
     -   Pessimistic: Beta(5, 10)
     -   Very Optimistic: Beta(140, 10)

@@ -1,16 +1,28 @@
 ---
 title: "Bechdel Sampler"
-format: html
+format: live-html
+date: "10/07/2024"
+date-modified: today
+date-format: long
+author:
+  - name: "Laurie Baker"
+    affiliations:
+      - name: "Bates College"
 engine: knitr
 webr:
-  channel-type: "automatic"
+  channel-type: automatic
 filters:
   - webr
 ---
 
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
 # The Rule
 
-## [![The Rule - Comic by Alison Bechdel](images/Bechdel_Test.jpg)](https://dykestowatchoutfor.com/the-rule/)Packages
+[![The Rule - Comic by Alison Bechdel](images/Bechdel_Test.jpg)](https://dykestowatchoutfor.com/the-rule/)
+
+## Packages
 
 ```{r packages, message = FALSE}
 library(tidyverse)

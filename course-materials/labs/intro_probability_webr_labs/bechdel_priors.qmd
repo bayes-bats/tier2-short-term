@@ -1,18 +1,26 @@
 ---
 title: "Bechdel: Priors and Posteriors"
-format: html
+format: live-html
+date: "10/07/2024"
+date-modified: today
+date-format: long
+author:
+  - name: "Laurie Baker"
+    affiliations:
+      - name: "Bates College"
 engine: knitr
 webr:
-  channel-type: "automatic"
+  channel-type: automatic
 filters:
   - webr
 ---
 
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+
 # The Rule
 
-* More than two women
-* Who talk to eachother
-* About something other than a man
+[![The Rule - Comic by Alison Bechdel](images/Bechdel_Test.jpg)](https://dykestowatchoutfor.com/the-rule/)
 
 Link to [Bechdel Random Sampler](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/intro_probability_webr_labs/bechdel_generator.html)
 

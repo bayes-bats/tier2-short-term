@@ -94,11 +94,11 @@ Drawing from a box of tickets is easily simulated in R, since there is a conveni
 
 **Arguments**
 
-– x: the vector to be sampled from, this must be specified
+– `x`: the vector to be sampled from, this must be specified
 
-– size: the number of items to be sampled, the default value is the length of x
+– `size`: the number of items to be sampled, the default value is the length of x
 
-– replace: whether we replace a drawn item before we draw again, the default value is FALSE, indicating that we would draw without replacement. Example: one sample of size 2 from a box with tickets from 1 to 6
+– `replace`: whether we replace a drawn item before we draw again, the default value is FALSE, indicating that we would draw without replacement. Example: one sample of size 2 from a box with tickets from 1 to 6
 
 ```{webr-r}
 box <- c(1, 2, 3, 4, 5, 6)
@@ -187,11 +187,14 @@ Above, we created the vector die using `die <- c(1, 2, 3, 4, 5, 6)`, which is fi
 
 **Arguments**
 
-– **from:** where to start
-- **by:** size of jump from number to number (the increment)
+- `from`: where to start
+
+- `by`: size of jump from number to number (the increment)
 You can end a sequence in one of two ways: 
 
-- **to:** at what number should the sequence end - **length:** how long should the sequence be
+- `to`: at what number should the sequence end 
+
+- `length`: how long should the sequence be
 
 **Example: sequence with the to argument**
 
@@ -214,51 +217,51 @@ odds_2
 ```
 
 
-## Returning to Beano
+<!-- ## Returning to Beano -->
 
-Let's return to the Beano game. In the game we roll two die and sum them together. 
+<!-- Let's return to the Beano game. In the game we roll two die and sum them together.  -->
 
-Another way we can simulate this is to store our first dice roll in an object called `dice roll 1` and the second dice roll in an object called `dice roll 2`. We can get the sum by adding them together and we can plot the distribution.
+<!-- Another way we can simulate this is to store our first dice roll in an object called `dice roll 1` and the second dice roll in an object called `dice roll 2`. We can get the sum by adding them together and we can plot the distribution. -->
 
-Try modifying the number of rolls to see how the game would play out with a small number of rolls (e.g. 8) and a very large number of rolls (e.g. 1000). What do you notice?
+<!-- Try modifying the number of rolls to see how the game would play out with a small number of rolls (e.g. 8) and a very large number of rolls (e.g. 1000). What do you notice? -->
 
-```{webr, message = FALSE}
-library(ggplot2)
+<!-- ```{webr, message = FALSE} -->
+<!-- library(ggplot2) -->
 
-die_1 <- seq(from = 1, to = 6, by = 1)
-die_2 <- seq(from = 1, to = 6, by = 1)
+<!-- die_1 <- seq(from = 1, to = 6, by = 1) -->
+<!-- die_2 <- seq(from = 1, to = 6, by = 1) -->
 
-number_of_rolls <- 100
+<!-- number_of_rolls <- 100 -->
 
-game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE),
-                         roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE))
+<!-- game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE), -->
+<!--                          roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE)) -->
 
-ggplot(game_rolls) + 
-  geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) +
-  scale_x_continuous(breaks = seq(1, 12, by = 1))
-```
-
-
-**Challenge**
+<!-- ggplot(game_rolls) +  -->
+<!--   geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) + -->
+<!--   scale_x_continuous(breaks = seq(1, 12, by = 1)) -->
+<!-- ``` -->
 
 
-Try modifying the code to simulate a Beano game played with a 20 sided die.
+<!-- **Challenge** -->
 
 
-```{webr, message = FALSE}
-library(ggplot2)
+<!-- Try modifying the code to simulate a Beano game played with a 20 sided die. -->
 
-die_1 <- seq(from = 1, to = 6, by = 1)
-die_2 <- seq(from = 1, to = 6, by = 1)
 
-number_of_rolls <- 100
+<!-- ```{webr, message = FALSE} -->
+<!-- library(ggplot2) -->
 
-game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE),
-                         roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE))
+<!-- die_1 <- seq(from = 1, to = 6, by = 1) -->
+<!-- die_2 <- seq(from = 1, to = 6, by = 1) -->
 
-ggplot(game_rolls) + 
-  geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) +
-  scale_x_continuous(breaks = seq(1, 12, by = 1))
-```
+<!-- number_of_rolls <- 100 -->
 
-**Hint**: Don't forget to update `scale_x_continuous()`
+<!-- game_rolls <- data.frame(roll_1 = sample(die_1, size = number_of_rolls, replace = TRUE), -->
+<!--                          roll_2 = sample(die_2, size = number_of_rolls, replace = TRUE)) -->
+
+<!-- ggplot(game_rolls) +  -->
+<!--   geom_histogram(aes(x = roll_1 + roll_2), binwidth = 1) + -->
+<!--   scale_x_continuous(breaks = seq(1, 12, by = 1)) -->
+<!-- ``` -->
+
+<!-- **Hint**: Don't forget to update `scale_x_continuous()` -->

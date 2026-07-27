@@ -35,6 +35,7 @@ This material is based upon work supported by the National Science Foundation un
 
 - [A Gentle Introduction to Probability and Bayesian Statistics Presentation Slides](https://docs.google.com/presentation/d/1ALwRv7Xje3z_SRBKh88_HNX_5W-tFBLGB0zKVbGRNbM/edit?usp=sharing)
 - [UKCOTS 2025: CNN vs The Onion Presentation](presentation/cnn_vs_onion_beta_binomial.html)
+- [MATHFEST 2026: Introducing Frequentist and Bayesian Inference through an Interactive Classification of Real and Satirical Headlines](presentation/cnn_vs_onion_beta_binomial_mathfest.html)
 
 
 **Progress Reports**

@@ -1,7 +1,7 @@
 ---
-title: "Bayes news: teaching the Beta-Binomial using real and fake headlines"
-author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, UC Irvine"
-subtitle: "UKCOTS 2025 University of Glasgow"
+title: "Introducing Frequentist and Bayesian Inference through an Interactive Classification of Real and Satirical Headlines"
+author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, Harvard University"
+subtitle: "MathFest 2026, Boston"
 format: revealjs
 editor: visual
 ---
@@ -14,33 +14,27 @@ library(bayesrules)
 
 ## Outline
 
--   Introduce the Course Context
--   Introduce the Activity
--   Next Steps
+-   Introduce the Course Context (Bayesian and frequentist)
+-   Introduce the Quiz
+-   Introduce the Bayesian Activity
+-   Student Feedback
 
 ## Course Context
 
--   **Target Course:** Intro to Probability and Statistics or Bayesian Statistics Course
+-   **Target Course:** Intro Statistics (F), Probability (B) or Bayesian Statistics Course (B)
 
--   **Student Background:**
+-   **Frequentist Goal:** Introduce the idea of hypothesis testing.
+-   **Bayesian Goal:** Show how priors, data, and posteriors interact with a real example.
 
--   Basic probability concepts (e.g., probability of success/failure)
-
--   What a probability distribution represents
-
--   Familiarity with the concept of conditional probability
-
--   Some prior experience with R programming
+*Bayesian activity assumes prior R coding experience and familiarity with conditional probability
 
 ## Activity Overview
-
--   **Goal:** Show how priors, data, and posteriors interact with a real example
 
 ![Frontpage of the Onion. Photo: Casey Bisson, via Flickr](images/the_onion.jpg){fig-alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"} CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.
 
 How well do people distinguish real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com)?
 
-## Learning Objectives
+## Bayesian Learning Objectives
 
 -   Define and distinguish between **prior** and **posterior** distributions.
 -   Use the **Beta distribution** to construct prior beliefs about a probability.
@@ -48,7 +42,7 @@ How well do people distinguish real news stories published on [cnn.com](cnn.com)
 -   Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.
 -   Reflect on how prior information and data interact to shape posterior conclusions.
 
-## Activity Sequence
+## Bayesian Activity Sequence
 
 1.  Introduce the Context
 2.  Construct and Visualize Priors
@@ -170,7 +164,7 @@ student_prior <- plot_beta_binomial(alpha = 8, beta = 7, y = 10, n = 15)  +
 gridExtra::grid.arrange(optimistic_prior, undecided_prior, pessimistic_prior, student_prior, ncol = 2)
 ```
 
-## 6. Update with neighbor and class data
+## 6. Update with neighbor & class data
 
 With class data: 80 correct out of 150 questions
 
@@ -203,6 +197,58 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 
 -   In what ways does the posterior reflect a compromise between prior belief and observed data?
 
+## Frequentist activity
+
+- How many headlines do you expect to guess correctly out of 15?
+- How does this compare the the strategy of guessing randomly?
+
+## Feedback Survey
+
+1. What aspects of this activity have impacted your learning positively?
+2. What aspects of this activity have impacted your learning negatively?
+3. What is your overall opinion of this activity?
+4. Do you have any recommendations on how this activity can be improved for future students?
+
+- Responses classified as positive, negative, neutral or suggesting improvement and then further coded using deductive and inductive themes.
+
+## Survey Results - Positive
+
+```{r}
+#| label: fig-pos
+#| echo: false
+#| fig-align: center
+#| out-width: "4.5in"
+#| fig-alt: "Thematic coding of positive student comments broken down by Bayesian and frequentist versions of the activity."
+
+knitr::include_graphics("images/theme_counts_positive.png")
+```
+
+
+## Survey Results - Negative
+
+```{r}
+#| label: fig-neg
+#| echo: false
+#| fig-align: center
+#| out-width: "4.5in"
+#| fig-alt: "Thematic coding of negative student comments broken down by Bayesian and frequentist versions of the activity."
+
+knitr::include_graphics("images/theme_counts_negative.png")
+```
+
+
+## Survey Results - Improvements
+
+```{r}
+#| label: fig-improv
+#| echo: false
+#| fig-align: center
+#| fig-alt: "Thematic coding of student comments related to improvements broken down by Bayesian and frequentist versions of the activity."
+#| out-width: "4.5in"
+
+knitr::include_graphics("images/theme_counts_improvement.png")
+```
+
 ## Where to find the Activity
 
 ```{=html}
@@ -213,11 +259,8 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 
 ## Conclusions and Next Steps
 
--   Fun activity where students generate their own data and explore Bayesian thinking.
--   Plan to gather feedback from students on activity in coming year.
--   Make updates based on student and facilitator feedback.
--   Adapt activity for different levels of R knowledge.
--   Streamline webr experience (missing BayesRule package).
+-   Fun activity where students generate their own data and explore Frequentist and Bayesian thinking.
+
 
 ## Thanks and Questions
 

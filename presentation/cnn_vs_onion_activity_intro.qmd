@@ -1,7 +1,7 @@
 ---
-title: "Bayes news: teaching the Beta-Binomial using real and fake headlines"
+title: "Introduction to Bayesian Updating Using the Beta-Binomial"
 author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, UC Irvine"
-subtitle: "UKCOTS 2025 University of Glasgow"
+subtitle: "Activity Intro"
 format: revealjs
 editor: visual
 ---
@@ -12,25 +12,68 @@ library(gridExtra)
 library(bayesrules)
 ```
 
-## Outline
+---
+title: "Introduction to Bayesian Updating Using the Beta-Binomial"
+format:
+  revealjs:
+    slide-number: true
+    incremental: false
+---
 
--   Introduce the Course Context
--   Introduce the Activity
--   Next Steps
+# Bayesian vs. Frequentist Approaches
 
-## Course Context
+## Frequentist Perspective
+- Parameters (e.g., $p$, $\mu$) are **fixed but unknown**.  
+- Data are **random** because they come from repeated sampling.  
+- Inference is based on long-run frequency properties  
+  (e.g., confidence intervals, hypothesis tests).  
+- Does **not** assign probabilities to hypotheses or parameters.
 
--   **Target Course:** Intro to Probability and Statistics or Bayesian Statistics Course
+## Bayesian Perspective
+- Parameters are treated as **random variables** with a distribution.  
+- Probability describes **degrees of belief**, updated with data.
+- Able to incorporate prior knowledge
 
--   **Student Background:**
+### Core Difference
+Frequentists quantify uncertainty in the **data-generating process**;  
+Bayesians quantify uncertainty in the **parameters themselves**.
 
--   Basic probability concepts (e.g., probability of success/failure)
+## Recap of Bayes’ Rule
 
--   What a probability distribution represents
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+            = \frac{P(B \mid A)\,P(A)}{P(B)}.
+$$
 
--   Familiarity with the concept of conditional probability
+### Purpose
 
--   Some prior experience with R programming
+-   Reverses conditional probabilities\
+-   Uses information about how likely $B$ is under $A$
+-   Normalizes by $P(B)$, the total probability of the evidence\
+-   A tool for computing probabilities of unseen/latent events
+
+------------------------------------------------------------------------
+
+## Bayesian Stats: Rewriting Bayes’ Rule
+
+$$
+P(H \mid D) = 
+\frac{P(D \mid H)\,P(H)}{P(D)}
+$$
+
+### New terminology
+
+-   **Prior** $P(H)$: belief before seeing data\
+
+-   **Likelihood** $P(D \mid H)$: compatibility of data with hypothesis\
+
+-   **Evidence** $P(D)$: total probability of observing the data\
+
+-   **Posterior** $P(H \mid D)$: updated belief after seeing the data
+
+    $$
+    \text{Posterior} \propto \text{Prior} \times \text{Likelihood}
+    $$
 
 ## Activity Overview
 
@@ -38,7 +81,15 @@ library(bayesrules)
 
 ![Frontpage of the Onion. Photo: Casey Bisson, via Flickr](images/the_onion.jpg){fig-alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"} CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.
 
-How well do people distinguish real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com)?
+## Activit Overview
+
+-   **Research Question:** How well do people distinguish real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com)?
+
+- **Step 1**: Construct Our Prior Beliefs
+- **Step 2**: Gather Data (Take a Quiz)
+- **Step 3**: Update Our Prior Beliefs with More and More Data
+
+- You will be able to opt-in to be part of a research study to give us feedback on this activity
 
 ## Learning Objectives
 
@@ -47,17 +98,6 @@ How well do people distinguish real news stories published on [cnn.com](cnn.com)
 -   Apply **Bayesian updating** to revise beliefs with observed data.
 -   Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.
 -   Reflect on how prior information and data interact to shape posterior conclusions.
-
-## Activity Sequence
-
-1.  Introduce the Context
-2.  Construct and Visualize Priors
-3.  Discuss Vague vs. Informative Priors
-4.  Take the Quiz
-5.  Update Priors with Data and Visualize Posterior
-6.  Update Priors with Class Data and Visualize Posterior
-7.  Compare Posteriors from Different Priors
-8.  Discussion questions
 
 ## 1. Introduce priors
 
@@ -95,7 +135,7 @@ student_prior <- plot_beta(alpha = 8, beta = 7) +
 student_prior
 ```
 
-## 3. Discuss vague vs. informative priors
+## 3. Vague vs. informative priors
 
 ```{r}
 
@@ -128,7 +168,7 @@ gridExtra::grid.arrange(vague, informative, ncol = 2)
 
 `summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
 
-`plot_beta_binomial(alpha, beta, y = NULL, n = NULL)` \[function produces a plot of any combination of the corresponding\]; plots prior pdf, scaled likelihood function, and posterior pdf
+`plot_beta_binomial(alpha, beta, y = NULL, n = NULL)` function produces a plot of the prior pdf, scaled likelihood function, and posterior pdf
 
 Arguments:
 
@@ -203,23 +243,7 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 
 -   In what ways does the posterior reflect a compromise between prior belief and observed data?
 
-## Where to find the Activity
-
-```{=html}
-<iframe width="780" height="500" src="https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html" title="CNN vs The Onion - Bayesian Thinking Activity"></iframe>
-```
-
-[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Readme Homepage Link](https://bayes-bats.github.io/tier2-short-term/)
-
-## Conclusions and Next Steps
-
--   Fun activity where students generate their own data and explore Bayesian thinking.
--   Plan to gather feedback from students on activity in coming year.
--   Make updates based on student and facilitator feedback.
--   Adapt activity for different levels of R knowledge.
--   Streamline webr experience (missing BayesRule package).
-
-## Thanks and Questions
+## Thanks
 
 ![](images/baseball_stats_joke.png){fig-alt="Onion Headline: Baseball Statisticians Unveil New Analytics Model Measuring Precise Amount of Joy They Suck From The Game"}
 

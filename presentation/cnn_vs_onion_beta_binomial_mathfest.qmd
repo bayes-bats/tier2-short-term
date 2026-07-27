@@ -1,5 +1,5 @@
 ---
-title: "Introducing Frequentist and Bayesian Inference through an Interactive Classification of Real and Satirical Headlines"
+title: "Introducing Frequentist and Bayesian Inference through Real and Satirical Headlines"
 author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, Harvard University"
 subtitle: "MathFest 2026, Boston"
 format: revealjs

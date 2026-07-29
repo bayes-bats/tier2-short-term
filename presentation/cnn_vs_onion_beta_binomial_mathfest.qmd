@@ -104,19 +104,39 @@ gridExtra::grid.arrange(vague, informative, ncol = 2)
 
 ## 4. Take the quiz (15 CNN/Onion headlines)
 
-::::: columns
-::: {.column width="20%"}
-![](images/qr-code-for-google-forms.png){fig-alt="Google Form QR Code"}
+Counselors Quarantine Homesick Campers  
+   A. CNN  B. The Onion
 
-[Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
-:::
+Man Makes Guillotine, Uses It  
+   A. CNN  B. The Onion
 
-::: {.column width="80%"}
-```{=html}
-<iframe width="780" height="500" src="https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform" title="Google Form"></iframe>
-```
-:::
-:::::
+God Responds to Legislator's Lawsuit  
+   A. CNN  B. The Onion
+
+Fan's Wife Allows Batmobile, But Has Limits  
+   A. CNN  B. The Onion
+
+[Link to full Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
+
+## 4. Take the quiz (15 CNN/Onion headlines)
+
+Counselors Quarantine Homesick Campers  
+   A. CNN  **B. The Onion**
+
+Man Makes Guillotine, Uses It  
+   **A. CNN**  B. The Onion
+
+God Responds to Legislator's Lawsuit  
+   **A. CNN**  B. The Onion
+
+Fan's Wife Allows Batmobile, But Has Limits  
+   **A. CNN**  B. The Onion
+
+[Link to full Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
+
+
+
+
 
 ## 5. Update with data
 

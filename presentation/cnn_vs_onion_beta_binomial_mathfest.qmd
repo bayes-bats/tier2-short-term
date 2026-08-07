@@ -1,6 +1,6 @@
 ---
 title: "Introducing Frequentist and Bayesian Inference through Real and Satirical Headlines"
-author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Dogucu, Harvard University"
+author: "Dr. Laurie Baker, Bates College; Dr. Jim Scott, Colby College; Dr. Mine Doguçu, Harvard University"
 subtitle: "MathFest 2026, Boston"
 format: revealjs
 editor: visual
@@ -219,11 +219,6 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 
 -   In what ways does the posterior reflect a compromise between prior belief and observed data?
 
-## Frequentist activity
-
--   How many headlines do you expect to guess correctly out of 15?
--   How does this compare to the strategy of guessing randomly?
-
 ## Feedback Survey
 
 1.  What aspects of this activity have impacted your learning positively?
@@ -253,7 +248,7 @@ knitr::include_graphics("images/theme_counts_positive.png")
 
 - "It was interesting and engaging.  Cool to use data we understand and have more of a stake in to learn new concepts" (F)
 - "I think the use of the quiz as a concrete example was very helpful in understanding the complicated topics of posterior and prior probability. I enjoyed the coding aspect and felt it helped me visualize what was happening." (B)
-- "Very fun, informative. Learning by doing / seeing is optimal."
+- "Very fun, informative. Learning by doing / seeing is optimal." (B)
 
 ## Survey Results - Negative
 
@@ -288,7 +283,8 @@ knitr::include_graphics("images/theme_counts_improvement.png")
 ## Conclusions
 
 - Overall, students found it a fun activity where they were able to generate their own data.
-- More code scaffolding and revisiting explanations would improve the activity.
+- Students appreciated the relevance to misinformation and "fake news".
+- Plans to incorporate more code scaffolding and split the activity so there is more time to review key terms.
 
 ## Where to find the Activity
 
@@ -296,7 +292,7 @@ knitr::include_graphics("images/theme_counts_improvement.png")
 <iframe width="780" height="500" src="https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html" title="CNN vs The Onion - Bayesian Thinking Activity"></iframe>
 ```
 
-[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Readme Homepage Link](https://bayes-bats.github.io/tier2-short-term/)
+[Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Homepage Link](https://bayes-bats.github.io/tier2-short-term/)
 
 ## Thanks and Questions
 

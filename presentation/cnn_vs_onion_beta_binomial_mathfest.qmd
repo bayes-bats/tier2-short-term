@@ -14,25 +14,25 @@ library(bayesrules)
 
 ## Outline
 
--   Introduce the Course Context (Bayesian and frequentist)
--   Introduce the Quiz
+-   Introduce the Motivation and Course Context
 -   Introduce the Bayesian Activity
 -   Student Feedback
 
+## Motivation
+
+-   GAISE 2016: develop statistical thinking, with a particular focus on using **real data**.
+-   **Student-generated data**: contribute to a classroom community and foster a more intuitive understanding of statistical analysis (Kuiper 2015).
+-   **Coding** enables students to construct, modify, and replicate analyses (Chance 2007).
+
 ## Course Context
 
+- Students to use the quiz data to evaluate a central claim: *how skilled is a person at distinguishing real news headlines from satirical headlines?*
+
+- **Frequentist:** framed as a hypothesis test. Compares student performance against random guessing. 
+- **Bayesian:** frames as process of updating beliefs with evidence (student, peer, and class quiz scores) to refine a prior understanding of a person's ability.
 -   **Target Course:** Intro Statistics (F), Probability (B) or Bayesian Statistics Course (B)
 
--   **Frequentist Goal:** Introduce the idea of hypothesis testing.
--   **Bayesian Goal:** Show how priors, data, and posteriors interact with a real example.
-
-*Bayesian activity assumes prior R coding experience and familiarity with conditional probability
-
-## Activity Overview
-
-![Frontpage of the Onion. Photo: Casey Bisson, via Flickr](images/the_onion.jpg){fig-alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"} CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.
-
-How well do people distinguish real news stories published on [cnn.com](cnn.com) from fake news stories published on [theonion.com](theonion.com)?
+\*Bayesian activity - we recommend prior R coding experience and familiarity with conditional probability
 
 ## Bayesian Learning Objectives
 
@@ -42,9 +42,15 @@ How well do people distinguish real news stories published on [cnn.com](cnn.com)
 -   Interpret summary statistics (mean, mode, standard deviation) of Beta distributions.
 -   Reflect on how prior information and data interact to shape posterior conclusions.
 
+## Real vs. fake headlines
+
+![Frontpage of the Onion. Photo: Casey Bisson, via Flickr](images/the_onion.jpg){fig-alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence" width="1080"}CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization".
+
+How well do people distinguish real news headlines published on [cnn.com](cnn.com) from fake news headlines published on [theonion.com](theonion.com)?
+
 ## Bayesian Activity Sequence
 
-1.  Introduce the Context
+1.  Introduce our Prior
 2.  Construct and Visualize Priors
 3.  Discuss Vague vs. Informative Priors
 4.  Take the Quiz
@@ -104,45 +110,41 @@ gridExtra::grid.arrange(vague, informative, ncol = 2)
 
 ## 4. Take the quiz (15 CNN/Onion headlines)
 
-Counselors Quarantine Homesick Campers  
-   A. CNN  B. The Onion
+Counselors Quarantine Homesick Campers\
+A. CNN  B. The Onion
 
-Man Makes Guillotine, Uses It  
-   A. CNN  B. The Onion
+Man Makes Guillotine, Uses It\
+A. CNN  B. The Onion
 
-God Responds to Legislator's Lawsuit  
-   A. CNN  B. The Onion
+God Responds to Legislator's Lawsuit\
+A. CNN  B. The Onion
 
-Fan's Wife Allows Batmobile, But Has Limits  
-   A. CNN  B. The Onion
+Fan's Wife Allows Batmobile, But Has Limits\
+A. CNN  B. The Onion
 
 [Link to full Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
 
 ## 4. Take the quiz (15 CNN/Onion headlines)
 
-Counselors Quarantine Homesick Campers  
-   A. CNN  **B. The Onion**
+Counselors Quarantine Homesick Campers\
+A. CNN  **B. The Onion**
 
-Man Makes Guillotine, Uses It  
-   **A. CNN**  B. The Onion
+Man Makes Guillotine, Uses It\
+**A. CNN**  B. The Onion
 
-God Responds to Legislator's Lawsuit  
-   **A. CNN**  B. The Onion
+God Responds to Legislator's Lawsuit\
+**A. CNN**  B. The Onion
 
-Fan's Wife Allows Batmobile, But Has Limits  
-   **A. CNN**  B. The Onion
+Fan's Wife Allows Batmobile, But Has Limits\
+**A. CNN**  B. The Onion
 
 [Link to full Google Form](https://docs.google.com/forms/d/e/1FAIpQLSeNADV2SfZbCNZRcwZ_2oaP1eBh8rgXKV_WKxXyQR-5QGEBlA/viewform)
 
-
-
-
-
 ## 5. Update with data
 
-`summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)` summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
+`summarize_beta_binomial(alpha, beta, y = successes, n = trials)` summarizes the mean, mode, and variance of the prior and posterior Beta models of $\pi$
 
-`plot_beta_binomial(alpha, beta, y = NULL, n = NULL)` \[function produces a plot of any combination of the corresponding\]; plots prior pdf, scaled likelihood function, and posterior pdf
+`plot_beta_binomial(alpha, beta, y = successes, n = trials)` plots prior pdf, scaled likelihood function, and posterior pdf
 
 Arguments:
 
@@ -219,15 +221,15 @@ gridExtra::grid.arrange(optimist, undecided, pessimist, student_prior, ncol = 2)
 
 ## Frequentist activity
 
-- How many headlines do you expect to guess correctly out of 15?
-- How does this compare to the strategy of guessing randomly?
+-   How many headlines do you expect to guess correctly out of 15?
+-   How does this compare to the strategy of guessing randomly?
 
 ## Feedback Survey
 
-1. What aspects of this activity have impacted your learning positively?
-2. What aspects of this activity have impacted your learning negatively?
-3. What is your overall opinion of this activity?
-4. Do you have any recommendations on how this activity can be improved for future students?
+1.  What aspects of this activity have impacted your learning positively?
+2.  What aspects of this activity have impacted your learning negatively?
+3.  What is your overall opinion of this activity?
+4.  Do you have any recommendations on how this activity can be improved for future students?
 
 ## Survey Coding
 
@@ -247,6 +249,11 @@ Part 2: Coded using deductive and inductive subthemes.
 knitr::include_graphics("images/theme_counts_positive.png")
 ```
 
+## Survey Results - Positive
+
+- "It was interesting and engaging.  Cool to use data we understand and have more of a stake in to learn new concepts" (F)
+- "I think the use of the quiz as a concrete example was very helpful in understanding the complicated topics of posterior and prior probability. I enjoyed the coding aspect and felt it helped me visualize what was happening." (B)
+- "Very fun, informative. Learning by doing / seeing is optimal."
 
 ## Survey Results - Negative
 
@@ -260,6 +267,11 @@ knitr::include_graphics("images/theme_counts_positive.png")
 knitr::include_graphics("images/theme_counts_negative.png")
 ```
 
+## Survey Results - Negative
+
+"I found the R component confusing"
+
+"I would have liked to spend more time discussing the terms used in this lesson like likelihood, evidence, etc."
 
 ## Survey Results - Improvements
 
@@ -273,9 +285,10 @@ knitr::include_graphics("images/theme_counts_negative.png")
 knitr::include_graphics("images/theme_counts_improvement.png")
 ```
 
-## Summary
+## Conclusions
 
--   Fun activity where students generate their own data and explore Frequentist and Bayesian thinking.
+- Overall, students found it a fun activity where they were able to generate their own data.
+- More code scaffolding and revisiting explanations would improve the activity.
 
 ## Where to find the Activity
 
@@ -284,8 +297,6 @@ knitr::include_graphics("images/theme_counts_improvement.png")
 ```
 
 [Activity Link](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html); [Instructor Guide](https://bayes-bats.github.io/tier2-short-term/course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_facilitator.html); [Github Readme Homepage Link](https://bayes-bats.github.io/tier2-short-term/)
-
-
 
 ## Thanks and Questions
 

@@ -406,25 +406,28 @@ Dr.&nbsp;Laurie Baker, Bates College; Dr.&nbsp;Jim Scott, Colby College; Dr.&nbs
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Introduce the Course Context (Bayesian and frequentist)</li>
-<li>Introduce the Quiz</li>
+<li>Introduce the Motivation and Course Context</li>
 <li>Introduce the Bayesian Activity</li>
 <li>Student Feedback</li>
+</ul>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li>GAISE 2016: develop statistical thinking, with a particular focus on using <strong>real data</strong>.</li>
+<li><strong>Student-generated data</strong>: contribute to a classroom community and foster a more intuitive understanding of statistical analysis (Kuiper 2015).</li>
+<li><strong>Coding</strong> enables students to construct, modify, and replicate analyses (Chance 2007).</li>
 </ul>
 </section>
 <section id="course-context" class="slide level2">
 <h2>Course Context</h2>
 <ul>
+<li><p>Students to use the quiz data to evaluate a central claim: <em>how skilled is a person at distinguishing real news headlines from satirical headlines?</em></p></li>
+<li><p><strong>Frequentist:</strong> framed as a hypothesis test. Compares student performance against random guessing.</p></li>
+<li><p><strong>Bayesian:</strong> frames as process of updating beliefs with evidence (student, peer, and class quiz scores) to refine a prior understanding of a person’s ability.</p></li>
 <li><p><strong>Target Course:</strong> Intro Statistics (F), Probability (B) or Bayesian Statistics Course (B)</p></li>
-<li><p><strong>Frequentist Goal:</strong> Introduce the idea of hypothesis testing.</p></li>
-<li><p><strong>Bayesian Goal:</strong> Show how priors, data, and posteriors interact with a real example.</p></li>
 </ul>
-<p>*Bayesian activity assumes prior R coding experience and familiarity with conditional probability</p>
-</section>
-<section id="activity-overview" class="slide level2">
-<h2>Activity Overview</h2>
-<p><img data-src="images/the_onion.jpg" alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence"> CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization.</p>
-<p>How well do people distinguish real news stories published on <a href="cnn.com">cnn.com</a> from fake news stories published on <a href="theonion.com">theonion.com</a>?</p>
+<p>*Bayesian activity - we recommend prior R coding experience and familiarity with conditional probability</p>
 </section>
 <section id="bayesian-learning-objectives" class="slide level2">
 <h2>Bayesian Learning Objectives</h2>
@@ -436,10 +439,15 @@ Dr.&nbsp;Laurie Baker, Bates College; Dr.&nbsp;Jim Scott, Colby College; Dr.&nbs
 <li>Reflect on how prior information and data interact to shape posterior conclusions.</li>
 </ul>
 </section>
+<section id="real-vs.-fake-headlines" class="slide level2">
+<h2>Real vs.&nbsp;fake headlines</h2>
+<p><img data-src="images/the_onion.jpg" alt="Front page of Onion Newspaper: Headline reads Wikipedia Celebrates 750 Years of American Independence" width="1080">CNN (the Cable News Network) is widely considered a reputable news source. The Onion, on the other hand, is (according to Wikipedia) “an American news satire organization”.</p>
+<p>How well do people distinguish real news headlines published on <a href="cnn.com">cnn.com</a> from fake news headlines published on <a href="theonion.com">theonion.com</a>?</p>
+</section>
 <section id="bayesian-activity-sequence" class="slide level2">
 <h2>Bayesian Activity Sequence</h2>
 <ol type="1">
-<li>Introduce the Context</li>
+<li>Introduce our Prior</li>
 <li>Construct and Visualize Priors</li>
 <li>Discuss Vague vs.&nbsp;Informative Priors</li>
 <li>Take the Quiz</li>
@@ -506,8 +514,8 @@ A. CNN  <strong>B. The Onion</strong></p>
 </section>
 <section id="update-with-data" class="slide level2">
 <h2>5. Update with data</h2>
-<p><code>summarize_beta_binomial(alpha, beta, y = NULL, n = NULL)</code> summarizes the mean, mode, and variance of the prior and posterior Beta models of <span class="math inline">\(\pi\)</span></p>
-<p><code>plot_beta_binomial(alpha, beta, y = NULL, n = NULL)</code> [function produces a plot of any combination of the corresponding]; plots prior pdf, scaled likelihood function, and posterior pdf</p>
+<p><code>summarize_beta_binomial(alpha, beta, y = successes, n = trials)</code> summarizes the mean, mode, and variance of the prior and posterior Beta models of <span class="math inline">\(\pi\)</span></p>
+<p><code>plot_beta_binomial(alpha, beta, y = successes, n = trials)</code> plots prior pdf, scaled likelihood function, and posterior pdf</p>
 <p>Arguments:</p>
 <pre><code>-   `alpha, beta`: positive shape parameters of the prior Beta model
 -   `y`: number of successes
@@ -633,22 +641,36 @@ A. CNN  <strong>B. The Onion</strong></p>
 <img data-src="images/theme_counts_positive.png" id="fig-pos" class="quarto-figure quarto-figure-center r-stretch" style="width:4.5in" alt="Thematic coding of positive student comments broken down by Bayesian and frequentist versions of the activity."><p class="caption">
 Figure&nbsp;1
 </p></section>
+<section id="survey-results---positive-1" class="slide level2">
+<h2>Survey Results - Positive</h2>
+<ul>
+<li>“It was interesting and engaging. Cool to use data we understand and have more of a stake in to learn new concepts” (F)</li>
+<li>“I think the use of the quiz as a concrete example was very helpful in understanding the complicated topics of posterior and prior probability. I enjoyed the coding aspect and felt it helped me visualize what was happening.” (B)</li>
+<li>“Very fun, informative. Learning by doing / seeing is optimal.”</li>
+</ul>
+</section>
 <section id="survey-results---negative" class="slide level2">
 <h2>Survey Results - Negative</h2>
 
 <img data-src="images/theme_counts_negative.png" id="fig-neg" class="quarto-figure quarto-figure-center r-stretch" style="width:4.5in" alt="Thematic coding of negative student comments broken down by Bayesian and frequentist versions of the activity."><p class="caption">
 Figure&nbsp;2
 </p></section>
+<section id="survey-results---negative-1" class="slide level2">
+<h2>Survey Results - Negative</h2>
+<p>“I found the R component confusing”</p>
+<p>“I would have liked to spend more time discussing the terms used in this lesson like likelihood, evidence, etc.”</p>
+</section>
 <section id="survey-results---improvements" class="slide level2">
 <h2>Survey Results - Improvements</h2>
 
 <img data-src="images/theme_counts_improvement.png" id="fig-improv" class="quarto-figure quarto-figure-center r-stretch" style="width:4.5in" alt="Thematic coding of student comments related to improvements broken down by Bayesian and frequentist versions of the activity."><p class="caption">
 Figure&nbsp;3
 </p></section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
 <ul>
-<li>Fun activity where students generate their own data and explore Frequentist and Bayesian thinking.</li>
+<li>Overall, students found it a fun activity where they were able to generate their own data.</li>
+<li>More code scaffolding and revisiting explanations would improve the activity.</li>
 </ul>
 </section>
 <section id="where-to-find-the-activity" class="slide level2">

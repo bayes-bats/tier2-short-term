@@ -1,0 +1,205 @@
+---
+title: "Lefty Righty"
+format: html
+engine: knitr
+show-startup-message: false
+packages:
+  - ggplot2
+webr:
+  channel-type: "automatic"
+filters:
+  - webr
+---
+
+
+## Permutations and Combinations in R
+
+A **permutation** is an arrangement in which order matters. The number of ways to select and arrange $r$ objects from $n$ distinct objects is
+
+$$
+P(n,r)=\frac{n!}{(n-r)!}.
+$$
+
+In R, `factorial(n)` calculates $n!$.
+
+### Practice 1: a podium
+
+Eight runners compete in a race. In how many ways can gold, silver, and bronze be awarded? Because the three places are different, order matters.
+
+1. Before running the code, write down $n$ and $r$.
+2. Edit the code to calculate $P(8,3)$.
+3. Explain what the result counts.
+
+```{webr-r}
+n <- __
+r <- __
+
+# Replace the question marks with the permutation formula.
+factorial(?) / factorial(? - ?)
+```
+
+A **combination** is a selection in which order does not matter. R's `choose(n, r)` function calculates
+
+$$
+\binom{n}{r}.
+$$
+
+### Practice 2: handshakes
+
+Six people each shake hands with every other person exactly once. A handshake is determined by choosing two people, and it does not matter who is named first.
+
+1. Is this a permutation or a combination?
+2. Predict whether the answer should be larger or smaller than $P(6,2)$.
+3. Complete and run the code.
+
+```{webr-r}
+n <- __
+r <- __
+
+# Replace the blanks with what n and r equal for this question.
+choose(n = ?, k = ?)
+```
+
+### Compare the two counts
+
+Use R to calculate both $P(6,2)$ and $\binom{6}{2}$. Why is the permutation count twice as large in this example?
+
+```{webr-r}
+n <- 6
+r <- 2
+
+permutations <- factorial(n) / factorial(n - r)
+combinations <- choose(n, r)
+
+permutations
+combinations
+```
+
+## Our Lefty/Righty Data
+
+Now we will enter our class data and make a plot. Your instructor will supply two vectors in this form:
+
+```r
+lefty <- c( )
+righty <- c( )
+```
+
+Copy the values into the code block below. Keep commas between the measurements. The two vectors must contain the same number of measurements so that each row represents one person.
+
+```{webr-r}
+# Replace these example values with the class data.
+lefty <- c(12, 15, 11, 14, 17, 13, 16, 14, 18, 12)
+righty <- c(14, 17, 13, 16, 18, 15, 17, 16, 19, 14)
+
+lefty_righty <- data.frame(
+  lefty = lefty,
+  righty = righty
+)
+
+lefty_righty
+```
+
+`data.frame()` organizes the vectors into a rectangular data set. Each row is an observation and each column is a variable.
+
+Use `str()` to inspect the data frame and `summary()` to obtain a few numerical summaries:
+
+```{webr-r}
+str(lefty_righty)
+summary(lefty_righty)
+```
+
+## Preparing the Data for `ggplot2`
+
+For the plot, we will convert the two measurement columns into:
+
+- one column called `measurement`, containing the numerical values; and
+- one column called `hand`, identifying each value as `lefty` or `righty`.
+
+The base R function `stack()` does this for us:
+
+```{webr-r}
+lefty_righty_long <- stack(lefty_righty)
+names(lefty_righty_long) <- c("measurement", "hand")
+
+lefty_righty_long
+```
+
+## Creating a Histogram with `ggplot2`
+
+The code below builds the graph in layers:
+
+- `ggplot()` names the data set and maps `measurement` to the x-axis.
+- `geom_histogram()` draws the histogram.
+- `facet_wrap()` makes a separate panel for each hand.
+- `labs()` adds descriptive labels.
+- `theme_minimal()` changes the appearance of the graph.
+
+
+```{webr-r}
+#| context: setup
+  library(ggplot2)
+```
+
+The `ggplot2` library is loaded as part of the tutorial, but you would load it using `library(ggplot2)` if you were on your own computer.
+
+```{webr-r}
+ggplot(lefty_righty_long, aes(x = measurement)) +
+  geom_histogram(
+    binwidth = 2,
+    boundary = 0,
+    color = "white",
+    fill = "steelblue"
+  ) +
+  facet_wrap(~ hand, ncol = 1) +
+  labs(
+    title = "Distribution of Lefty and Righty Measurements",
+    x = "Measurement",
+    y = "Number of observations"
+  ) +
+  theme_minimal()
+```
+
+### Your turn: revise the plot
+
+Make at least two changes to the graph. You might:
+
+- change `binwidth` and notice how the appearance changes;
+- place the panels side by side with `ncol = 2`;
+- choose a new fill color; or
+- improve the title and axis label so that they describe what we measured.
+
+```{webr-r}
+
+ggplot(lefty_righty_long, aes(x = measurement)) +
+  geom_histogram(
+    binwidth = 2,
+    boundary = 0,
+    color = "white",
+    fill = "steelblue"
+  ) +
+  facet_wrap(~ hand, ncol = 1) +
+  labs(
+    title = "Distribution of Lefty and Righty Measurements",
+    x = "Measurement",
+    y = "Number of observations"
+  ) +
+  theme_minimal()
+```
+
+### Interpret the distributions
+
+1. What values are typical for each hand?
+2. Which distribution has more variability?
+3. Are there any gaps, clusters, or unusual values?
+4. How did changing the bin width affect what you could see?
+
+## Wrap-Up
+
+In this activity, you used R to:
+
+- store values in objects and vectors;
+- simulate random outcomes with `sample()`;
+- calculate permutations with `factorial()`;
+- calculate combinations with `choose()`;
+- organize vectors in a data frame; and
+- create and revise a histogram with `ggplot2`.

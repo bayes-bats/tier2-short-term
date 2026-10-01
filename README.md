@@ -21,6 +21,8 @@ You can access our materials using the links below:
 - [Random Variables Discrete Distributions Web-R Tutorial](course-materials/labs/intro_probability_webr_labs/random_variables_binomial_poisson.html)
 - [Random Variables Continuous Distributions Web-R Tutorial](course-materials/labs/intro_probability_webr_labs/normal_continuous.html)
 - [Permutations and Combinations with Lefty Right](course-materials/labs/lab-permutation-combination-plotting.html)
+- [Open Intro Hot Hand Lab WebR Version](course-materials/labs/basketball/hot-hand.html)
+
 
 **Bayesian Statistics**
 

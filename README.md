@@ -23,7 +23,6 @@ You can access our materials using the links below:
 - [Permutations and Combinations with Lefty Right](course-materials/labs/lab-permutation-combination-plotting.html)
 - [Open Intro Hot Hand Lab WebR Version](course-materials/labs/basketball/hot-hand.html)
 
-
 **Bayesian Statistics**
 
 - [CNN vs. The Onion: Priors, Posterior, and Summary Statistics with the Beta-Binomial Distribution](course-materials/labs/beta_binomial_cnn_vs_onion/cnn_vs_onion_beta_binomial.html)

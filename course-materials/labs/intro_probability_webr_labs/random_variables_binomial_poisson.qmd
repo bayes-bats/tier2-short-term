@@ -10,7 +10,7 @@ filters:
 
 # Code Examples
 
-Web-r to accompany examples in [Stat20 Random Variable Notes](https://www.stat20.org/3-probability/04-random-variables/notes).
+Web-r to accompany examples in Stat20 Random Variable Notes.
 
 
 ## Bernoulli$(p)$ and Binomial$(n,p)$
